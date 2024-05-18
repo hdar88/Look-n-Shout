@@ -1,11 +1,17 @@
 {
-  "manifest_version": 1,
-  "name" :"Look n Shout",
-  "version" : "1.0.0",
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js" : ["Content.js"]
-    }
-  ]
+  "manifest_version": 3,
+  "name": "Look n Shout",
+  "version": "1.0",
+  "description": "look n shout to play web based 2D games",
+  "permissions": [
+    "tabs"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "options_page" : "./options.html",
+  "action": {
+    "default_popup": "popup.html"
+  }
 }
+

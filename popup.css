@@ -1,0 +1,140 @@
+/* Add this style to create the toggle switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+/* Reset default margin and padding */
+body, h2, div, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Set the font family and background color */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #161625; /* Dark background */
+}
+
+/* Container for the popup content */
+.container {
+    width: 300px;
+    padding: 20px;
+    background-color: #292943; /* Dark purple background */
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3); /* Soft shadow */
+    margin: 20px auto;
+}
+
+/* Header styling */
+h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #ffffff; /* White text */
+}
+
+/* Label styling */
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #ffffff; /* White text */
+}
+
+/* Input field styling */
+input[type="text"] {
+    width: calc(100% - 22px); /* Adjust for input padding */
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #5f5f7f; /* Lighter purple border */
+    border-radius: 5px;
+    background-color: #3d3d58; /* Darker purple background */
+    color: #ffffff; /* White text */
+}
+
+/* Button styling */
+button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    color: #ffffff; /* White text */
+}
+
+/* Cancel button specific styling */
+#cancelButton {
+    background-color: #707070; /* Dark gray */
+}
+
+/* Save button specific styling */
+#saveButton {
+    background-color: #8e44ad; /* Purple */
+}
+
+/* Button hover effect */
+button:hover {
+    filter: brightness(1.1); /* Hover effect to make the button slightly brighter */
+}
