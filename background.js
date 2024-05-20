@@ -1,1 +1,1 @@
-console.log("Hi from background")
+console.log("Hi from background test")
