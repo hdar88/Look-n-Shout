@@ -1,11 +1,4 @@
-chrome.action.onClicked.addListener((tab) => {
-    chrome.scripting.executeScript({
-        target: {tabId: tab.id},
-        function: injectBoundaries
-    });
-});
-
-function injectBoundaries() {
+(() => {
     fetch(chrome.runtime.getURL('boundaries.html')).then(response => response.text()).then(html => {
         const div = document.createElement('div');
         div.innerHTML = html;
@@ -21,4 +14,4 @@ function injectBoundaries() {
         };
         document.body.appendChild(script);
     }).catch(err => console.warn('Error loading overlay:', err));
-}
+})();
