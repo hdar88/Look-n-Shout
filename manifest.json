@@ -14,10 +14,10 @@
   },
   "content_scripts": [{
     "matches": ["<all_urls>"],
-    "js": ["/js/content.js"]
+    "js": ["js/webGazerContent.js", "js/webSpeechContent.js"]
   }],
   "web_accessible_resources": [{
-    "resources": ["boundaries.html", "WebGazer/www/webgazer.js", "js/WebGazerWrapper.js"],
+    "resources": ["boundaries.html", "WebGazer/www/webgazer.js", "js/WebGazerWrapper.js", "js/WebSpeechWrapper.js"],
     "matches": ["<all_urls>"]
   }],
   "options_page" : "options.html",
