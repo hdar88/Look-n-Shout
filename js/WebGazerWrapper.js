@@ -28,7 +28,7 @@ webgazer.setGazeListener(function(data, elapsedTime) {
     if (yPrediction >= topRect.top && yPrediction <= topRect.bottom &&
         xPrediction >= topRect.left && xPrediction <= topRect.right) {
         console.log("Du schaust nach oben");
-        //TODO simulateKeyPress("ArrowUp");
+        simulateKeyPress("ArrowUp");
 
     } else if (yPrediction >= bottomRect.top && yPrediction <= bottomRect.bottom &&
         xPrediction >= bottomRect.left && xPrediction <= bottomRect.right) {
@@ -75,56 +75,46 @@ webgazer.showPredictionPoints(true);
 webgazer.begin();
 
 function simulateKeyPress(key) {
-    let keyCode;
+    const keyCodeMap = {
+        'ArrowUp': 38,
+        'ArrowDown': 40,
+        'ArrowLeft': 37,
+        'ArrowRight': 39,
+        'Enter': 13,
+        'Escape': 27,
+        'Backspace': 8,
+        'Tab': 9,
+        'Space': 32
+    };
 
-    if (key.length === 1) {
-        keyCode = key.toUpperCase().charCodeAt(0);
-    } else {
-        const specialKeys = {
-            'Enter': 13,
-            'Escape': 27,
-            'Backspace': 8,
-            'Tab': 9,
-            'Space': 32,
-            'ArrowUp': 126,
-            'ArrowDown': 40,
-            'ArrowLeft': 37,
-            'ArrowRight': 39
-        };
-        keyCode = specialKeys[key];
-    }
+    let keyCode = keyCodeMap[key] || key.toUpperCase().charCodeAt(0);
 
     if (keyCode === undefined) {
         console.error(`Key "${key}" is not supported.`);
         return;
     }
 
-    const keyDownEvent = new KeyboardEvent("keydown", {
-        key: key,
-        keyCode: keyCode,
-        code: key,
-        which: keyCode,
-        bubbles: true,
-        cancelable: true
-    });
+    function triggerKeyEvent(type, key, keyCode) {
+        const event = new KeyboardEvent(type, {
+            bubbles: true,
+            cancelable: true,
+            key: key,
+            code: key,
+            keyCode: keyCode,
+            which: keyCode,
+            shiftKey: false,
+            ctrlKey: false,
+            metaKey: false
+        });
+        document.dispatchEvent(event);
+    }
 
-    const keyUpEvent = new KeyboardEvent("keyup", {
-        key: key,
-        keyCode: keyCode,
-        code: key,
-        which: keyCode,
-        bubbles: true,
-        cancelable: true
-    });
-
-    document.dispatchEvent(keyDownEvent);
-    console.log("Key down: " + key);
-
-    // Delay the keyup event slightly to simulate a proper key press
+    triggerKeyEvent('keydown', key, keyCode);
     setTimeout(() => {
-        document.dispatchEvent(keyUpEvent);
-        console.log("Key up: " + key);
-    }, 100); // 100ms delay, adjust as necessary
+        triggerKeyEvent('keyup', key, keyCode);
+    }, 100); // Delay to simulate key press duration
+
+    console.log("Pressed " + key);
 }
 
 function simulateKeyCombiPress(keys){

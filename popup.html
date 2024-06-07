@@ -2,38 +2,61 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Look n Shout</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popup</title>
     <link rel="stylesheet" href="css/popup.css">
 </head>
 <body>
-    <div class="container">
-        <div class="toggle-container">
-            <label class="toggle-label">Play w/ eyes</label>
-            <label class="switch">
-                <input type="checkbox" id="toggleSwitch">
-                <span class="slider round"></span>
-            </label>
-            <label class="toggle-label">Play w/ voice</label>
-        </div>
+<div class="container">
+    <h2>Play with your</h2>
+    <label class="switch">
+        <input type="checkbox" id="toggle">
+        <span class="slider round">
+                <span class="slider-labels">
+                    <span class="label-eyes">eyes</span>
+                    <span class="label-voice">voice</span>
+                </span>
+            </span>
+    </label>
+    <div id="input-container-eyes" class="hidden">
         <div>
             <label for="upKey">Look up:</label>
-            <input type="text" id="upKey" placeholder="Press a key">
+            <input type="text" id="upKey" placeholder="Enter a key">
         </div>
         <div>
             <label for="downKey">Look down:</label>
-            <input type="text" id="downKey" placeholder="Press a key">
+            <input type="text" id="downKey" placeholder="Enter a key">
         </div>
         <div>
             <label for="leftKey">Look left:</label>
-            <input type="text" id="leftKey" placeholder="Press a key">
+            <input type="text" id="leftKey" placeholder="Enter a key">
         </div>
         <div>
             <label for="rightKey">Look right:</label>
-            <input type="text" id="rightKey" placeholder="Press a key">
+            <input type="text" id="rightKey" placeholder="Enter a key">
         </div>
-        <button id="cancelButton">Cancel</button>
-        <button id="saveButton">Save Settings</button>
+        <button id="saveEyesButton">Save</button>
+    </div>
+    <div id="input-container-voice" class="hidden">
+        <div>
+            <label for="upKey">voice:</label>
+            <input type="text" id="up-voice" placeholder="Enter a keyword">
+        </div>
+        <div>
+            <label for="downKey">voice:</label>
+            <input type="text" id="down-voice" placeholder="Enter a keyword">
+        </div>
+        <div>
+            <label for="leftKey">voice:</label>
+            <input type="text" id="left-voice" placeholder="Enter a keyword">
+        </div>
+        <div>
+            <label for="rightKey">voice:</label>
+            <input type="text" id="right-voice" placeholder="Enter a keyword">
+        </div>
+        <button id="saveVoiceButton">Save</button>
     </div>
 </div>
+<script src="js/popup.js" type="text/javascript"></script>
 </body>
 </html>
