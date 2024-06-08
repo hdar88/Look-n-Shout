@@ -10,7 +10,7 @@ body, h2, div, p, ul, li {
 /* Set the font family and background color */
 body {
     font-family: "Press Start 2P", cursive;
-    /* background-color: #161625; /* Dark background */
+    width: 300px;
     background-image: url("../icons/retro-gaming.jpg");
     background-size: cover; /* Adjusts the background image size to cover the entire body */
     display: flex;
@@ -22,7 +22,7 @@ body {
 
 /* Container for the popup content */
 .container {
-    width: 200px;
+    width: 275px;
     padding: 20px;
     /*background-color: #292943; /* Dark purple background */
     background-color: rgba(41, 41, 67, 0.3);
@@ -68,11 +68,23 @@ h2 {
     justify-content: space-between;
     align-items: center;
     padding: 0 10px;
-    color: #fff;
+    text-shadow: 0 0 40px #ffffff;
     font-size: 1em;
     box-sizing: border-box;
+    color: #fff;
+    text-align: center;
+    animation: glow 1s ease-in-out infinite alternate;
 }
 
+@-webkit-keyframes glow {
+    from {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+    }
+
+    to {
+        text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+    }
+}
 input:checked + .slider {
     background-color: #8e44ad;
 }
@@ -105,7 +117,9 @@ input:not(:checked) + .slider .label-voice {
 #input-container-eyes, #input-container-voice {
     margin-top: 20px;
     font-size: 12px;
-    color: #ffffff; /* White text */
+    color: rgb(243, 89, 6);
+    /*text-shadow: 0 0 40px #ffffff;*/
+    animation: glow 1s ease-in-out infinite alternate;
 }
 
 #input-container-eyes div, #input-container-voice div {
@@ -119,7 +133,7 @@ input:not(:checked) + .slider .label-voice {
     margin-top: 5px; /* Add margin to space input field below label */
     border: 1px solid #5f5f7f; /* Lighter purple border */
     border-radius: 5px;
-    background-color: #3d3d58; /* Darker purple background */
+    background-color: rgba(61, 61, 88, 0.5); /* Darker purple background */
     color: #ffffff; /* White text */
 }
 
@@ -137,6 +151,7 @@ input:not(:checked) + .slider .label-voice {
     transition: background-color 0.3s;
     color: #ffffff; /* White text */
     background-color: #8e44ad; /* Purple background */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
 }
 
 .icon-buttons {
@@ -148,18 +163,25 @@ input:not(:checked) + .slider .label-voice {
     transition: background-color 0.3s;
     /*border-radius: 0px; /*Ecke abrunden */
     font-size: 1em; /* Schriftgröße anpassen */
-    color: rgba(255, 255, 255, 0.2);
     background-color: rgba(32, 32, 58, -1.0);
     border: none;
 }
 
+.icon-buttons img {
+    width: 55px;  /* Set the width you want for your icons */
+    height: 55px; /* Set the height you want for your icons */
+    max-width: 100%; /* Ensure images are responsive */
+    max-height: 100%; /* Ensure images are responsive */
+    opacity: 1.1;
+}
+
 #icons-sidebar {
-    font-family: "Pixelify Sans", sans-serif;
     width: 100px;
 }
 /* Button hover effect */
 button:hover {
-    filter: brightness(1.1); /* Hover effect to make the button slightly brighter */
+    filter: brightness(1.5); /* Hover effect to make the button slightly brighter */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
 }
 
 /* Hidden class for the labels */
