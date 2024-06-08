@@ -118,8 +118,6 @@ input:not(:checked) + .slider .label-voice {
     margin-top: 20px;
     font-size: 12px;
     color: rgb(243, 89, 6);
-    /*text-shadow: 0 0 40px #ffffff;*/
-    animation: glow 1s ease-in-out infinite alternate;
 }
 
 #input-container-eyes div, #input-container-voice div {

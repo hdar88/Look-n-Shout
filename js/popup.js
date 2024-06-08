@@ -1,3 +1,4 @@
+// switch between eyes and voice pop up content
 document.addEventListener('DOMContentLoaded', function() {
     const toggle = document.getElementById('toggle');
     const inputContainerEyes = document.getElementById("input-container-eyes");
@@ -18,3 +19,19 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+// Reset button: clear the visible content inside the input fields and (maybe also saved key assignments)
+//TODO
+
+//Pause - Start button to pause/ restart eye gaze or voice tracking
+// switch between pause and start icon
+//TODO
+
+// stop/ restart tracking
+//TODO
+
+//help page -> whole description of the functionality of our extension
+//TODO
+
+// save button -> chrome.storage API -> get User Input
+//TODO
