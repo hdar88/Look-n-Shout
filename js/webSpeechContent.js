@@ -7,4 +7,6 @@ script.onload = function() {
     const speechWrapper = new WebSpeechWrapper();
     speechWrapper.start();
 };
+
+
 (document.head || document.documentElement).appendChild(script);
