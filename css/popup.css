@@ -10,26 +10,31 @@ body, h2, div, p, ul, li {
 /* Set the font family and background color */
 body {
     font-family: "Press Start 2P", cursive;
-    background-color: #161625; /* Dark background */
+    /* background-color: #161625; /* Dark background */
+    background-image: url("../icons/retro-gaming.jpg");
+    background-size: cover; /* Adjusts the background image size to cover the entire body */
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    border-radius: 50px;
 }
 
 /* Container for the popup content */
 .container {
-    width: 300px;
+    width: 200px;
     padding: 20px;
-    background-color: #292943; /* Dark purple background */
-    border-radius: 10px;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3); /* Soft shadow */
+    /*background-color: #292943; /* Dark purple background */
+    background-color: rgba(41, 41, 67, 0.3);
+    border-radius: 20px;
+    /*border: 20px solid rgba(32, 32, 58, 0.25); /* Slightly darker border */
+    /*box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5); /* Slightly more pronounced shadow */
     text-align: center;
 }
 
 /* Header styling */
 h2 {
-    font-size: 1.8em;
+    font-size: 1.4em;
     margin-bottom: 20px;
     color: #ffffff; /* White text */
 }
@@ -83,6 +88,7 @@ input:checked + .slider {
 .label-voice {
     transition: opacity 0.4s;
 }
+
 .label-eyes {
     transition: opacity 0.4s;
 }
@@ -95,17 +101,65 @@ input:not(:checked) + .slider .label-voice {
     opacity: 0.5;
 }
 
-/* Style for the "eyes" label */
-#input-container-eyes {
+/* Style for the "eyes" and "voice" labels */
+#input-container-eyes, #input-container-voice {
     margin-top: 20px;
-    font-size: 18px;
+    font-size: 12px;
     color: #ffffff; /* White text */
 }
 
-#input-container-voice {
-    margin-top: 20px;
-    font-size: 18px;
+#input-container-eyes div, #input-container-voice div {
+    margin-bottom: 10px;
+}
+
+/* Input field styling */
+#input-container-eyes input[type="text"], #input-container-voice input[type="text"] {
+    width: calc(100% - 22px); /* Adjust for input padding */
+    padding: 12px;
+    margin-top: 5px; /* Add margin to space input field below label */
+    border: 1px solid #5f5f7f; /* Lighter purple border */
+    border-radius: 5px;
+    background-color: #3d3d58; /* Darker purple background */
     color: #ffffff; /* White text */
+}
+
+/* Button styling */
+#save-button {
+    font-family: "Press Start 2P", cursive;
+    display: block;
+    width: 100px; /* Same width as the toggle switch */
+    padding: 15px;
+    margin-left: auto; /* Set left margin to auto to push the button to the right */
+    border: none;
+    border-radius: 50px; /* Fully round corners */
+    cursor: pointer;
+    font-size: 0.8em; /* Adjust font size for better fit */
+    transition: background-color 0.3s;
+    color: #ffffff; /* White text */
+    background-color: #8e44ad; /* Purple background */
+}
+
+.icon-buttons {
+    font-family: "Pixelify Sans", sans-serif;
+    display: inline-block;
+    justify-content: space-between;
+    margin-right: -10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    /*border-radius: 0px; /*Ecke abrunden */
+    font-size: 1em; /* Schriftgröße anpassen */
+    color: rgba(255, 255, 255, 0.2);
+    background-color: rgba(32, 32, 58, -1.0);
+    border: none;
+}
+
+#icons-sidebar {
+    font-family: "Pixelify Sans", sans-serif;
+    width: 100px;
+}
+/* Button hover effect */
+button:hover {
+    filter: brightness(1.1); /* Hover effect to make the button slightly brighter */
 }
 
 /* Hidden class for the labels */
