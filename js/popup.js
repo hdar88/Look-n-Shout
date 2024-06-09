@@ -21,17 +21,17 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Reset button: clear the visible content inside the input fields and (maybe also saved key assignments)
-//TODO
+//TODO weram
 
 //Pause - Start button to pause/ restart eye gaze or voice tracking
 // switch between pause and start icon
-//TODO
+//TODO hakar
 
 // stop/ restart tracking
-//TODO
+//TODO hakar
 
 //help page -> whole description of the functionality of our extension
-//TODO
+//TODO leonard
 
 // save button -> chrome.storage API -> get User Input
-//TODO
+//TODO oqba
