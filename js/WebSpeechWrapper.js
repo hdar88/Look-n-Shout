@@ -49,6 +49,7 @@ function startRecognition() {
         diagnostic.textContent = "Final Transcript TEST: " + finalTranscript;
       }
       startRecognition();
+      console.log("TEST")
     }
   };
 }
