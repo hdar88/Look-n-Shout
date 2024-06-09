@@ -5,10 +5,6 @@ chrome.action.onClicked.addListener((tab) => {
     });
 });
 
-chrome.tabs.getSelected(null, function(tab){
-    console.log(tab);
-});
-
 function injectBoundaries() {
     fetch(chrome.runtime.getURL('boundaries.html')).then(response => response.text()).then(html => {
         const div = document.createElement('div');

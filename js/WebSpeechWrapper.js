@@ -54,10 +54,9 @@ function startRecognition() {
 }
 
 function triggerkeypress(key, command) {
-  const event = new KeyboardEvent("keypress", { keyCode: 87, which: 87 });
+  const event = new KeyboardEvent(key);
   console.log(event);
-  console.log(gettingCurrent);
-  gettingCurrent.dispatchEvent(event);
+  document.dispatchEvent(event);
   if (command == "jump") {
     console.log("Character jumps" + key);
   } else if (command == "down") {
@@ -76,10 +75,6 @@ function triggerkeypress(key, command) {
     console.log('Speech recognition service disconnected');
     recognition.start();  // restart when service failed
 };*/
-
-chrome.tabs.getSelected(null, function (tab) {
-  console.log(tab);
-});
 
 window.addEventListener("load", () => {
   console.log("TESTTTT");
