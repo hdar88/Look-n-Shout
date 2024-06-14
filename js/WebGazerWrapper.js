@@ -28,22 +28,22 @@ webgazer.setGazeListener(function(data, elapsedTime) {
     if (yPrediction >= topRect.top && yPrediction <= topRect.bottom &&
         xPrediction >= topRect.left && xPrediction <= topRect.right) {
         console.log("Du schaust nach oben");
-        simulateKeyPress("ArrowUp");
+        simulateKeyPress("w");
 
     } else if (yPrediction >= bottomRect.top && yPrediction <= bottomRect.bottom &&
         xPrediction >= bottomRect.left && xPrediction <= bottomRect.right) {
         console.log("Du schaust nach unten");
-        //TODO simulateKeyPress("ArrowDown");
+        simulateKeyPress("s");
 
     } else if (yPrediction >= leftRect.top && yPrediction <= leftRect.bottom &&
         xPrediction >= leftRect.left && xPrediction <= leftRect.right) {
         console.log("Du schaust nach links");
-        //TODO simulateKeyPress("ArrowLeft");
+        simulateKeyPress("a");
 
     } else if (yPrediction >= rightRect.top && yPrediction <= rightRect.bottom &&
         xPrediction >= rightRect.left && xPrediction <= rightRect.right) {
         console.log("Du schaust nach rechts");
-        //TODO simulateKeyPress("ArrowRight");
+        simulateKeyPress("d");
 
     } else if (yPrediction >= topLeftRect.top && yPrediction <= topLeftRect.bottom &&
         xPrediction >= topLeftRect.left && xPrediction <= topLeftRect.right) {
@@ -71,7 +71,6 @@ webgazer.setGazeListener(function(data, elapsedTime) {
 }).begin();
 
 webgazer.showPredictionPoints(true);
-
 webgazer.begin();
 
 function simulateKeyPress(key) {
@@ -84,7 +83,12 @@ function simulateKeyPress(key) {
         'Escape': 27,
         'Backspace': 8,
         'Tab': 9,
-        'Space': 32
+        'Space': 32,
+        'W':87,
+        'S':83,
+        'A':65,
+        'D':68
+
     };
 
     let keyCode = keyCodeMap[key] || key.toUpperCase().charCodeAt(0);

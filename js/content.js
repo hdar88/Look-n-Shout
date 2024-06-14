@@ -6,7 +6,7 @@
 
         // Load WebGazer
         const script = document.createElement('script');
-        script.src = chrome.runtime.getURL('WebGazer/www/webgazer.js');
+        script.src = chrome.runtime.getURL('WebGazer/webgazer.js');
         script.onload = () => {
             const gazeScript = document.createElement('script');
             gazeScript.src = chrome.runtime.getURL('js/WebGazerWrapper.js');

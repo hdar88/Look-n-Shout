@@ -17,7 +17,7 @@
     "js": ["/js/content.js"]
   }],
   "web_accessible_resources": [{
-    "resources": ["boundaries.html", "WebGazer/www/webgazer.js", "js/WebGazerWrapper.js"],
+    "resources": ["boundaries.html", "WebGazer/webgazer.js", "js/WebGazerWrapper.js"],
     "matches": ["<all_urls>"]
   }],
   "options_page" : "options.html",
