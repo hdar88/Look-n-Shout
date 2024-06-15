@@ -3,6 +3,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const toggle = document.getElementById('toggle');
     const inputContainerEyes = document.getElementById("input-container-eyes");
     const inputContainerVoice = document.getElementById("input-container-voice");
+    const restartButton = document.getElementById('restart-button');
+    const pauseButton = document.getElementById('pause-button');
+    const resetButton = document.getElementById('reset-button');
 
     // Initialize input-container-eyes as visible
     inputContainerEyes.classList.remove('hidden');
@@ -18,17 +21,33 @@ document.addEventListener('DOMContentLoaded', function() {
             inputContainerVoice.classList.add('hidden');
         }
     });
-});
 
 // Reset button: clear the visible content inside the input fields and (maybe also saved key assignments)
 //TODO weram
+    resetButton.addEventListener('click', function() {
+        //clear input fields
+    })
 
 //Pause - Start button to pause/ restart eye gaze or voice tracking
 // switch between pause and start icon
-//TODO hakar
 
-// stop/ restart tracking
-//TODO hakar
+    // init visibility of buttons
+    restartButton.classList.add('hidden');
+    pauseButton.classList.remove('hidden');
+
+    // switch between pause and start icons when clicking
+    pauseButton.addEventListener('click', function () {
+        pauseButton.classList.add('hidden');
+        restartButton.classList.remove('hidden');
+        if (toggle.checked) {
+
+        }
+    })
+    restartButton.addEventListener('click', function () {
+        restartButton.classList.add('hidden');
+        pauseButton.classList.remove('hidden');
+    })
+});
 
 //help page -> whole description of the functionality of our extension
 //TODO leonard
