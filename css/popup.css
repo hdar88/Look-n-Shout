@@ -135,6 +135,12 @@ input:not(:checked) + .slider .label-voice {
     color: #ffffff; /* White text */
 }
 
+/* Placeholder styling */
+#input-container-eyes input[type="text"]::placeholder, #input-container-voice input[type="text"]::placeholder {
+    color: #cccccc; /* Light grey placeholder text */
+    opacity: 1;
+}
+
 /* Button styling */
 #save-button {
     font-family: "Press Start 2P", cursive;
