@@ -1,9 +1,51 @@
+/* Import a pixel retro font */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* Reset default margin and padding */
+body, h2, div, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Set the font family and background color */
+body {
+    font-family: "Press Start 2P", cursive;
+    width: 300px;
+    background-image: url("../icons/retro-gaming.jpg");
+    background-size: cover; /* Adjusts the background image size to cover the entire body */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    border-radius: 50px;
+}
+
+/* Container for the popup content */
+.container {
+    width: 275px;
+    padding: 20px;
+    /*background-color: #292943; /* Dark purple background */
+    background-color: rgba(41, 41, 67, 0.3);
+    border-radius: 20px;
+    /*border: 20px solid rgba(32, 32, 58, 0.25); /* Slightly darker border */
+    /*box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5); /* Slightly more pronounced shadow */
+    text-align: center;
+}
+
+/* Header styling */
+h2 {
+    font-size: 1.4em;
+    margin-bottom: 20px;
+    color: #ffffff; /* White text */
+}
+
 /* Add this style to create the toggle switch */
 .switch {
     position: relative;
     display: inline-block;
-    width: 60px;
+    width: 100%; /* Set the width of the toggle */
     height: 34px;
+    margin: 0 auto;
 }
 
 .switch input {
@@ -19,122 +61,134 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: .4s;
+    background-color: #8e44ad;
     transition: .4s;
     border-radius: 34px;
-}
-
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
-    border-radius: 50%;
-}
-
-input:checked + .slider {
-    background-color: #2196F3;
-}
-
-input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
-}
-
-input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
-}
-
-/* Rounded sliders */
-.slider.round {
-    border-radius: 34px;
-}
-
-.slider.round:before {
-    border-radius: 50%;
-}
-
-/* Reset default margin and padding */
-body, h2, div, p, ul, li {
-    margin: 0;
-    padding: 0;
-}
-
-/* Set the font family and background color */
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #161625; /* Dark background */
-}
-
-/* Container for the popup content */
-.container {
-    width: 300px;
-    padding: 20px;
-    background-color: #292943; /* Dark purple background */
-    border-radius: 10px;
-    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3); /* Soft shadow */
-    margin: 20px auto;
-}
-
-/* Header styling */
-h2 {
-    font-size: 1.8em;
-    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    text-shadow: 0 0 40px #ffffff;
+    font-size: 1em;
+    box-sizing: border-box;
+    color: #fff;
     text-align: center;
-    color: #ffffff; /* White text */
+    animation: glow 1s ease-in-out infinite alternate;
 }
 
-/* Label styling */
-label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
-    color: #ffffff; /* White text */
+@-webkit-keyframes glow {
+    from {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+    }
+
+    to {
+        text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+    }
+}
+input:checked + .slider {
+    background-color: #8e44ad;
+}
+
+.slider-labels {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+.label-voice {
+    transition: opacity 0.4s;
+}
+
+.label-eyes {
+    transition: opacity 0.4s;
+}
+
+input:checked + .slider .label-eyes {
+    opacity: 0.5;
+}
+
+input:not(:checked) + .slider .label-voice {
+    opacity: 0.5;
+}
+
+/* Style for the "eyes" and "voice" labels */
+#input-container-eyes, #input-container-voice {
+    margin-top: 20px;
+    font-size: 12px;
+    color: rgb(243, 89, 6);
+}
+
+#input-container-eyes div, #input-container-voice div {
+    margin-bottom: 10px;
 }
 
 /* Input field styling */
-input[type="text"] {
+#input-container-eyes input[type="text"], #input-container-voice input[type="text"] {
     width: calc(100% - 22px); /* Adjust for input padding */
     padding: 12px;
-    margin-bottom: 15px;
+    margin-top: 5px; /* Add margin to space input field below label */
     border: 1px solid #5f5f7f; /* Lighter purple border */
     border-radius: 5px;
-    background-color: #3d3d58; /* Darker purple background */
+    background-color: rgba(61, 61, 88, 0.5); /* Darker purple background */
     color: #ffffff; /* White text */
+}
+
+/* Placeholder styling */
+#input-container-eyes input[type="text"]::placeholder, #input-container-voice input[type="text"]::placeholder {
+    color: #cccccc; /* Light grey placeholder text */
+    opacity: 1;
 }
 
 /* Button styling */
-button {
+#save-button {
+    font-family: "Press Start 2P", cursive;
     display: block;
-    width: 100%;
-    padding: 12px;
-    margin-top: 15px;
+    width: 100px; /* Same width as the toggle switch */
+    padding: 15px;
+    margin-left: auto; /* Set left margin to auto to push the button to the right */
     border: none;
-    border-radius: 5px;
+    border-radius: 50px; /* Fully round corners */
     cursor: pointer;
-    font-size: 16px;
+    font-size: 0.8em; /* Adjust font size for better fit */
     transition: background-color 0.3s;
     color: #ffffff; /* White text */
+    background-color: #8e44ad; /* Purple background */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
 }
 
-/* Cancel button specific styling */
-#cancelButton {
-    background-color: #707070; /* Dark gray */
+.icon-buttons {
+    font-family: "Pixelify Sans", sans-serif;
+    display: inline-block;
+    justify-content: space-between;
+    margin-right: -10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    /*border-radius: 0px; /*Ecke abrunden */
+    font-size: 1em; /* Schriftgröße anpassen */
+    background-color: rgba(32, 32, 58, -1.0);
+    border: none;
 }
 
-/* Save button specific styling */
-#saveButton {
-    background-color: #8e44ad; /* Purple */
+.icon-buttons img {
+    width: 55px;  /* Set the width you want for your icons */
+    height: 55px; /* Set the height you want for your icons */
+    max-width: 100%; /* Ensure images are responsive */
+    max-height: 100%; /* Ensure images are responsive */
+    opacity: 1.1;
 }
 
+#icons-sidebar {
+    width: 100px;
+}
 /* Button hover effect */
 button:hover {
-    filter: brightness(1.1); /* Hover effect to make the button slightly brighter */
+    filter: brightness(1.5); /* Hover effect to make the button slightly brighter */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+/* Hidden class for the labels */
+.hidden {
+    display: none;
 }
