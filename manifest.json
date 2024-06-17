@@ -20,7 +20,6 @@
     "resources": ["boundaries.html", "WebGazer/webgazer.js", "js/WebGazerWrapper.js"],
     "matches": ["<all_urls>"]
   }],
-  "options_page" : "options.html",
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
