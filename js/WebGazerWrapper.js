@@ -28,7 +28,7 @@ webgazer.setGazeListener(function(data, elapsedTime) {
     if (yPrediction >= topRect.top && yPrediction <= topRect.bottom &&
         xPrediction >= topRect.left && xPrediction <= topRect.right) {
         console.log("Du schaust nach oben");
-        simulateKeyPress('ArrowUp');
+        //simulateKeyPress('ArrowUp');
 
     } else if (yPrediction >= bottomRect.top && yPrediction <= bottomRect.bottom &&
         xPrediction >= bottomRect.left && xPrediction <= bottomRect.right) {
@@ -73,7 +73,7 @@ webgazer.setGazeListener(function(data, elapsedTime) {
 webgazer.showPredictionPoints(true);
 webgazer.begin();
 
-function simulateKeyPress(key) {
+/*function simulateKeyPress(key) {
     const keyCodeMap = {
         'ArrowUp': 38,
         'ArrowDown': 40,
@@ -133,7 +133,7 @@ function simulateKeyPress(key) {
     }, 100); // Delay to simulate key press duration
 
     console.log("Pressed " + key);
-}
+}*/
 
 function simulateKeyCombiPress(keys){
     //TODO
