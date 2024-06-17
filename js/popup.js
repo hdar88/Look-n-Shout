@@ -4,16 +4,7 @@ const inputContainerVoice = document.getElementById("input-container-voice");
 const restartButton = document.getElementById('restart-button');
 const pauseButton = document.getElementById('pause-button');
 const resetButton = document.getElementById('reset-button');
-
-// Store default state of input fields
-const storeDefaultInputFields = (container) => {
-    container.querySelectorAll('input').forEach(input => {
-        input.dataset.placeholder = input.placeholder;
-    });
-};
-storeDefaultInputFields(inputContainerEyes);
-storeDefaultInputFields(inputContainerVoice);
-
+const saveButton = document.getElementById('save-button');
 
 //TODO define webgazer object
 //TODO define webspeech object
@@ -92,6 +83,16 @@ const checkAndReset = (container) => {
     });
     return allEmpty;
 };
+
+// Store default state of input fields
+const storeDefaultInputFields = (container) => {
+    container.querySelectorAll('input').forEach(input => {
+        input.dataset.placeholder = input.placeholder;
+    });
+};
+storeDefaultInputFields(inputContainerEyes);
+storeDefaultInputFields(inputContainerVoice);
+
 //help page -> whole description of the functionality of our extension
 //TODO leonard
 
