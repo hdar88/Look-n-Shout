@@ -98,3 +98,6 @@ storeDefaultInputFields(inputContainerVoice);
 
 // save button -> chrome.storage API -> get User Input
 //TODO oqba
+
+// input validation
+//TODO

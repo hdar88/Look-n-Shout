@@ -28,22 +28,22 @@ webgazer.setGazeListener(function(data, elapsedTime) {
     if (yPrediction >= topRect.top && yPrediction <= topRect.bottom &&
         xPrediction >= topRect.left && xPrediction <= topRect.right) {
         console.log("Du schaust nach oben");
-        simulateKeyPress("w");
+        simulateKeyPress('ArrowUp');
 
     } else if (yPrediction >= bottomRect.top && yPrediction <= bottomRect.bottom &&
         xPrediction >= bottomRect.left && xPrediction <= bottomRect.right) {
         console.log("Du schaust nach unten");
-        simulateKeyPress("s");
+        //simulateKeyPress('ArrowDown');
 
     } else if (yPrediction >= leftRect.top && yPrediction <= leftRect.bottom &&
         xPrediction >= leftRect.left && xPrediction <= leftRect.right) {
         console.log("Du schaust nach links");
-        simulateKeyPress("a");
+        //simulateKeyPress('ArrowLeft');
 
     } else if (yPrediction >= rightRect.top && yPrediction <= rightRect.bottom &&
         xPrediction >= rightRect.left && xPrediction <= rightRect.right) {
         console.log("Du schaust nach rechts");
-        simulateKeyPress("d");
+        //simulateKeyPress('ArrowRight');
 
     } else if (yPrediction >= topLeftRect.top && yPrediction <= topLeftRect.bottom &&
         xPrediction >= topLeftRect.left && xPrediction <= topLeftRect.right) {
@@ -83,15 +83,14 @@ function simulateKeyPress(key) {
         'Escape': 27,
         'Backspace': 8,
         'Tab': 9,
-        'Space': 32,
-        'W':87,
-        'S':83,
-        'A':65,
-        'D':68
-
+        ' ': 32,
+        'W': 87,
+        'S': 83,
+        'A': 65,
+        'D': 68
     };
 
-    let keyCode = keyCodeMap[key] || key.toUpperCase().charCodeAt(0);
+    let keyCode = key.toUpperCase().charCodeAt(0);
 
     if (keyCode === undefined) {
         console.error(`Key "${key}" is not supported.`);
@@ -110,6 +109,21 @@ function simulateKeyPress(key) {
             ctrlKey: false,
             metaKey: false
         });
+
+        Object.defineProperty(event, 'keyCode', {
+            get: function() {
+                return this.keyCodeVal;
+            }
+        });
+
+        Object.defineProperty(event, 'which', {
+            get: function() {
+                return this.keyCodeVal;
+            }
+        });
+
+        event.keyCodeVal = keyCode;
+
         document.dispatchEvent(event);
     }
 
