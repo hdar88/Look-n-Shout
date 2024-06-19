@@ -5,6 +5,8 @@ const restartButton = document.getElementById('restart-button');
 const pauseButton = document.getElementById('pause-button');
 const resetButton = document.getElementById('reset-button');
 const saveButton = document.getElementById('save-button');
+const webcamOnButton = document.getElementById('webcam-on-button');
+const webcamOffButton = document.getElementById('webcam-off-button');
 
 //TODO define webgazer object
 //TODO define webspeech object
@@ -101,3 +103,25 @@ storeDefaultInputFields(inputContainerVoice);
 
 // input validation
 //TODO
+
+// button to turn visibility of webcam on/ off
+//TODO
+document.addEventListener('DOMContentLoaded', function() {
+
+    // init visibility of buttons
+    webcamOnButton.classList.add('hidden');
+    webcamOffButton.classList.remove('hidden');
+
+    // do not show webcam
+    webcamOffButton.addEventListener('click', function () {
+        webcamOffButton.classList.add('hidden');
+        webcamOnButton.classList.remove('hidden');
+        //logic
+    })
+    // show webcam
+    webcamOnButton.addEventListener('click', function () {
+        webcamOnButton.classList.add('hidden');
+        webcamOffButton.classList.remove('hidden');
+        //logic
+    })
+});
