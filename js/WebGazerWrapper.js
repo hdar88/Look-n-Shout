@@ -29,22 +29,22 @@ webgazer.setGazeListener(function(data, elapsedTime) {
     if (yPrediction >= topRect.top && yPrediction <= topRect.bottom &&
         xPrediction >= topRect.left && xPrediction <= topRect.right) {
         //console.log("Du schaust nach oben");
-        simulateKeyPress('ArrowUp', true);
+        simulateKeyPress('ArrowUp');
 
     } else if (yPrediction >= bottomRect.top && yPrediction <= bottomRect.bottom &&
         xPrediction >= bottomRect.left && xPrediction <= bottomRect.right) {
         console.log("Du schaust nach unten");
-        simulateKeyPress('ArrowDown', true);
+        simulateKeyPress('ArrowDown');
 
     } else if (yPrediction >= leftRect.top && yPrediction <= leftRect.bottom &&
         xPrediction >= leftRect.left && xPrediction <= leftRect.right) {
         console.log("Du schaust nach links");
-        simulateKeyPress('ArrowLeft', true);
+        simulateKeyPress('ArrowLeft');
 
     } else if (yPrediction >= rightRect.top && yPrediction <= rightRect.bottom &&
         xPrediction >= rightRect.left && xPrediction <= rightRect.right) {
         console.log("Du schaust nach rechts");
-        simulateKeyPress('ArrowRight', true);
+        simulateKeyPress('ArrowRight');
 
     } else if (yPrediction >= topLeftRect.top && yPrediction <= topLeftRect.bottom &&
         xPrediction >= topLeftRect.left && xPrediction <= topLeftRect.right) {
@@ -74,7 +74,7 @@ webgazer.setGazeListener(function(data, elapsedTime) {
 webgazer.showPredictionPoints(true);
 webgazer.begin();
 
-async function simulateKeyPress(key, hold) {
+async function simulateKeyPress(key) {
     const keyCodeMap = {
         'w': 87,
         'a': 65,
@@ -102,13 +102,9 @@ async function simulateKeyPress(key, hold) {
     const eventDown = new KeyboardEvent('keydown', eventInit);
     const eventUp = new KeyboardEvent('keyup', eventInit);
 
-    if(!hold){
-        document.dispatchEvent(eventDown);
-        await new Promise(r => setTimeout(r, 5000));
-        document.dispatchEvent(eventUp);
-    } else {
-        document.dispatchEvent(eventDown);
-    }
+    document.dispatchEvent(eventUp);
+    await new Promise(r => setTimeout(r, 500));
+    document.dispatchEvent(eventDown);
 }
 
 function simulateKeyCombiPress(keys){
