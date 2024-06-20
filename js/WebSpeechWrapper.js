@@ -14,12 +14,6 @@ function startRecognition() {
   recognition.lang = "en-US";
   recognition.start();
 
-  recognition.onerror = function (event) {
-    console.error("Speech recognition error:", event.error);
-    diagnostic.textContent = "Speech recognition error: " + event.error;
-    startRecognition();
-  };
-
   recognition.onresult = function (event) {
     finalTranscript = event.results[0][0].transcript;
     if (finalTranscript.includes("stop")) {
@@ -32,16 +26,16 @@ function startRecognition() {
 
       if (finalTranscript.includes("jump")) {
         console.log("TEST A");
-        triggerkeypress("w", "jump");
+        triggerkeypress("ArrowUp", "jump");
       } else if (finalTranscript.includes("left")) {
         console.log("TESTTTTTTTTT");
-        triggerkeypress("a", "left");
+        triggerkeypress("ArrowLeft", "left");
       } else if (finalTranscript.includes("right")) {
         console.log("TESTTTTTTTTT");
-        triggerkeypress("d", "right");
+        triggerkeypress("ArrowRight", "right");
       } else if (finalTranscript.includes("down")) {
         console.log("TESTTTTTTTTT");
-        triggerkeypress("d", "down");
+        triggerkeypress("ArrowDown", "down");
       }
 
       if (finalTranscript) {
@@ -49,27 +43,53 @@ function startRecognition() {
         diagnostic.textContent = "Final Transcript TEST: " + finalTranscript;
       }
       startRecognition();
-      console.log("TEST")
+      console.log("TEST");
     }
   };
 }
 
-function triggerkeypress(key, command) {
-  const event = new KeyboardEvent(key);
-  console.log(event);
-  document.dispatchEvent(event);
-  if (command == "jump") {
-    console.log("Character jumps" + key);
-  } else if (command == "down") {
-    console.log("Character down");
-  } else if (command == "left") {
-    console.log("Character left");
-  } else if (command == "right") {
-    console.log("Character right");
-  }
+async function triggerkeypress(key, command) {
+  const keyCodeMap = {
+    " ": 32,
+    a: 65,
+    s: 83,
+    d: 68,
+    w: 87,
+    ArrowUp: 38,
+    ArrowLeft: 37,
+    ArrowRight: 39,
+    ArrowDown: 40,
+  };
+
+  const keyCode = keyCodeMap[key];
+  if (!keyCode) return;
+
+  const eventInit = {
+    key: key,
+    code: key.toUpperCase(),
+    keyCode: keyCode,
+    which: keyCode,
+    bubbles: true,
+    cancelable: true,
+  };
+
+  const eventDown = new KeyboardEvent("keydown", eventInit);
+  const eventUp = new KeyboardEvent("keyup", eventInit);
+
+  console.log(eventUp);
+
+  document.dispatchEvent(eventDown);
+  console.log(eventDown);
+  await new Promise((r) => setTimeout(r, 500));
+  document.dispatchEvent(eventUp);
+
   //output.dispatchEvent(event);
 
   console.log("inside trigger method");
+}
+
+function sleep(milliseconds) {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
 }
 
 /*recognition.onspeechend = function() {
