@@ -1,14 +1,10 @@
 const toggle = document.getElementById("toggle");
-const mainContainer = document.getElementById("container");
 const inputContainerEyes = document.getElementById("input-container-eyes");
 const inputContainerVoice = document.getElementById("input-container-voice");
 const restartButton = document.getElementById("restart-button");
 const pauseButton = document.getElementById("pause-button");
 const resetButton = document.getElementById("reset-button");
 const saveButton = document.getElementById("save-button");
-const helpButton = document.getElementById("settings-button");
-const helpPage = document.getElementById("help-page-container");
-const mainContainerPopup = document.getElementById("main-container");
 const arrowUp = document.getElementById("up-voice");
 const arrowDown = document.getElementById("down-voice");
 const arrowLeft = document.getElementById("left-voice");
@@ -17,13 +13,12 @@ const upKey = document.getElementById("upKey");
 const downKey = document.getElementById("downKey");
 const leftKey = document.getElementById("leftKey");
 const rightKey = document.getElementById("rightKey");
+
 const webcamOnButton = document.getElementById("webcam-on-button");
 const webcamOffButton = document.getElementById("webcam-off-button");
 
 //TODO define webgazer object
 //TODO define webspeech object
-
-let clicked = false;
 
 // switch between eyes and voice pop up content
 document.addEventListener("DOMContentLoaded", function () {
@@ -42,7 +37,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
-
 //Pause - Start button to pause/ restart eye gaze or voice tracking
 // switch between pause and start icon
 document.addEventListener("DOMContentLoaded", function () {
@@ -99,25 +93,6 @@ const checkAndReset = (container) => {
   });
   return allEmpty;
 };
-
-helpButton.addEventListener("click", function () {
-  mainContainerPopup.classList.toggle("expanded");
-  console.log("TEST");
-  if (!clicked) {
-    clicked = true;
-    helpPage.classList.remove("hidden");
-    mainContainer.classList.add("hidden");
-    pauseButton.classList.add("hidden");
-    resetButton.classList.add("hidden");
-  } else {
-    clicked = false;
-    helpPage.classList.add("hidden");
-    mainContainer.classList.remove("hidden");
-    pauseButton.classList.remove("hidden");
-    console.log("TEST");
-    resetButton.classList.remove("hidden")
-  }
-});
 
 // Store default state of input fields
 const storeDefaultInputFields = (container) => {

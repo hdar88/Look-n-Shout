@@ -10,33 +10,19 @@ body, h2, div, p, ul, li {
 /* Set the font family and background color */
 body {
     font-family: "Press Start 2P", cursive;
-    width: fit-content;
+    width: 300px;
     background-image: url("../icons/retro-gaming.jpg");
     background-size: cover; /* Adjusts the background image size to cover the entire body */
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100vh;
     border-radius: 50px;
 }
 
-.main-container-popup{
-    transition: 0.3s ease-in-out;
-    width: 250px;
-    height: 450px;
-    display: flex;
-    align-items: center;
-}
-
-.text-help-page{
-    line-height: 1.4;
-    color: white;
-    font-size: 10px;
-    margin-top: 30px;
-}
-
 /* Container for the popup content */
-#container {
-    width: 200px;
+.container {
+    width: 275px;
     padding: 20px;
     /*background-color: #292943; /* Dark purple background */
     background-color: rgba(41, 41, 67, 0.3);
@@ -44,32 +30,6 @@ body {
     /*border: 20px solid rgba(32, 32, 58, 0.25); /* Slightly darker border */
     /*box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.5); /* Slightly more pronounced shadow */
     text-align: center;
-}
-
-.main-container-popup.expanded{
-    width: 400px;
-    height: 500px;
-}
-
-.header-help-page{
-    color: white;
-    font-size: 20px;
-    margin-top: 20px;
-}
-
-#help-page-container {
-    background-color: rgba(12, 2, 68, 0.719);
-    text-align: center;
-    top: -50px;
-    border-radius: 20px;
-    height: 330px;
-    padding: 10px;
-    margin-right: 10px;
-}
-
-@keyframes slide{
-    0% {scale: 0}
-    100% {scale: 1;}
 }
 
 /* Header styling */
@@ -220,7 +180,7 @@ input:not(:checked) + .slider .label-voice {
 }
 
 #icons-sidebar {
-    width: 70px;
+    width: 100px;
 }
 /* Button hover effect */
 button:hover {
