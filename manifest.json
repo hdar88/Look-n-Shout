@@ -3,15 +3,30 @@
   "name": "Look n Shout",
   "version": "1.0",
   "description": "look n shout to play web based 2D games",
+  "host_permissions": ["<all_urls>"],
   "permissions": [
-    "tabs"
+    "tabs",
+    "scripting",
+    "activeTab"
   ],
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "/js/background.js"
   },
-  "options_page" : "./options.html",
+  "content_scripts": [{
+    "matches": ["<all_urls>"],
+    "js": ["/js/content.js"]
+  }],
+  "web_accessible_resources": [{
+    "resources": ["boundaries.html", "WebGazer-master/www/webgazer.js", "js/WebGazerWrapper.js"],
+    "matches": ["<all_urls>"]
+  }],
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "96": "icons/icon96.png"
+    }
   }
 }
 

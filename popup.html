@@ -2,41 +2,79 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Look n Shout</title>
-
-    <link rel="stylesheet" href="popup.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popup</title>
+    <link rel="stylesheet" href="css/popup.css">
 </head>
 <body>
-<div class="container">
-    <div class="toggle-container">
-        <label class="toggle-label">Play w/ eyes</label>
-        <label class="switch">
-            <input type="checkbox" id="toggleSwitch">
-            <span class="slider round"></span>
-        </label>
-        <label class="toggle-label">Play w/ voice</label>
-    </div>
-    <div>
-        <label for="upKey">Look up:</label>
-        <input type="text" id="upKey" placeholder="Press a key">
-    </div>
-    <div>
-        <label for="downKey">look down:</label>
-        <input type="text" id="downKey" placeholder="Press a key">
-    </div>
-    <div>
-        <label for="downKey">look left:</label>
-        <input type="text" id="leftKey" placeholder="Press a key">
-    </div>
-    <div>
-        <label for="downKey">look right:</label>
-        <input type="text" id="rightKey" placeholder="Press a key">
-    </div>
-
-    <button id="cancelButton">Cancel</button>
-    <button id="saveButton">Save Settings</button>
+<div class="header" id="icons-sidebar">
+    <button class= "icon-buttons" id="settings-button">
+        <img src="icons/help-button.png" alt="settings">
+    </button>
+    <button class= "icon-buttons hidden" id="pause-button">
+        <img src="icons/pause-button.png" alt="pause">
+    </button>
+    <button class= "icon-buttons hidden" id="restart-button">
+        <img src="icons/restart-button.png" alt="restart">
+    </button>
+    <button class= "icon-buttons" id="reset-button">
+        <img src="icons/reset-button.png" alt="reset">
+    </button>
+    <button class= "icon-buttons hidden" id="webcam-on-button">
+        <img src="icons/webcam-on.png" alt="webcam-on">
+    </button>
+    <button class= "icon-buttons hidden" id="webcam-off-button">
+        <img src="icons/webcam-off.png" alt="webcam-off">
+    </button>
 </div>
-<!-- Include JavaScript file -->
-<script src="foreground.js"></script>
+<div class="container">
+    <label class="switch">
+        <input type="checkbox" id="toggle">
+        <span class="slider round">
+                <span class="slider-labels">
+                    <span class="label-eyes">eyes</span>
+                    <span class="label-voice">voice</span>
+                </span>
+            </span>
+    </label>
+    <div id="input-container-eyes" class="hidden">
+        <div>
+            <label for="upKey">Look up:</label>
+            <input type="text" id="upKey" placeholder="Enter a key">
+        </div>
+        <div>
+            <label for="downKey">Look down:</label>
+            <input type="text" id="downKey" placeholder="Enter a key">
+        </div>
+        <div>
+            <label for="leftKey">Look left:</label>
+            <input type="text" id="leftKey" placeholder="Enter a key">
+        </div>
+        <div>
+            <label for="rightKey">Look right:</label>
+            <input type="text" id="rightKey" placeholder="Enter a key">
+        </div>
+    </div>
+    <div id="input-container-voice" class="hidden">
+        <div>
+            <label for="up-voice">Arrow Up:</label>
+            <input type="text" id="up-voice" placeholder="Enter a keyword">
+        </div>
+        <div>
+            <label for="down-voice">Arrow Down:</label>
+            <input type="text" id="down-voice" placeholder="Enter a keyword">
+        </div>
+        <div>
+            <label for="left-voice">Arrow Left:</label>
+            <input type="text" id="left-voice" placeholder="Enter a keyword">
+        </div>
+        <div>
+            <label for="right-voice">Arrow Right:</label>
+            <input type="text" id="right-voice" placeholder="Enter a keyword">
+        </div>
+    </div>
+    <button id="save-button">Save</button>
+</div>
+<script src="js/popup.js" type="text/javascript"></script>
 </body>
 </html>
