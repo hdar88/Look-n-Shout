@@ -4,6 +4,7 @@ webgazer.setGazeListener(function(data, elapsedTime) {
     }
     let xPrediction = data.x;
     let yPrediction = data.y;
+    //console.log(elapsedTime);
 
     let topBoundary = document.getElementById("topBoundary");
     let bottomBoundary = document.getElementById("bottomBoundary");
@@ -27,23 +28,23 @@ webgazer.setGazeListener(function(data, elapsedTime) {
     // check in which boundary gaze is positioned
     if (yPrediction >= topRect.top && yPrediction <= topRect.bottom &&
         xPrediction >= topRect.left && xPrediction <= topRect.right) {
-        console.log("Du schaust nach oben");
-        simulateKeyPress("w");
+        //console.log("Du schaust nach oben");
+        simulateKeyPress('ArrowUp');
 
     } else if (yPrediction >= bottomRect.top && yPrediction <= bottomRect.bottom &&
         xPrediction >= bottomRect.left && xPrediction <= bottomRect.right) {
         console.log("Du schaust nach unten");
-        simulateKeyPress("s");
+        simulateKeyPress('ArrowDown');
 
     } else if (yPrediction >= leftRect.top && yPrediction <= leftRect.bottom &&
         xPrediction >= leftRect.left && xPrediction <= leftRect.right) {
         console.log("Du schaust nach links");
-        simulateKeyPress("a");
+        simulateKeyPress('ArrowLeft');
 
     } else if (yPrediction >= rightRect.top && yPrediction <= rightRect.bottom &&
         xPrediction >= rightRect.left && xPrediction <= rightRect.right) {
         console.log("Du schaust nach rechts");
-        simulateKeyPress("d");
+        simulateKeyPress('ArrowRight');
 
     } else if (yPrediction >= topLeftRect.top && yPrediction <= topLeftRect.bottom &&
         xPrediction >= topLeftRect.left && xPrediction <= topLeftRect.right) {
@@ -73,52 +74,37 @@ webgazer.setGazeListener(function(data, elapsedTime) {
 webgazer.showPredictionPoints(true);
 webgazer.begin();
 
-function simulateKeyPress(key) {
+async function simulateKeyPress(key) {
     const keyCodeMap = {
+        'w': 87,
+        'a': 65,
+        's': 83,
+        'd': 68,
+        ' ': 32,
         'ArrowUp': 38,
         'ArrowDown': 40,
         'ArrowLeft': 37,
         'ArrowRight': 39,
-        'Enter': 13,
-        'Escape': 27,
-        'Backspace': 8,
-        'Tab': 9,
-        'Space': 32,
-        'W':87,
-        'S':83,
-        'A':65,
-        'D':68
-
     };
 
-    let keyCode = keyCodeMap[key] || key.toUpperCase().charCodeAt(0);
+    const keyCode = keyCodeMap[key];
+    if (!keyCode) return;
 
-    if (keyCode === undefined) {
-        console.error(`Key "${key}" is not supported.`);
-        return;
-    }
+    const eventInit = {
+        key: key,
+        code: key.toUpperCase(),
+        keyCode: keyCode,
+        which: keyCode,
+        bubbles: true,
+        cancelable: true
+    };
 
-    function triggerKeyEvent(type, key, keyCode) {
-        const event = new KeyboardEvent(type, {
-            bubbles: true,
-            cancelable: true,
-            key: key,
-            code: key,
-            keyCode: keyCode,
-            which: keyCode,
-            shiftKey: false,
-            ctrlKey: false,
-            metaKey: false
-        });
-        document.dispatchEvent(event);
-    }
+    const eventDown = new KeyboardEvent('keydown', eventInit);
+    const eventUp = new KeyboardEvent('keyup', eventInit);
 
-    triggerKeyEvent('keydown', key, keyCode);
-    setTimeout(() => {
-        triggerKeyEvent('keyup', key, keyCode);
-    }, 100); // Delay to simulate key press duration
-
-    console.log("Pressed " + key);
+    document.dispatchEvent(eventUp);
+    await new Promise(r => setTimeout(r, 500));
+    document.dispatchEvent(eventDown);
 }
 
 function simulateKeyCombiPress(keys){
