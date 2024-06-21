@@ -9,6 +9,16 @@ const saveButton = document.getElementById("save-button");
 const helpButton = document.getElementById("settings-button");
 const helpPage = document.getElementById("help-page-container");
 const mainContainerPopup = document.getElementById("main-container");
+const arrowUp = document.getElementById("up-voice");
+const arrowDown = document.getElementById("down-voice");
+const arrowLeft = document.getElementById("left-voice");
+const arrowRight = document.getElementById("right-voice");
+const upKey = document.getElementById("upKey");
+const downKey = document.getElementById("downKey");
+const leftKey = document.getElementById("leftKey");
+const rightKey = document.getElementById("rightKey");
+const webcamOnButton = document.getElementById("webcam-on-button");
+const webcamOffButton = document.getElementById("webcam-off-button");
 
 //TODO define webgazer object
 //TODO define webspeech object
@@ -32,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
 //Pause - Start button to pause/ restart eye gaze or voice tracking
 // switch between pause and start icon
 document.addEventListener("DOMContentLoaded", function () {
@@ -122,6 +133,120 @@ storeDefaultInputFields(inputContainerVoice);
 
 // save button -> chrome.storage API -> get User Input
 //TODO oqba
+saveButton.addEventListener("click", function () {
+  if (toggle.checked && inputContainerEyes.classList.contains("hidden")) {
+    saveKeysVoice(inputContainerVoice);
+  } else if (inputContainerVoice.classList.contains("hidden")) {
+    saveKeysEyes(inputContainerEyes);
+  }
+});
+
+const saveKeysVoice = (container) => {
+  let empty = false;
+  container.querySelectorAll("input").forEach((input) => {
+    if (input.value === "") {
+      empty = true;
+    }
+  });
+  if (empty) {
+    alert("Some Keywords missing!!");
+  } else {
+    const arrowUpInput = arrowUp.value;
+    const arrowDownInput = arrowDown.value;
+    const arrowLeftInput = arrowLeft.value;
+    const arrowRightInput = arrowRight.value;
+
+    chrome.storage.sync.set(
+      {
+        arrowUp: arrowUpInput,
+        arrowDown: arrowDownInput,
+        arrowLeft: arrowLeftInput,
+        arrowRight: arrowRightInput,
+      },
+      function () {
+        console.log("Settings saved");
+      }
+    );
+  }
+};
+
+const saveKeysEyes = (container) => {
+  let empty = false;
+  container.querySelectorAll("input").forEach((input) => {
+    if (input.value === "") {
+      empty = true;
+    }
+  });
+
+  const upKeyInput = upKey.value;
+  const downKeyInput = downKey.value;
+  const leftKeyInput = leftKey.value;
+  const rightKeyInput = rightKey.value;
+
+  chrome.storage.sync.set(
+    {
+      upKey: upKeyInput,
+      downKey: downKeyInput,
+      leftKey: leftKeyInput,
+      rightKey: rightKeyInput,
+    },
+    function () {
+      console.log("Settings saved");
+    }
+  );
+};
+
+const restoreVoiceOptions = () => {
+  chrome.storage.sync.get(
+    ["arrowUp", "arrowDown", "arrowLeft", "arrowRight"],
+    function (result) {
+      arrowUp.value = result.arrowUp;
+      arrowDown.value = result.arrowDown;
+      arrowLeft.value = result.arrowLeft;
+      arrowRight.value = result.arrowRight;
+    }
+  );
+};
+
+const restoreEyeOptions = () => {
+  chrome.storage.sync.get(
+    ["upKey", "downKey", "leftKey", "rightKey"],
+    function (result) {
+      if (result.upKey === undefined) {
+        upKey.value = "";
+      } else {
+        upKey.value = result.upKey;
+      }
+      downKey.value = result.downKey;
+      leftKey.value = result.leftKey;
+      rightKey.value = result.rightKey;
+    }
+  );
+};
+
+document.addEventListener("DOMContentLoaded", restoreVoiceOptions);
+document.addEventListener("DOMContentLoaded", restoreEyeOptions);
 
 // input validation
 //TODO
+
+// button to turn visibility of webcam on/ off
+//TODO
+document.addEventListener("DOMContentLoaded", function () {
+  // init visibility of buttons
+  webcamOnButton.classList.add("hidden");
+  webcamOffButton.classList.remove("hidden");
+
+  // do not show webcam
+  webcamOffButton.addEventListener("click", function () {
+    webcamOffButton.classList.add("hidden");
+    webcamOnButton.classList.remove("hidden");
+    //logic
+  });
+  // show webcam
+  webcamOnButton.addEventListener("click", function () {
+    webcamOnButton.classList.add("hidden");
+    webcamOffButton.classList.remove("hidden");
+    //logic
+  });
+});

@@ -7,17 +7,18 @@
   "permissions": [
     "tabs",
     "scripting",
-    "activeTab"
+    "activeTab",
+    "storage"
   ],
   "background": {
     "service_worker": "/js/background.js"
   },
   "content_scripts": [{
     "matches": ["<all_urls>"],
-    "js": ["/js/content.js"]
+    "js": ["js/webGazerContent.js", "js/webSpeechContent.js"]
   }],
   "web_accessible_resources": [{
-    "resources": ["boundaries.html", "WebGazer-master/www/webgazer.js", "js/WebGazerWrapper.js"],
+    "resources": ["boundaries.html", "WebGazer-master/www/webgazer.js", "js/WebGazerWrapper.js", "js/WebSpeechWrapper.js"],
     "matches": ["<all_urls>"]
   }],
   "action": {
