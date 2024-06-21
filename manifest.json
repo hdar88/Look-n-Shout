@@ -17,10 +17,9 @@
     "js": ["js/webGazerContent.js", "js/webSpeechContent.js"]
   }],
   "web_accessible_resources": [{
-    "resources": ["boundaries.html", "WebGazer/www/webgazer.js", "js/WebGazerWrapper.js", "js/WebSpeechWrapper.js"],
+    "resources": ["boundaries.html", "WebGazer-master/www/webgazer.js", "js/WebGazerWrapper.js", "js/WebSpeechWrapper.js"],
     "matches": ["<all_urls>"]
   }],
-  "options_page" : "options.html",
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
