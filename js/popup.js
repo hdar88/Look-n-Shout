@@ -5,6 +5,25 @@ const restartButton = document.getElementById('restart-button');
 const pauseButton = document.getElementById('pause-button');
 const resetButton = document.getElementById('reset-button');
 const saveButton = document.getElementById('save-button');
+const arrowUp = document.getElementById('up-voice');
+const arrowDown = document.getElementById('down-voice');
+const arrowLeft = document.getElementById('left-voice');
+const arrowRight = document.getElementById('right-voice');
+const upKey = document.getElementById('upKey');
+const downKey = document.getElementById('downKey');
+const leftKey = document.getElementById('leftKey');
+const rightKey = document.getElementById('rightKey');
+
+
+// Store default state of input fields
+const storeDefaultInputFields = (container) => {
+    container.querySelectorAll('input').forEach(input => {
+        input.dataset.placeholder = input.placeholder;
+    });
+};
+storeDefaultInputFields(inputContainerEyes);
+storeDefaultInputFields(inputContainerVoice);
+
 const webcamOnButton = document.getElementById('webcam-on-button');
 const webcamOffButton = document.getElementById('webcam-off-button');
 
@@ -100,6 +119,88 @@ storeDefaultInputFields(inputContainerVoice);
 
 // save button -> chrome.storage API -> get User Input
 //TODO oqba
+saveButton.addEventListener('click', function(){
+    if (toggle.checked && inputContainerEyes.classList.contains('hidden')) {
+        saveKeysVoice(inputContainerVoice);
+    } else if (inputContainerVoice.classList.contains('hidden')){
+        saveKeysEyes(inputContainerEyes);
+    }
+})
+
+const saveKeysVoice = (container) => {
+    let empty = false;
+    container.querySelectorAll('input').forEach(input => {
+        if (input.value === '') {
+            empty = true;
+        }
+    })
+    if (empty) {
+        alert("Some Keywords missing!!")
+    } else {
+        const arrowUpInput = arrowUp.value;
+        const arrowDownInput = arrowDown.value;
+        const arrowLeftInput = arrowLeft.value;
+        const arrowRightInput = arrowRight.value;
+
+        chrome.storage.sync.set({
+            arrowUp : arrowUpInput,
+            arrowDown: arrowDownInput,
+            arrowLeft: arrowLeftInput,
+            arrowRight: arrowRightInput
+        }, function() {
+            console.log('Settings saved')
+        });
+    }
+}
+
+
+const saveKeysEyes = (container) => {
+    let empty = false;
+    container.querySelectorAll('input').forEach(input => {
+        if (input.value === '') {
+            empty = true;
+        }
+    })
+    if (empty) {
+        alert("Some Keys missing!!")
+    } else {
+        const upKeyInput = upKey.value;
+        const downKeyInput = downKey.value;
+        const leftKeyInput = leftKey.value;
+        const rightKeyInput = rightKey.value;
+
+        chrome.storage.sync.set({
+            upKey : upKeyInput,
+            downKey: downKeyInput,
+            leftKey: leftKeyInput,
+            rightKey: rightKeyInput
+        }, function() {
+            console.log('Settings saved')
+        });
+    }
+}
+
+const restoreVoiceOptions = () => {
+    chrome.storage.sync.get(['arrowUp', 'arrowDown', 'arrowLeft', 'arrowRight'], function(result) {
+        arrowUp.value = result.arrowUp;
+        arrowDown.value = result.arrowDown;
+        arrowLeft.value = result.arrowLeft;
+        arrowRight.value = result.arrowRight;
+    });
+}
+
+const restoreEyeOptions = () => {
+    chrome.storage.sync.get(['upKey', 'downKey', 'leftKey', 'rightKey'], function(result) {
+        upKey.value = result.upKey;
+        downKey.value = result.downKey;
+        leftKey.value = result.leftKey;
+        rightKey.value = result.rightKey;
+    });
+}
+
+
+document.addEventListener('DOMContentLoaded', restoreVoiceOptions);
+document.addEventListener('DOMContentLoaded', restoreEyeOptions);
 
 // input validation
 //TODO
