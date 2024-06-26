@@ -5,7 +5,7 @@
     <style>
         .boundary {
             position: fixed;
-            background-color: rgba(222, 222, 222, 0.2); /*(-1.0) if you want it to be completely invisible*/
+            background-color: rgba(111, 44, 255, 0.2);
             z-index: 10;
             pointer-events: none;
             display: flex;
@@ -18,50 +18,26 @@
         #topBoundary {
             top:      0;
             left:   30%;
-            height: 30%;
+            height: 40%;
             width:  40%;
         }
         #bottomBoundary {
             bottom:   0;
             left:   30%;
-            height: 30%;
+            height: 40%;
             width:  40%;
         }
         #leftBoundary {
-            top:    30%;
+            top:    20%;
             left:     0;
             width:  29%;
-            height: 40%;
+            height: 60%;
         }
         #rightBoundary {
-            top:    30%;
+            top:    20%;
             right:    0;
             width:  29%;
-            height: 40%;
-        }
-        #topLeftBoundary {
-            top:      0;
-            left:     0;
-            width:  29%;
-            height: 29%;
-        }
-        #topRightBoundary {
-            top:      0;
-            right:    0;
-            width:  29%;
-            height: 29%;
-        }
-        #bottomLeftBoundary {
-            bottom:   0;
-            left:     0;
-            width:  29%;
-            height: 29%;
-        }
-        #bottomRightBoundary {
-            bottom:   0;
-            right:    0;
-            width:  29%;
-            height: 29%;
+            height: 60%;
         }
     </style>
 </head>
@@ -71,10 +47,6 @@
     <div id="bottomBoundary" class="boundary"></div>
     <div id="leftBoundary" class="boundary"></div>
     <div id="rightBoundary" class="boundary"></div>
-    <div id="topLeftBoundary" class="boundary"></div>
-    <div id="topRightBoundary" class="boundary"></div>
-    <div id="bottomLeftBoundary" class="boundary"></div>
-    <div id="bottomRightBoundary" class="boundary"></div>
 </div>
 <script src="WebGazer-master/www/webgazer.js" type="text/javascript"></script>
 <script src="js/WebGazerWrapper.js" type="text/javascript"></script>
