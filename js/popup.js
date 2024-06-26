@@ -19,6 +19,13 @@ const leftKey = document.getElementById("leftKey");
 const rightKey = document.getElementById("rightKey");
 const webcamOnButton = document.getElementById("webcam-on-button");
 const webcamOffButton = document.getElementById("webcam-off-button");
+const gridOnButton = document.getElementById("grid-on-button");
+const gridOffButton = document.getElementById("grid-off-button");
+
+
+// init und export for grid visibility
+let isGridVisible;
+//export { isGridVisible };
 
 //TODO define webgazer object
 //TODO define webspeech object
@@ -250,3 +257,32 @@ document.addEventListener("DOMContentLoaded", function () {
     //logic
   });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  // init visibility of grid buttons
+  gridOnButton.classList.remove("hidden");
+  gridOffButton.classList.add("hidden");
+
+  // init visibility of grid
+  isGridVisible = false;
+
+  // do not show grid
+  gridOffButton.addEventListener("click", function () {
+    gridOffButton.classList.add("hidden");
+    gridOnButton.classList.remove("hidden");
+
+    //logic
+    //isGridVisible = false;
+  });
+
+  // show grid
+  gridOnButton.addEventListener("click", function () {
+    gridOnButton.classList.add("hidden");
+    gridOffButton.classList.remove("hidden");
+
+    //logic
+    isGridVisible = true;
+  });
+});
+
