@@ -256,11 +256,11 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
 
   // init visibility of grid buttons
-  gridOnButton.classList.remove("hidden");
-  gridOffButton.classList.add("hidden");
+  gridOnButton.classList.add("hidden");
+  gridOffButton.classList.remove("hidden");
 
   // init visibility of grid true for calibration
-  isGridVisible = true;
+  //isGridVisible = true;
 
   // do not show grid
   gridOffButton.addEventListener("click", function () {
@@ -269,9 +269,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //logic
     isGridVisible = false;
-    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-      chrome.tabs.sendMessage(tabs[0].id, { isGridVisible: isGridVisible });
-    });
+    sendMessageToContentScript();
   });
 
   // show grid
@@ -281,9 +279,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //logic
     isGridVisible = true;
-    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-      chrome.tabs.sendMessage(tabs[0].id, { isGridVisible: isGridVisible });
-    });
+    sendMessageToContentScript();
   });
 });
 

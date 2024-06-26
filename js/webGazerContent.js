@@ -1,4 +1,25 @@
-// Event listener for messages from popup.js
+document.addEventListener("DOMContentLoaded", function() {
+    alert("Please calibrate the gaze tracker for a few seconds by clicking into or hovering over the the grid fields." +
+        "You can turn off the grid in the extensions popup! Happy Gaming! :)")
+})
+
+// load grid overlay initially for calibration
+fetchBoundaries(true);
+
+// Load WebGazer initially
+const loadWebGazer = () => {
+    const script = document.createElement('script');
+    script.src = chrome.runtime.getURL('WebGazer-master/www/webgazer.js');
+    script.onload = () => {
+        const gazeScript = document.createElement('script');
+        gazeScript.src = chrome.runtime.getURL('js/WebGazerWrapper.js');
+        document.body.appendChild(gazeScript);
+    };
+    document.body.appendChild(script);
+};
+loadWebGazer();
+
+// Event listener for messages regarding grid visibility button clicks
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
     if (message.isGridVisible !== undefined) {
         const gridOverlay = document.getElementById('gridId');
@@ -41,15 +62,3 @@ function setBoundaryVisibility(isVisible) {
     }
 }
 
-// Load WebGazer initially
-const loadWebGazer = () => {
-    const script = document.createElement('script');
-    script.src = chrome.runtime.getURL('WebGazer-master/www/webgazer.js');
-    script.onload = () => {
-        const gazeScript = document.createElement('script');
-        gazeScript.src = chrome.runtime.getURL('js/WebGazerWrapper.js');
-        document.body.appendChild(gazeScript);
-    };
-    document.body.appendChild(script);
-};
-loadWebGazer();
