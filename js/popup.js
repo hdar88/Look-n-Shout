@@ -21,12 +21,7 @@ const webcamOnButton = document.getElementById("webcam-on-button");
 const webcamOffButton = document.getElementById("webcam-off-button");
 const gridOnButton = document.getElementById("grid-on-button");
 const gridOffButton = document.getElementById("grid-off-button");
-
-
-// init und export for grid visibility
 let isGridVisible;
-//export { isGridVisible };
-
 //TODO define webgazer object
 //TODO define webspeech object
 
@@ -264,8 +259,8 @@ document.addEventListener("DOMContentLoaded", function () {
   gridOnButton.classList.remove("hidden");
   gridOffButton.classList.add("hidden");
 
-  // init visibility of grid
-  isGridVisible = false;
+  // init visibility of grid true for calibration
+  isGridVisible = true;
 
   // do not show grid
   gridOffButton.addEventListener("click", function () {
@@ -273,7 +268,10 @@ document.addEventListener("DOMContentLoaded", function () {
     gridOnButton.classList.remove("hidden");
 
     //logic
-    //isGridVisible = false;
+    isGridVisible = false;
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+      chrome.tabs.sendMessage(tabs[0].id, { isGridVisible: isGridVisible });
+    });
   });
 
   // show grid
@@ -283,6 +281,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //logic
     isGridVisible = true;
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+      chrome.tabs.sendMessage(tabs[0].id, { isGridVisible: isGridVisible });
+    });
   });
 });
 
+// Function to send message to content script
+function sendMessageToContentScript() {
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    chrome.tabs.sendMessage(tabs[0].id, { isGridVisible: isGridVisible });
+  });
+}
