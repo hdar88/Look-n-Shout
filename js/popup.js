@@ -21,6 +21,7 @@ const webcamOnButton = document.getElementById("webcam-on-button");
 const webcamOffButton = document.getElementById("webcam-off-button");
 const gridOnButton = document.getElementById("grid-on-button");
 const gridOffButton = document.getElementById("grid-off-button");
+let dropdownLabel = document.getElementById('dropdown-label');
 let isGridVisible;
 //TODO define webgazer object
 //TODO define webspeech object
@@ -102,22 +103,27 @@ const checkAndReset = (container) => {
   return allEmpty;
 };
 
+// help page UI
 helpButton.addEventListener("click", function () {
-  mainContainerPopup.classList.toggle("expanded");
-  console.log("TEST");
+  //mainContainerPopup.classList.toggle("expanded");
   if (!clicked) {
     clicked = true;
     helpPage.classList.remove("hidden");
     mainContainer.classList.add("hidden");
     pauseButton.classList.add("hidden");
     resetButton.classList.add("hidden");
+    webcamOnButton.classList.add("hidden");
+    webcamOffButton.classList.add("hidden");
+    gridOnButton.classList.add("hidden");
+    gridOffButton.classList.add("hidden");
   } else {
     clicked = false;
     helpPage.classList.add("hidden");
     mainContainer.classList.remove("hidden");
     pauseButton.classList.remove("hidden");
-    console.log("TEST");
-    resetButton.classList.remove("hidden")
+    resetButton.classList.remove("hidden");
+    webcamOffButton.classList.remove("hidden");
+    gridOffButton.classList.remove("hidden");
   }
 });
 
