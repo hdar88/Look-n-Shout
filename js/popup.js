@@ -57,19 +57,20 @@ document.addEventListener("DOMContentLoaded", function () {
   pauseButton.addEventListener("click", function () {
     pauseButton.classList.add("hidden");
     restartButton.classList.remove("hidden");
-    /*if (toggle.checked) {
-             webspeech recognition stop
-        }
-        else webgazer stop*/
+
+    // stop extension
+
+    // webgazer.stop()
+    // recognition.stop()
   });
   restartButton.addEventListener("click", function () {
     restartButton.classList.add("hidden");
     pauseButton.classList.remove("hidden");
-    /* if checked
-        webspeech recognition restart
-        else
-        webgazer restart
-         */
+
+    // restart extension
+
+    //webgazer.begin()
+    //recognition.start()
   });
 });
 
