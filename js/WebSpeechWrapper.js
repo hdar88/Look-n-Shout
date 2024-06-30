@@ -22,12 +22,11 @@ window.addEventListener("message", function (event) {
     keywordDown = event.data.dataArray.arrowDown;
     keywordLeft = event.data.dataArray.arrowLeft;
     keywordRight = event.data.dataArray.arrowRight;
-    console.log("TEST " + keywordUp);
   }
 });
 
 function startRecognition() {
-  console.log("START RECOGNITION");
+  console.log("STARTED RECOGNITION");
   if ("webkitSpeechRecognition" in window) {
     recognition = new webkitSpeechRecognition();
   } else if ("SpeechRecognition" in window) {
@@ -120,6 +119,5 @@ function sleep(milliseconds) {
 };*/
 
 window.addEventListener("load", () => {
-  console.log("TESTTTT");
   startRecognition();
 });
