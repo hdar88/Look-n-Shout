@@ -2,6 +2,34 @@ let recognition;
 let diagnostic = document.createElement("div");
 document.body.appendChild(diagnostic);
 
+const dataToSend = "Hello from sender.js";
+localStorage.setItem("myData", dataToSend);
+
+let moveUp;
+let moveDown;
+let moveRight;
+let moveLeft;
+let keywordUp;
+let keywordDown;
+let keywordRight;
+let keywordLeft;
+
+window.addEventListener("message", function (event) {
+  if (event.data.type && event.data.type === "keybinds") {
+    // Process the dataArray
+    console.log(event.data.dataArray);
+    moveUp = event.data.dataArray.selectArrowUp;
+    moveDown = event.data.dataArray.selectArrowDown;
+    moveLeft = event.data.dataArray.selectArrowLeft;
+    moveRight = event.data.dataArray.selectArrowRight;
+    keywordUp = event.data.dataArray.arrowUp;
+    keywordDown = event.data.dataArray.arrowDown;
+    keywordLeft = event.data.dataArray.arrowLeft;
+    keywordRight = event.data.dataArray.arrowRight;
+    console.log("TEST " + keywordUp);
+  }
+});
+
 function startRecognition() {
   console.log("START RECOGNITION");
   if ("webkitSpeechRecognition" in window) {
@@ -24,18 +52,18 @@ function startRecognition() {
       console.log("TEST METHOD");
       console.log(event);
 
-      if (finalTranscript.includes("jump")) {
+      if (finalTranscript.includes(keywordUp)) {
         console.log("TEST A");
-        triggerkeypress("ArrowUp", "jump");
-      } else if (finalTranscript.includes("left")) {
+        triggerkeypress(moveUp, "jump");
+      } else if (finalTranscript.includes(keywordLeft)) {
         console.log("TESTTTTTTTTT");
-        triggerkeypress("ArrowLeft", "left");
-      } else if (finalTranscript.includes("right")) {
+        triggerkeypress(moveLeft, "left");
+      } else if (finalTranscript.includes(keywordRight)) {
         console.log("TESTTTTTTTTT");
-        triggerkeypress("ArrowRight", "right");
-      } else if (finalTranscript.includes("down")) {
+        triggerkeypress(moveRight, "right");
+      } else if (finalTranscript.includes(keywordDown)) {
         console.log("TESTTTTTTTTT");
-        triggerkeypress("ArrowDown", "down");
+        triggerkeypress(moveDown, "down");
       }
 
       if (finalTranscript) {
@@ -51,7 +79,7 @@ function startRecognition() {
 async function triggerkeypress(key, command) {
   const keyCodeMap = {
     " ": 32,
-    a: 65,
+    A: 65,
     s: 83,
     d: 68,
     w: 87,
@@ -75,8 +103,6 @@ async function triggerkeypress(key, command) {
 
   const eventDown = new KeyboardEvent("keydown", eventInit);
   const eventUp = new KeyboardEvent("keyup", eventInit);
-
-  console.log(eventUp);
 
   document.dispatchEvent(eventDown);
   console.log(eventDown);

@@ -33,7 +33,6 @@
       <button class="icon-buttons hidden" id="grid-off-button">
         <img src="icons/grid-off.png" alt="grid-off" />
       </button>
-
     </div>
     <div id="main-container" class="main-container-popup">
       <div id="container">
@@ -47,39 +46,101 @@
           </span>
         </label>
         <div id="input-container-eyes" class="hidden">
-          <div>
-            <label for="upKey">Look up:</label>
-            <input type="text" id="upKey" placeholder="Enter a key" />
+          <div class="eyes-containers">
+            <div>
+              <label for="upKey" class="eyes-containers">Look up:</label>
+            </div>
+            <div>
+              <select name="upKey" id="upKey" class="dropdown-select">
+                <option class="dropdown-options" disabled selected>---Select a key---</option>
+                <option class="dropdown-options">W</option>
+                <option class="dropdown-options">SpaceBar</option>
+                <option class="dropdown-options">ArrowUp</option>
+              </select>
+            </div>
           </div>
-          <div>
-            <label for="downKey">Look down:</label>
-            <input type="text" id="downKey" placeholder="Enter a key" />
+          <div class="eyes-containers">
+            <div>
+              <label for="downKey" class="eyes-containers">Look down:</label>
+            </div>
+            <div>
+              <select name="downKey" id="downKey" class="dropdown-select">
+                <option class="dropdown-options" disabled selected>---Select a key---</option>
+                <option class="dropdown-options">S</option>
+                <option class="dropdown-options">ArrowDown</option>
+              </select>
+            </div>
           </div>
-          <div>
-            <label for="leftKey">Look left:</label>
-            <input type="text" id="leftKey" placeholder="Enter a key" />
+          <div class="eyes-containers">
+            <div>
+              <label for="leftKey">Look left:</label>
+            </div>
+            <div>
+              <select name="leftKey" id="leftKey" class="dropdown-select">
+                <option class="dropdown-options" disabled selected>---Select a key---</option>
+                <option class="dropdown-options">A</option>
+                <option class="dropdown-options">ArrowLeft</option>
+              </select>
+            </div>
           </div>
-          <div>
-            <label for="rightKey">Look right:</label>
-            <input type="text" id="rightKey" placeholder="Enter a key" />
+          <div class="eyes-containers">
+            <div>
+              <label for="rightKey" class="eyes-containers">Look right:</label>
+            </div>
+            <div>
+              <select onfocus='this.size=2;' onblur='this.size=0;' onchange='this.size=1; this.blur();' name="rightKey" id="rightKey" class="dropdown-select">
+                <option class="dropdown-options" disabled selected>---Select a key---</option>
+                <option class="dropdown-options">D</option>
+                <option class="dropdown-options">ArrowRight</option>
+              </select>
+            </div>
           </div>
         </div>
         <div id="input-container-voice" class="hidden">
-          <div>
+          <div class="voice-containers">
             <label for="up-voice">Arrow Up:</label>
-            <input type="text" id="up-voice" placeholder="Enter a keyword" />
+            <div class ="keyword-keybind-divs">
+              <input type="text" id="up-voice" placeholder="Enter a keyword" class="keyword-input"/>
+              <select name="upKey" id="upKey-voice" class="dropdown-select-voice">
+                <option class="dropdown-options" disabled selected>---Select a key---</option>
+                <option class="dropdown-options">W</option>
+                <option class="dropdown-options">SpaceBar</option>
+                <option class="dropdown-options">ArrowUp</option>
+              </select>
+            </div>
           </div>
-          <div>
+          <div class="voice-containers">
             <label for="down-voice">Arrow Down:</label>
-            <input type="text" id="down-voice" placeholder="Enter a keyword" />
+            <div class ="keyword-keybind-divs">
+              <input type="text" id="down-voice" placeholder="Enter a keyword" class="keyword-input"/>
+              <select name="downKey" id="downKey-voice" class="dropdown-select-voice">
+                <option class="dropdown-options" disabled selected>---Select a key---</option>
+                <option class="dropdown-options">S</option>
+                <option class="dropdown-options">ArrowDown</option>
+              </select>
+            </div>
           </div>
-          <div>
+          <div class="voice-containers">
             <label for="left-voice">Arrow Left:</label>
-            <input type="text" id="left-voice" placeholder="Enter a keyword" />
+            <div class ="keyword-keybind-divs">
+              <input type="text" id="left-voice" placeholder="Enter a keyword" class="keyword-input"/>
+              <select name="leftKey" id="leftKey-voice" class="dropdown-select-voice">
+                <option class="dropdown-options" disabled selected>---Select a key---</option>
+                <option class="dropdown-options">A</option>
+                <option class="dropdown-options">ArrowLeft</option>
+              </select>
+            </div>
           </div>
-          <div>
+          <div class="voice-containers">
             <label for="right-voice">Arrow Right:</label>
-            <input type="text" id="right-voice" placeholder="Enter a keyword" />
+            <div class ="keyword-keybind-divs">
+              <input type="text" id="right-voice" placeholder="Enter a keyword" class="keyword-input"/>
+              <select name="rightKey" id="rightKey-voice" class="dropdown-select-voice">
+                <option class="dropdown-options" disabled selected>---Select a key---</option>
+                <option class="dropdown-options">D</option>
+                <option class="dropdown-options">ArrowRight</option>
+              </select>
+            </div>
           </div>
         </div>
         <button id="save-button">Save</button>

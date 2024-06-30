@@ -21,7 +21,7 @@ body {
 
 .main-container-popup{
     transition: 0.3s ease-in-out;
-    width: 250px;
+    width: 270px;
     height: 450px;
     display: flex;
     align-items: center;
@@ -36,8 +36,9 @@ body {
 
 /* Container for the popup content */
 #container {
-    width: 200px;
+    width: 220px;
     padding: 20px;
+    align-items: center;
     /*background-color: #292943; /* Dark purple background */
     background-color: rgba(41, 41, 67, 0.3);
     border-radius: 20px;
@@ -137,6 +138,51 @@ input:checked + .slider {
     box-sizing: border-box;
 }
 
+.dropdown-divs{
+    display: flex;
+}
+
+.dropdown-select{
+    height: 25px;
+    width: 180px;
+    font-size: 14px;
+    background-color: #5b48a196;
+    border-radius: 50px;
+    color: white;  
+}
+
+.dropdown-select-voice{
+    height: 25px;
+    width: 110px;
+    font-size: 12px;
+    background-color: #5b48a196;
+    border-radius: 50px;
+    margin-top: 8px; 
+    color: white; 
+}
+
+.dropdown-options{
+    text-align: center;
+    background-color: #5b48a194;
+    color: white;
+}
+
+.voice-containers{
+    margin-top: 20px;
+}
+
+.eyes-containers{
+    margin-top: 15px;
+}
+
+.dropdown-options:hover{
+    background-color: yellow;
+}
+
+option:hover {
+    background-color: yellow;
+}
+
 .label-voice {
     transition: opacity 0.4s;
 }
@@ -153,11 +199,16 @@ input:not(:checked) + .slider .label-voice {
     opacity: 0.5;
 }
 
+#input-container-voice{
+    
+}
+
 /* Style for the "eyes" and "voice" labels */
 #input-container-eyes, #input-container-voice {
     margin-top: 20px;
     font-size: 12px;
     color: rgb(243, 89, 6);
+    height: 270px;
 }
 
 #input-container-eyes div, #input-container-voice div {
@@ -165,10 +216,12 @@ input:not(:checked) + .slider .label-voice {
 }
 
 /* Input field styling */
-#input-container-eyes input[type="text"], #input-container-voice input[type="text"] {
-    width: calc(100% - 22px); /* Adjust for input padding */
-    padding: 12px;
-    margin-top: 5px; /* Add margin to space input field below label */
+#input-container-voice input[type="text"] {
+    width: 100px; /* Adjust for input padding */
+    height: 20px;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 8px; /* Add margin to space input field below label */
     border: 1px solid #5f5f7f; /* Lighter purple border */
     border-radius: 5px;
     background-color: rgba(61, 61, 88, 0.5); /* Darker purple background */
@@ -188,6 +241,7 @@ input:not(:checked) + .slider .label-voice {
     width: 100px; /* Same width as the toggle switch */
     padding: 15px;
     margin-left: auto; /* Set left margin to auto to push the button to the right */
+    margin-top: 8px;
     border: none;
     border-radius: 50px; /* Fully round corners */
     cursor: pointer;
@@ -217,6 +271,12 @@ input:not(:checked) + .slider .label-voice {
     max-width: 100%; /* Ensure images are responsive */
     max-height: 100%; /* Ensure images are responsive */
     opacity: 1.1;
+}
+
+.keyword-keybind-divs{
+    display: flex;
+    gap: 5px;
+    margin-left: auto;
 }
 
 #icons-sidebar {
