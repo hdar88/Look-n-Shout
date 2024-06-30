@@ -25,7 +25,6 @@ window.addEventListener("message", function (event) {
     keywordDown = event.data.dataArray.arrowDown;
     keywordLeft = event.data.dataArray.arrowLeft;
     keywordRight = event.data.dataArray.arrowRight;
-    console.log("TEST " + keywordUp);
   }
 });
 
@@ -55,13 +54,10 @@ function startRecognition() {
         console.log("TEST A");
         triggerkeypress(moveUp, "jump");
       } else if (finalTranscript.includes(keywordLeft)) {
-        console.log("TESTTTTTTTTT");
         triggerkeypress(moveLeft, "left");
       } else if (finalTranscript.includes(keywordRight)) {
-        console.log("TESTTTTTTTTT");
         triggerkeypress(moveRight, "right");
       } else if (finalTranscript.includes(keywordDown)) {
-        console.log("TESTTTTTTTTT");
         triggerkeypress(moveDown, "down");
       }
 
@@ -123,6 +119,5 @@ function sleep(milliseconds) {
 };*/
 
 window.addEventListener("load", () => {
-  console.log("TESTTTT");
   startRecognition();
 });

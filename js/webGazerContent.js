@@ -64,7 +64,7 @@ function fetchBoundaries(isVisible) {
 
 const restoreEyeOptions = () => {
   chrome.storage.sync.get(
-    ["upKey", "downKey", "leftKey", "rightKey"],
+    ["upKey", "downKey", "leftKey", "rightKey", "upKeyTime", "downKeyTime", "leftKeyTime", "rightKeyTime"],
     function (result) {
         dataArrayWebgazer = result;
 

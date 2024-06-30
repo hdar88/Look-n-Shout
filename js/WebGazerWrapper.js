@@ -2,6 +2,10 @@ let moveUpEyes;
 let moveDownEyes;
 let moveLeftEyes;
 let moveRightEyes;
+let timeUpEyes;
+let timeDownEyes;
+let timeLeftEyes;
+let timeRightEyes;
 
 webgazer
   .setGazeListener(function (data) {
@@ -27,31 +31,22 @@ webgazer
       yPrediction >= topRect.top &&
       yPrediction <= topRect.bottom &&
       xPrediction >= topRect.left &&
-      xPrediction <= topRect.right
-    ) {
-      //console.log("Du schaust nach oben");
-      simulateKeyPress(moveUpEyes);
+      xPrediction <= topRect.right) { simulateKeyPress(moveUpEyes, timeUpEyes);
     } else if (
       yPrediction >= bottomRect.top &&
       yPrediction <= bottomRect.bottom &&
       xPrediction >= bottomRect.left &&
-      xPrediction <= bottomRect.right
-    ) {
-      simulateKeyPress(moveDownEyes);
+      xPrediction <= bottomRect.right) { simulateKeyPress(moveDownEyes, timeDownEyes);
     } else if (
       yPrediction >= leftRect.top &&
       yPrediction <= leftRect.bottom &&
       xPrediction >= leftRect.left &&
-      xPrediction <= leftRect.right
-    ) {
-      simulateKeyPress(moveLeftEyes);
+      xPrediction <= leftRect.right ) { simulateKeyPress(moveLeftEyes, timeLeftEyes);
     } else if (
       yPrediction >= rightRect.top &&
       yPrediction <= rightRect.bottom &&
       xPrediction >= rightRect.left &&
-      xPrediction <= rightRect.right
-    ) {
-      simulateKeyPress(moveRightEyes);
+      xPrediction <= rightRect.right) { simulateKeyPress(moveRightEyes, timeRightEyes);
     }
   })
   .setTracker("TFFacemesh")
@@ -69,7 +64,7 @@ window.addEventListener('message', function(event) {
         }
     }
 });
-async function simulateKeyPress(key) {
+async function simulateKeyPress(key, timeKeyPress) {
   const keyCodeMap = {
     w: 87,
     a: 65,
@@ -81,6 +76,9 @@ async function simulateKeyPress(key) {
     ArrowLeft: 37,
     ArrowRight: 39,
   };
+
+  console.log(key);
+  console.log(timeKeyPress);
 
   const keyCode = keyCodeMap[key];
   if (!keyCode) return;
@@ -98,7 +96,9 @@ async function simulateKeyPress(key) {
   const eventUp = new KeyboardEvent("keyup", eventInit);
 
   document.dispatchEvent(eventDown);
-  await new Promise((r) => setTimeout(r, 500));
+  if(timeKeyPress > 0) {
+      await new Promise((r) => setTimeout(r, timeKeyPress*1000));
+  }
   document.dispatchEvent(eventUp);
 }
 
@@ -109,6 +109,10 @@ window.addEventListener("message", function (event) {
     moveDownEyes = event.data.dataArrayWebgazer.downKey;
     moveLeftEyes = event.data.dataArrayWebgazer.leftKey;
     moveRightEyes = event.data.dataArrayWebgazer.rightKey;
+    timeUpEyes = event.data.dataArrayWebgazer.upKeyTime;
+    timeLeftEyes = event.data.dataArrayWebgazer.leftKeyTime;
+    timeRightEyes = event.data.dataArrayWebgazer.rightKeyTime;
+    timeDownEyes = event.data.dataArrayWebgazer.downKeyTime;
   }
 });
 

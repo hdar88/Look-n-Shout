@@ -47,52 +47,48 @@
         </label>
         <div id="input-container-eyes" class="hidden">
           <div class="eyes-containers">
-            <div>
-              <label for="upKey" class="eyes-containers">Look up:</label>
-            </div>
-            <div>
+            <label for="upKey">Top Screen:</label>
+            <div class ="keyword-keybind-divs">
               <select name="upKey" id="upKey" class="dropdown-select">
                 <option class="dropdown-options" disabled selected>---Select a key---</option>
                 <option class="dropdown-options">W</option>
                 <option class="dropdown-options">SpaceBar</option>
                 <option class="dropdown-options">ArrowUp</option>
               </select>
+              <input type="number" id="upKeyTime" class="key-length-input" min="0" max="10" value="0" onkeydown="return false;">
             </div>
           </div>
           <div class="eyes-containers">
-            <div>
-              <label for="downKey" class="eyes-containers">Look down:</label>
-            </div>
-            <div>
+            <label for="downKey">Bottom Screen:</label>
+            <div class ="keyword-keybind-divs">
               <select name="downKey" id="downKey" class="dropdown-select">
                 <option class="dropdown-options" disabled selected>---Select a key---</option>
                 <option class="dropdown-options">S</option>
                 <option class="dropdown-options">ArrowDown</option>
               </select>
+              <input type="number" id="downKeyTime" class="key-length-input" min="0" max="10" value="0" onkeydown="return false;">
             </div>
           </div>
           <div class="eyes-containers">
-            <div>
-              <label for="leftKey">Look left:</label>
-            </div>
-            <div>
+            <label for="leftKey">Left Screen:</label>
+            <div class ="keyword-keybind-divs">
               <select name="leftKey" id="leftKey" class="dropdown-select">
                 <option class="dropdown-options" disabled selected>---Select a key---</option>
                 <option class="dropdown-options">A</option>
                 <option class="dropdown-options">ArrowLeft</option>
               </select>
+              <input type="number" id="leftKeyTime" class="key-length-input" min="0" max="10" value="0" onkeydown="return false;">
             </div>
           </div>
-          <div class="eyes-containers">
-            <div>
-              <label for="rightKey" class="eyes-containers">Look right:</label>
-            </div>
-            <div>
-              <select onfocus='this.size=2;' onblur='this.size=0;' onchange='this.size=1; this.blur();' name="rightKey" id="rightKey" class="dropdown-select">
+          <div class="eyes-containers" >
+            <label for="rightKey">Right Screen:</label>
+            <div class ="keyword-keybind-divs">
+              <select name="rightKey" id="rightKey" class="dropdown-select">
                 <option class="dropdown-options" disabled selected>---Select a key---</option>
                 <option class="dropdown-options">D</option>
                 <option class="dropdown-options">ArrowRight</option>
               </select>
+              <input type="number" id="rightKeyTime" class="key-length-input" min="0" max="10" value="0" onkeydown="return false;">
             </div>
           </div>
         </div>

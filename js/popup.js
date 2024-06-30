@@ -20,7 +20,11 @@ const selectArrowRight = document.getElementById("rightKey-voice");
 const upKey = document.getElementById("upKey");
 const downKey = document.getElementById("downKey");
 const leftKey = document.getElementById("leftKey");
-const rightKey = document.getElementById("rightKey");
+const rightKey = document.getElementById("rightKey")
+const upKeyTime = document.getElementById("upKeyTime");
+const downKeyTime = document.getElementById("downKeyTime");
+const leftKeyTime = document.getElementById("leftKeyTime");
+const rightKeyTime = document.getElementById("rightKeyTime");
 const webcamOnButton = document.getElementById("webcam-on-button");
 const webcamOffButton = document.getElementById("webcam-off-button");
 const gridOnButton = document.getElementById("grid-on-button");
@@ -158,11 +162,6 @@ const storeDefaultInputFields = (container) => {
 storeDefaultInputFields(inputContainerEyes);
 storeDefaultInputFields(inputContainerVoice);
 
-//help page -> whole description of the functionality of our extension
-//TODO leonard
-
-// save button -> chrome.storage API -> get User Input
-//TODO oqba
 saveButton.addEventListener("click", function () {
   refreshKeys();
   if (toggle.checked && inputContainerEyes.classList.contains("hidden")) {
@@ -178,6 +177,7 @@ const saveKeysVoice = (container) => {
   let inputArray = container.getElementsByClassName("keyword-input");
   let selectArray = container.getElementsByClassName("dropdown-select-voice");
 
+  //TODO 3 if statements weg, i anstatt zahl benutzen
   for (var i = 0; i < 4; i++) {
     if (
       (!inputArray[0].value == "" && selectArray[0].selectedIndex == 0) ||
@@ -240,6 +240,10 @@ const saveKeysEyes = (container) => {
   const downKeyInput = downKey.selectedIndex == 0 ? "" : downKey.value;
   const leftKeyInput = leftKey.selectedIndex == 0 ? "" : leftKey.value;
   const rightKeyInput = rightKey.selectedIndex == 0 ? "" : rightKey.value;
+  const upKeyTimeInput = rightKeyTime.value;
+  const downKeyTimeInput = downKeyTime.value;
+  const leftKeyTimeInput = leftKeyTime.value;
+  const rightKeyTimeInput = rightKeyTime.value;
 
   chrome.storage.sync.set(
     {
@@ -247,6 +251,10 @@ const saveKeysEyes = (container) => {
       downKey: downKeyInput,
       leftKey: leftKeyInput,
       rightKey: rightKeyInput,
+      upKeyTime: upKeyTimeInput,
+      downKeyTime: downKeyTimeInput,
+      leftKeyTime: leftKeyTimeInput,
+      rightKeyTime: rightKeyTimeInput,
     },
     function () {
       console.log("Settings saved");
@@ -298,7 +306,16 @@ const restoreVoiceOptions = () => {
 
 const restoreEyeOptions = () => {
   chrome.storage.sync.get(
-    ["upKey", "downKey", "leftKey", "rightKey"],
+      [
+        "upKey",
+        "downKey",
+        "leftKey",
+        "rightKey",
+        "upKeyTime",
+        "downKeyTime",
+        "leftKeyTime",
+        "rightKeyTime"
+      ],
     function (result) {
       result.upKey == undefined || result.upKey == ""
         ? (upKey.selectedIndex = 0)
@@ -312,6 +329,18 @@ const restoreEyeOptions = () => {
       result.rightKey == undefined || result.rightKey == ""
         ? (rightKey.selectedIndex = 0)
         : (rightKey.value = result.rightKey);
+      result.rightKeyTime == undefined
+          ? (rightKeyTime.value = 0)
+          : (rightKeyTime.value = result.rightKeyTime);
+      result.leftKeyTime == undefined
+          ? (leftKeyTime.value = 0)
+          : (leftKeyTime.value = result.leftKeyTime);
+      result.downKeyTime == undefined
+          ? (downKeyTime.value = 0)
+          : (downKeyTime.value = result.downKeyTime);
+      result.upKeyTime == undefined
+          ? (upKeyTime.value = 0)
+          : (upKeyTime.value = result.upKeyTime);
       dataArray = result;
     }
   );
