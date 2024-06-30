@@ -58,6 +58,17 @@ webgazer
   .begin();
 webgazer.clearData();
 
+// Listener for messages from content.js for webcam on/off logic
+window.addEventListener('message', function(event) {
+    if (event.source !== window) return; // checks if message from same window
+    if (event.data.type && (event.data.type === 'TOGGLE_WEBCAM')) {
+        if(!event.data.isWebcamVisible){
+            webgazer.showVideo(false); // hides the video canvas element of webgazer.js
+        } else {
+            webgazer.showVideo(true); // shows the video canvas element of webgazer.js
+        }
+    }
+});
 async function simulateKeyPress(key) {
   const keyCodeMap = {
     w: 87,

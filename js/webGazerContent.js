@@ -23,6 +23,17 @@ const loadWebGazer = () => {
 };
 loadWebGazer();
 
+// Listener for messages regarding webcam visibility from popup.js
+chrome.runtime.onMessage.addListener(function (message) {
+    if (message.isWebcamVisible !== undefined) {
+        console.log('isWebcamVisible content: ', message.isWebcamVisible);
+
+        // pushes the current state of webcam visibility flag to webgazer wrapper
+        // for executing action on webcam video canvas element of webgazer
+        window.postMessage({ type: 'TOGGLE_WEBCAM', isWebcamVisible: message.isWebcamVisible }, '*');
+    }
+});
+
 // Event listener for messages regarding grid visibility button clicks
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
   if (message.isGridVisible !== undefined) {

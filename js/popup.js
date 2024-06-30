@@ -25,9 +25,11 @@ const webcamOnButton = document.getElementById("webcam-on-button");
 const webcamOffButton = document.getElementById("webcam-off-button");
 const gridOnButton = document.getElementById("grid-on-button");
 const gridOffButton = document.getElementById("grid-off-button");
+let dropdownLabel = document.getElementById('dropdown-label');
 let isGridVisible;
 let voiceKeyBindsArr = [];
 let togglePauseResumeButton = true;
+let isWebcamVisible;
 //TODO define webgazer object
 //TODO define webspeech object
 
@@ -72,11 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
     togglePauseResumeButton = true;
     restartButton.classList.add("hidden");
     pauseButton.classList.remove("hidden");
-    /* if checked
-        webspeech recognition restart
-        else
-        webgazer restart
-         */
+
   });
 });
 
@@ -126,6 +124,7 @@ const checkAndResetEyes = (container) => {
   return allEmpty;
 };
 
+// help page UI
 helpButton.addEventListener("click", function () {
   mainContainerPopup.classList.toggle("expanded");
   console.log("TEST");
@@ -141,12 +140,12 @@ helpButton.addEventListener("click", function () {
     helpPage.classList.add("hidden");
     mainContainer.classList.remove("hidden");
     resetButton.classList.remove("hidden")
-    if(togglePauseResumeButton){
+    if (togglePauseResumeButton) {
       pauseButton.classList.remove("hidden");
-    }else{
+    } else {
       restartButton.classList.remove("hidden");
     }
-    
+
   }
 });
 
@@ -337,59 +336,79 @@ console.log(voiceKeyBindsArr);
 // button to turn visibility of webcam on/ off
 //TODO
 document.addEventListener("DOMContentLoaded", function () {
+
   // init visibility of buttons
   webcamOnButton.classList.add("hidden");
   webcamOffButton.classList.remove("hidden");
 
-  // do not show webcam
+  // shows webcam on option button
   webcamOffButton.addEventListener("click", function () {
     webcamOffButton.classList.add("hidden");
     webcamOnButton.classList.remove("hidden");
-    //logic
+
+    // updates webgazer's webcam video canvas element visibility flag
+    isWebcamVisible = false;
+    updateWebcamVisibility();
   });
-  // show webcam
+
+  // show webcam off option button
   webcamOnButton.addEventListener("click", function () {
     webcamOnButton.classList.add("hidden");
     webcamOffButton.classList.remove("hidden");
-    //logic
+
+    // updates webgazer's webcam video canvas element visibility flag
+    isWebcamVisible = true;
+    updateWebcamVisibility();
   });
 });
 
 document.addEventListener("DOMContentLoaded", function () {
+  /*
+    // init visibility of grid buttons
+    gridOnButton.classList.add("hidden");
+    gridOffButton.classList.remove("hidden");
+  
+    // init visibility of grid true for calibration
+    //isGridVisible = true;
+  
+    // do not show grid
+    gridOffButton.addEventListener("click", function () {
+      gridOffButton.classList.add("hidden");
+      gridOnButton.classList.remove("hidden");
+  
+      //logic
+      isGridVisible = false;
+      sendMessageToContentScript();
+    });
+  
+    // show grid
+    gridOnButton.addEventListener("click", function () {
+  */
+
   // init visibility of grid buttons
   gridOnButton.classList.add("hidden");
   gridOffButton.classList.remove("hidden");
 
-  // init visibility of grid true for calibration
-  //isGridVisible = true;
-
-  // do not show grid
+  // do not show grid overlay
   gridOffButton.addEventListener("click", function () {
     gridOffButton.classList.add("hidden");
     gridOnButton.classList.remove("hidden");
 
-    //logic
+    //update grid visibility
     isGridVisible = false;
-    sendMessageToContentScript();
+    updateGridVisibility();
   });
 
-  // show grid
+  // show grid overlay
   gridOnButton.addEventListener("click", function () {
     gridOnButton.classList.add("hidden");
     gridOffButton.classList.remove("hidden");
 
-    //logic
+    //update grid visibility
     isGridVisible = true;
-    sendMessageToContentScript();
+    updateGridVisibility();
   });
 });
-
-// Function to send message to content script
-function sendMessageToContentScript() {
-  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    chrome.tabs.sendMessage(tabs[0].id, { isGridVisible: isGridVisible });
-  });
-}
 
 function sendSettingsContentScripts() {
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
@@ -402,3 +421,17 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     console.log("Received data:", message.dataArray);
   }
 });
+
+// Function to send message to content script about current state of grid visibility
+function updateGridVisibility() {
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    chrome.tabs.sendMessage(tabs[0].id, { isGridVisible: isGridVisible });
+  });
+}
+
+// Function to send message to content script about current state of webcam visibility
+function updateWebcamVisibility() {
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    chrome.tabs.sendMessage(tabs[0].id, { isWebcamVisible: isWebcamVisible });
+  });
+}
