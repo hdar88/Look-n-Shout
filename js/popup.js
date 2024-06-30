@@ -26,6 +26,8 @@ const webcamOffButton = document.getElementById("webcam-off-button");
 const gridOnButton = document.getElementById("grid-on-button");
 const gridOffButton = document.getElementById("grid-off-button");
 let isGridVisible;
+let voiceKeyBindsArr = [];
+let togglePauseResumeButton = true;
 //TODO define webgazer object
 //TODO define webspeech object
 
@@ -58,6 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // switch between pause and start icons when clicking
   pauseButton.addEventListener("click", function () {
+    togglePauseResumeButton = false;
     pauseButton.classList.add("hidden");
     restartButton.classList.remove("hidden");
     /*if (toggle.checked) {
@@ -66,6 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
         else webgazer stop*/
   });
   restartButton.addEventListener("click", function () {
+    togglePauseResumeButton = true;
     restartButton.classList.add("hidden");
     pauseButton.classList.remove("hidden");
     /* if checked
@@ -99,24 +103,24 @@ const checkAndResetVoice = (container) => {
   let allEmpty = true;
 
   allEmpty = false;
-  
+
   let arrSelect = container.getElementsByClassName("dropdown-select-voice");
-  let arrInput = container.getElementsByClassName("keyword-input")
-  for(var i = 0; i < 4; i++){
+  let arrInput = container.getElementsByClassName("keyword-input");
+  for (var i = 0; i < 4; i++) {
     arrSelect[i].selectedIndex = 0;
     arrInput[i].value = "";
   }
   return allEmpty;
 };
 
-const checkAndResetEyes= (container) => {
+const checkAndResetEyes = (container) => {
   console.log("TEST query1");
   let allEmpty = true;
 
   allEmpty = false;
-  
+
   let arrSelect = container.getElementsByClassName("dropdown-select");
-  for(var i = 0; i < 4; i++){
+  for (var i = 0; i < 4; i++) {
     arrSelect[i].selectedIndex = 0;
   }
   return allEmpty;
@@ -129,15 +133,20 @@ helpButton.addEventListener("click", function () {
     clicked = true;
     helpPage.classList.remove("hidden");
     mainContainer.classList.add("hidden");
+    resetButton.classList.add("hidden")
     pauseButton.classList.add("hidden");
-    resetButton.classList.add("hidden");
+    restartButton.classList.add("hidden");
   } else {
     clicked = false;
     helpPage.classList.add("hidden");
     mainContainer.classList.remove("hidden");
-    pauseButton.classList.remove("hidden");
-    console.log("TEST");
-    resetButton.classList.remove("hidden");
+    resetButton.classList.remove("hidden")
+    if(togglePauseResumeButton){
+      pauseButton.classList.remove("hidden");
+    }else{
+      restartButton.classList.remove("hidden");
+    }
+    
   }
 });
 
@@ -156,6 +165,7 @@ storeDefaultInputFields(inputContainerVoice);
 // save button -> chrome.storage API -> get User Input
 //TODO oqba
 saveButton.addEventListener("click", function () {
+  refreshKeys();
   if (toggle.checked && inputContainerEyes.classList.contains("hidden")) {
     saveKeysVoice(inputContainerVoice);
   } else if (inputContainerVoice.classList.contains("hidden")) {
@@ -165,49 +175,65 @@ saveButton.addEventListener("click", function () {
 
 const saveKeysVoice = (container) => {
   let empty = false;
-  
+
   let inputArray = container.getElementsByClassName("keyword-input");
   let selectArray = container.getElementsByClassName("dropdown-select-voice");
 
-  for(var i=0; i<4; i++){
-    if((!inputArray[0].value == "" && selectArray[0].selectedIndex == 0) || (inputArray[0].value == "" && !selectArray[0].selectedIndex == 0)){
+  for (var i = 0; i < 4; i++) {
+    if (
+      (!inputArray[0].value == "" && selectArray[0].selectedIndex == 0) ||
+      (inputArray[0].value == "" && !selectArray[0].selectedIndex == 0)
+    ) {
       empty = true;
-    }else if((!inputArray[1].value == "" && selectArray[1].selectedIndex == 0) || (inputArray[1].value == "" && !selectArray[1].selectedIndex == 0)){
+    } else if (
+      (!inputArray[1].value == "" && selectArray[1].selectedIndex == 0) ||
+      (inputArray[1].value == "" && !selectArray[1].selectedIndex == 0)
+    ) {
       empty = true;
-    }else if((!inputArray[2].value == "" && selectArray[2].selectedIndex == 0) || (inputArray[2].value == "" && !selectArray[2].selectedIndex == 0)){
+    } else if (
+      (!inputArray[2].value == "" && selectArray[2].selectedIndex == 0) ||
+      (inputArray[2].value == "" && !selectArray[2].selectedIndex == 0)
+    ) {
       empty = true;
-    }else if((!inputArray[3].value == "" && selectArray[3].selectedIndex == 0) || (inputArray[3].value == "" && !selectArray[3].selectedIndex == 0)){
+    } else if (
+      (!inputArray[3].value == "" && selectArray[3].selectedIndex == 0) ||
+      (inputArray[3].value == "" && !selectArray[3].selectedIndex == 0)
+    ) {
       empty = true;
     }
   }
 
-  if(empty){
-    alert("You must choose a keyword and a keybind")
+  if (empty) {
+    alert("You must choose a keyword and a keybind");
   }
-    const selectArrowUpValue = selectArrowUp.selectedIndex == 0 ? "" : selectArrowUp.value
-    const selectArrowDownValue = selectArrowDown.selectedIndex == 0 ? "" : selectArrowDown.value
-    const selectArrowLeftValue = selectArrowLeft.selectedIndex == 0 ? "" : selectArrowLeft.value
-    const selectArrowRightValue = selectArrowRight.selectedIndex == 0 ? "" : selectArrowRight.value
-    const arrowUpInput = arrowUp.value;
-    const arrowDownInput = arrowDown.value;
-    const arrowLeftInput = arrowLeft.value;
-    const arrowRightInput = arrowRight.value;
- 
-    chrome.storage.sync.set(
-      {
-        selectArrowUp: selectArrowUpValue,
-        selectArrowDown: selectArrowDownValue,
-        selectArrowLeft: selectArrowLeftValue,
-        selectArrowRight: selectArrowRightValue,
-        arrowUp: arrowUpInput,
-        arrowDown: arrowDownInput,
-        arrowLeft: arrowLeftInput,
-        arrowRight: arrowRightInput,
-      },
-      function () {
-        console.log("Settings saved");
-      }
-    );
+  const selectArrowUpValue =
+    selectArrowUp.selectedIndex == 0 ? "" : selectArrowUp.value;
+  const selectArrowDownValue =
+    selectArrowDown.selectedIndex == 0 ? "" : selectArrowDown.value;
+  const selectArrowLeftValue =
+    selectArrowLeft.selectedIndex == 0 ? "" : selectArrowLeft.value;
+  const selectArrowRightValue =
+    selectArrowRight.selectedIndex == 0 ? "" : selectArrowRight.value;
+  const arrowUpInput = arrowUp.value;
+  const arrowDownInput = arrowDown.value;
+  const arrowLeftInput = arrowLeft.value;
+  const arrowRightInput = arrowRight.value;
+
+  chrome.storage.sync.set(
+    {
+      selectArrowUp: selectArrowUpValue,
+      selectArrowDown: selectArrowDownValue,
+      selectArrowLeft: selectArrowLeftValue,
+      selectArrowRight: selectArrowRightValue,
+      arrowUp: arrowUpInput,
+      arrowDown: arrowDownInput,
+      arrowLeft: arrowLeftInput,
+      arrowRight: arrowRightInput,
+    },
+    function () {
+      console.log("Settings saved");
+    }
+  );
 };
 
 const saveKeysEyes = (container) => {
@@ -231,34 +257,79 @@ const saveKeysEyes = (container) => {
 
 const restoreVoiceOptions = () => {
   chrome.storage.sync.get(
-    ["arrowUp", "arrowDown", "arrowLeft", "arrowRight", "selectArrowUp", "selectArrowDown", "selectArrowLeft", "selectArrowRight"],
+    [
+      "arrowUp",
+      "arrowDown",
+      "arrowLeft",
+      "arrowRight",
+      "selectArrowUp",
+      "selectArrowDown",
+      "selectArrowLeft",
+      "selectArrowRight",
+    ],
     function (result) {
-      result.arrowUp == undefined ? arrowUp.value = "" : arrowUp.value = result.arrowUp;
-      result.arrowDown == undefined ? arrowDown.value = "" : arrowDown.value = result.arrowDown;
-      result.arrowLeft == undefined ? arrowLeft.value = "" : arrowLeft.value = result.arrowLeft;
-      result.arrowRight == undefined ? arrowRight.value = "" : arrowRight.value = result.arrowRight;
-      result.selectArrowUp == undefined || result.selectArrowUp == "" ? selectArrowUp.selectedIndex = 0 : selectArrowUp.value = result.selectArrowUp;
-      result.selectArrowDown == undefined || result.selectArrowDown == "" ? selectArrowDown.selectedIndex = 0 : selectArrowDown.value = result.selectArrowDown;
-      result.selectArrowLeft == undefined || result.selectArrowLeft == "" ? selectArrowLeft.selectedIndex = 0 : selectArrowLeft.value = result.selectArrowLeft;
-      result.selectArrowRight == undefined || result.selectArrowRight == "" ? selectArrowRight.selectedIndex = 0 : selectArrowRight.value = result.selectArrowRight;;
+      result.arrowUp == undefined
+        ? (arrowUp.value = "")
+        : (arrowUp.value = result.arrowUp);
+      result.arrowDown == undefined
+        ? (arrowDown.value = "")
+        : (arrowDown.value = result.arrowDown);
+      result.arrowLeft == undefined
+        ? (arrowLeft.value = "")
+        : (arrowLeft.value = result.arrowLeft);
+      result.arrowRight == undefined
+        ? (arrowRight.value = "")
+        : (arrowRight.value = result.arrowRight);
+      result.selectArrowUp == undefined || result.selectArrowUp == ""
+        ? (selectArrowUp.selectedIndex = 0)
+        : (selectArrowUp.value = result.selectArrowUp);
+      result.selectArrowDown == undefined || result.selectArrowDown == ""
+        ? (selectArrowDown.selectedIndex = 0)
+        : (selectArrowDown.value = result.selectArrowDown);
+      result.selectArrowLeft == undefined || result.selectArrowLeft == ""
+        ? (selectArrowLeft.selectedIndex = 0)
+        : (selectArrowLeft.value = result.selectArrowLeft);
+      result.selectArrowRight == undefined || result.selectArrowRight == ""
+        ? (selectArrowRight.selectedIndex = 0)
+        : (selectArrowRight.value = result.selectArrowRight);
     }
   );
+  setTimeout(refreshKeys, 100);
 };
 
 const restoreEyeOptions = () => {
   chrome.storage.sync.get(
     ["upKey", "downKey", "leftKey", "rightKey"],
     function (result) {
-      result.upKey == undefined || result.upKey == "" ? upKey.selectedIndex = 0 : upKey.value = result.upKey; 
-      result.downKey == undefined || result.downKey == "" ? downKey.selectedIndex = 0 : downKey.value = result.downKey;
-      result.leftKey == undefined || result.leftKey == "" ? leftKey.selectedIndex = 0 : leftKey.value = result.leftKey;
-      result.rightKey == undefined || result.rightKey == "" ? rightKey.selectedIndex = 0 : rightKey.value = result.rightKey;
+      result.upKey == undefined || result.upKey == ""
+        ? (upKey.selectedIndex = 0)
+        : (upKey.value = result.upKey);
+      result.downKey == undefined || result.downKey == ""
+        ? (downKey.selectedIndex = 0)
+        : (downKey.value = result.downKey);
+      result.leftKey == undefined || result.leftKey == ""
+        ? (leftKey.selectedIndex = 0)
+        : (leftKey.value = result.leftKey);
+      result.rightKey == undefined || result.rightKey == ""
+        ? (rightKey.selectedIndex = 0)
+        : (rightKey.value = result.rightKey);
+      dataArray = result;
     }
   );
+  setTimeout(refreshKeys, 100);
 };
+
+function refreshKeys() {
+  sendSettingsContentScripts();
+}
 
 document.addEventListener("DOMContentLoaded", restoreVoiceOptions);
 document.addEventListener("DOMContentLoaded", restoreEyeOptions);
+
+/* 
+document.addEventListener("DOMContentLoaded", getVoiceSelectValues);
+console.log(voiceKeyBindsArr);
+*/
 
 // input validation
 //TODO
@@ -319,3 +390,15 @@ function sendMessageToContentScript() {
     chrome.tabs.sendMessage(tabs[0].id, { isGridVisible: isGridVisible });
   });
 }
+
+function sendSettingsContentScripts() {
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    chrome.tabs.sendMessage(tabs[0].id, { voiceKeyBindsArr: voiceKeyBindsArr });
+  });
+}
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.type === "keybinds") {
+    console.log("Received data:", message.dataArray);
+  }
+});

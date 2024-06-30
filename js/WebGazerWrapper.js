@@ -1,3 +1,8 @@
+let moveUpEyes;
+let moveDownEyes;
+let moveLeftEyes;
+let moveRightEyes;
+
 webgazer
   .setGazeListener(function (data) {
     if (data == null) {
@@ -25,28 +30,28 @@ webgazer
       xPrediction <= topRect.right
     ) {
       //console.log("Du schaust nach oben");
-      simulateKeyPress("ArrowUp");
+      simulateKeyPress(moveUpEyes);
     } else if (
       yPrediction >= bottomRect.top &&
       yPrediction <= bottomRect.bottom &&
       xPrediction >= bottomRect.left &&
       xPrediction <= bottomRect.right
     ) {
-      simulateKeyPress("ArrowDown");
+      simulateKeyPress(moveDownEyes);
     } else if (
       yPrediction >= leftRect.top &&
       yPrediction <= leftRect.bottom &&
       xPrediction >= leftRect.left &&
       xPrediction <= leftRect.right
     ) {
-      simulateKeyPress("ArrowLeft");
+      simulateKeyPress(moveLeftEyes);
     } else if (
       yPrediction >= rightRect.top &&
       yPrediction <= rightRect.bottom &&
       xPrediction >= rightRect.left &&
       xPrediction <= rightRect.right
     ) {
-      simulateKeyPress("ArrowRight");
+      simulateKeyPress(moveRightEyes);
     }
   })
   .setTracker("TFFacemesh")
@@ -85,6 +90,17 @@ async function simulateKeyPress(key) {
   await new Promise((r) => setTimeout(r, 500));
   document.dispatchEvent(eventUp);
 }
+
+window.addEventListener("message", function (event) {
+  if (event.data.type && event.data.type === "keybinds_eyes") {
+    // Process the dataArray
+    console.log(event.data.dataArrayWebgazer);
+    moveUpEyes = event.data.dataArrayWebgazer.upKey;
+    moveDownEyes = event.data.dataArrayWebgazer.downKey;
+    moveLeftEyes = event.data.dataArrayWebgazer.leftKey;
+    moveRightEyes = event.data.dataArrayWebgazer.rightKey;
+  }
+});
 
 function simulateKeyCombiPress(keys) {
   //TODO
