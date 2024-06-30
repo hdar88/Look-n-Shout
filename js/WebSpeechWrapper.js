@@ -2,9 +2,6 @@ let recognition;
 let diagnostic = document.createElement("div");
 document.body.appendChild(diagnostic);
 
-const dataToSend = "Hello from sender.js";
-localStorage.setItem("myData", dataToSend);
-
 let moveUp;
 let moveDown;
 let moveRight;
@@ -51,16 +48,16 @@ function startRecognition() {
       console.log("TEST METHOD");
       console.log(event);
 
-      if (finalTranscript.includes(keywordUp)) {
+      if (finalTranscript == keywordUp) {
         console.log("TEST A");
         triggerkeypress(moveUp, "jump");
-      } else if (finalTranscript.includes(keywordLeft)) {
+      } else if (finalTranscript == keywordLeft) {
         console.log("TESTTTTTTTTT");
         triggerkeypress(moveLeft, "left");
-      } else if (finalTranscript.includes(keywordRight)) {
+      } else if (finalTranscript == keywordRight) {
         console.log("TESTTTTTTTTT");
         triggerkeypress(moveRight, "right");
-      } else if (finalTranscript.includes(keywordDown)) {
+      } else if (finalTranscript == keywordDown) {
         console.log("TESTTTTTTTTT");
         triggerkeypress(moveDown, "down");
       }
