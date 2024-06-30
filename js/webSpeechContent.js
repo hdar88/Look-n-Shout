@@ -32,3 +32,6 @@ const restoreVoiceOptions = () => {
 };
 setTimeout(restoreVoiceOptions, 100);
 
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  restoreVoiceOptions();
+});

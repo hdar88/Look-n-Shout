@@ -17,7 +17,6 @@ let keywordLeft;
 window.addEventListener("message", function (event) {
   if (event.data.type && event.data.type === "keybinds") {
     // Process the dataArray
-    console.log(event.data.dataArray);
     moveUp = event.data.dataArray.selectArrowUp;
     moveDown = event.data.dataArray.selectArrowDown;
     moveLeft = event.data.dataArray.selectArrowLeft;

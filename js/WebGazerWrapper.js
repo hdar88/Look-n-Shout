@@ -105,7 +105,6 @@ async function simulateKeyPress(key) {
 window.addEventListener("message", function (event) {
   if (event.data.type && event.data.type === "keybinds_eyes") {
     // Process the dataArray
-    console.log(event.data.dataArrayWebgazer);
     moveUpEyes = event.data.dataArrayWebgazer.upKey;
     moveDownEyes = event.data.dataArrayWebgazer.downKey;
     moveLeftEyes = event.data.dataArrayWebgazer.leftKey;
