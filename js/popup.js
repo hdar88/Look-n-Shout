@@ -137,7 +137,6 @@ helpButton.addEventListener("click", function () {
     restartButton.classList.add("hidden");
     webcamOffButton.classList.add("hidden");
     gridOffButton.classList.add("hidden");
-    //gridOnButton.classList.add("hidden");
   } else {
     clicked = false;
     helpPage.classList.add("hidden");
@@ -151,7 +150,6 @@ helpButton.addEventListener("click", function () {
     } else {
       restartButton.classList.remove("hidden");
     }
-
   }
 });
 

@@ -49,7 +49,7 @@ body {
 
 .main-container-popup.expanded{
     width: 400px;
-    height: 500px;
+    height: 700px;
 }
 
 .header-help-page{
@@ -63,7 +63,7 @@ body {
     text-align: center;
     top: -50px;
     border-radius: 20px;
-    height: 330px;
+    height: 630px; /*330*/
     padding: 10px;
     margin-right: 10px;
 }
