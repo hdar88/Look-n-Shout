@@ -135,11 +135,17 @@ helpButton.addEventListener("click", function () {
     resetButton.classList.add("hidden")
     pauseButton.classList.add("hidden");
     restartButton.classList.add("hidden");
+    webcamOffButton.classList.add("hidden");
+    gridOffButton.classList.add("hidden");
+    //gridOnButton.classList.add("hidden");
   } else {
     clicked = false;
     helpPage.classList.add("hidden");
     mainContainer.classList.remove("hidden");
-    resetButton.classList.remove("hidden")
+    resetButton.classList.remove("hidden");
+    webcamOffButton.classList.remove("hidden");
+    gridOffButton.classList.remove("hidden");
+
     if (togglePauseResumeButton) {
       pauseButton.classList.remove("hidden");
     } else {
@@ -363,27 +369,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  /*
-    // init visibility of grid buttons
-    gridOnButton.classList.add("hidden");
-    gridOffButton.classList.remove("hidden");
-  
-    // init visibility of grid true for calibration
-    //isGridVisible = true;
-  
-    // do not show grid
-    gridOffButton.addEventListener("click", function () {
-      gridOffButton.classList.add("hidden");
-      gridOnButton.classList.remove("hidden");
-  
-      //logic
-      isGridVisible = false;
-      sendMessageToContentScript();
-    });
-  
-    // show grid
-    gridOnButton.addEventListener("click", function () {
-  */
 
   // init visibility of grid buttons
   gridOnButton.classList.add("hidden");
