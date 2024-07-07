@@ -21,7 +21,7 @@ body {
 
 .main-container-popup{
     transition: 0.3s ease-in-out;
-    width: 270px;
+    width: 310px;
     height: 450px;
     display: flex;
     align-items: center;
@@ -36,7 +36,7 @@ body {
 
 /* Container for the popup content */
 #container {
-    width: 220px;
+    width: 260px;
     padding: 20px;
     align-items: center;
     /*background-color: #292943; /* Dark purple background */
@@ -233,6 +233,18 @@ input:not(:checked) + .slider .label-voice {
     color: #ffffff; /* White text */
 }
 
+#input-container-voice input[type="number"] {
+    width: 30px; /* Adjust for input padding */
+    height: 20px;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 9px; /* Add margin to space input field below label */
+    border: 1px solid #5f5f7f; /* Lighter purple border */
+    border-radius: 5px;
+    background-color: rgba(61, 61, 88, 0.5); /* Darker purple background */
+    color: #ffffff; /* White text */
+}
+
 /* Placeholder styling */
 #input-container-eyes input[type="text"]::placeholder, #input-container-voice input[type="text"]::placeholder {
     color: #cccccc; /* Light grey placeholder text */
@@ -280,6 +292,7 @@ input:not(:checked) + .slider .label-voice {
 
 .keyword-keybind-divs{
     display: flex;
+    justify-content: center;
     gap: 5px;
     margin-left: auto;
 }

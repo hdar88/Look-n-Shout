@@ -16,6 +16,10 @@ const restoreVoiceOptions = () => {
       "selectArrowDown",
       "selectArrowLeft",
       "selectArrowRight",
+      "arrowUpTime",
+      "arrowDownTime",
+      "arrowLeftTime",
+      "arrowRightTime"
     ],
     function (result) {
       dataArray = result;

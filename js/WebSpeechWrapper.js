@@ -13,6 +13,10 @@ let keywordUp;
 let keywordDown;
 let keywordRight;
 let keywordLeft;
+let timeUpVoice;
+let timeDownVoice;
+let timeLeftVoice;
+let timeRightVoice;
 
 window.addEventListener("message", function (event) {
   if (event.data.type && event.data.type === "keybinds") {
@@ -25,6 +29,10 @@ window.addEventListener("message", function (event) {
     keywordDown = event.data.dataArray.arrowDown;
     keywordLeft = event.data.dataArray.arrowLeft;
     keywordRight = event.data.dataArray.arrowRight;
+    timeUpVoice = event.data.dataArray.arrowUpTime;
+    timeDownVoice = event.data.dataArray.arrowDownTime;
+    timeLeftVoice = event.data.dataArray.arrowLeftTime;
+    timeRightVoice = event.data.dataArray.arrowRightTime;
   }
 });
 
@@ -52,13 +60,13 @@ function startRecognition() {
 
       if (finalTranscript.includes(keywordUp)) {
         console.log("TEST A");
-        triggerkeypress(moveUp, "jump");
+        triggerkeypress(moveUp, timeUpVoice);
       } else if (finalTranscript.includes(keywordLeft)) {
-        triggerkeypress(moveLeft, "left");
+        triggerkeypress(moveLeft, timeLeftVoice);
       } else if (finalTranscript.includes(keywordRight)) {
-        triggerkeypress(moveRight, "right");
+        triggerkeypress(moveRight, timeRightVoice);
       } else if (finalTranscript.includes(keywordDown)) {
-        triggerkeypress(moveDown, "down");
+        triggerkeypress(moveDown, timeDownVoice);
       }
 
       if (finalTranscript) {
@@ -71,7 +79,7 @@ function startRecognition() {
   };
 }
 
-async function triggerkeypress(key, command) {
+async function triggerkeypress(key, timeKeyPress) {
   const keyCodeMap = {
     " ": 32,
     A: 65,
@@ -101,7 +109,7 @@ async function triggerkeypress(key, command) {
 
   document.dispatchEvent(eventDown);
   console.log(eventDown);
-  await new Promise((r) => setTimeout(r, 500));
+  await new Promise((r) => setTimeout(r, timeKeyPress * 1000));
   document.dispatchEvent(eventUp);
 
   //output.dispatchEvent(event);

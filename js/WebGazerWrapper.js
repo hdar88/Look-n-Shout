@@ -31,22 +31,30 @@ webgazer
       yPrediction >= topRect.top &&
       yPrediction <= topRect.bottom &&
       xPrediction >= topRect.left &&
-      xPrediction <= topRect.right) { simulateKeyPress(moveUpEyes, timeUpEyes);
+      xPrediction <= topRect.right
+    ) {
+      simulateKeyPress(moveUpEyes, timeUpEyes);
     } else if (
       yPrediction >= bottomRect.top &&
       yPrediction <= bottomRect.bottom &&
       xPrediction >= bottomRect.left &&
-      xPrediction <= bottomRect.right) { simulateKeyPress(moveDownEyes, timeDownEyes);
+      xPrediction <= bottomRect.right
+    ) {
+      simulateKeyPress(moveDownEyes, timeDownEyes);
     } else if (
       yPrediction >= leftRect.top &&
       yPrediction <= leftRect.bottom &&
       xPrediction >= leftRect.left &&
-      xPrediction <= leftRect.right ) { simulateKeyPress(moveLeftEyes, timeLeftEyes);
+      xPrediction <= leftRect.right
+    ) {
+      simulateKeyPress(moveLeftEyes, timeLeftEyes);
     } else if (
       yPrediction >= rightRect.top &&
       yPrediction <= rightRect.bottom &&
       xPrediction >= rightRect.left &&
-      xPrediction <= rightRect.right) { simulateKeyPress(moveRightEyes, timeRightEyes);
+      xPrediction <= rightRect.right
+    ) {
+      simulateKeyPress(moveRightEyes, timeRightEyes);
     }
   })
   .setTracker("TFFacemesh")
@@ -54,17 +62,18 @@ webgazer
 webgazer.clearData();
 
 // Listener for messages from content.js for webcam on/off logic
-window.addEventListener('message', function(event) {
-    if (event.source !== window) return; // checks if message from same window
-    if (event.data.type && (event.data.type === 'TOGGLE_WEBCAM')) {
-        if(!event.data.isWebcamVisible){
-            webgazer.showVideo(false); // hides the video canvas element of webgazer.js
-        } else {
-            webgazer.showVideo(true); // shows the video canvas element of webgazer.js
-        }
+window.addEventListener("message", function (event) {
+  if (event.source !== window) return; // checks if message from same window
+  if (event.data.type && event.data.type === "TOGGLE_WEBCAM") {
+    if (!event.data.isWebcamVisible) {
+      webgazer.showVideo(false); // hides the video canvas element of webgazer.js
+    } else {
+      webgazer.showVideo(true); // shows the video canvas element of webgazer.js
     }
+  }
 });
 async function simulateKeyPress(key, timeKeyPress) {
+  console.log("TIME" + timeKeyPress);
   const keyCodeMap = {
     w: 87,
     a: 65,
@@ -76,9 +85,6 @@ async function simulateKeyPress(key, timeKeyPress) {
     ArrowLeft: 37,
     ArrowRight: 39,
   };
-
-  console.log(key);
-  console.log(timeKeyPress);
 
   const keyCode = keyCodeMap[key];
   if (!keyCode) return;
@@ -96,9 +102,9 @@ async function simulateKeyPress(key, timeKeyPress) {
   const eventUp = new KeyboardEvent("keyup", eventInit);
 
   document.dispatchEvent(eventDown);
-  if(timeKeyPress > 0) {
-      await new Promise((r) => setTimeout(r, timeKeyPress*1000));
-  }
+
+  await new Promise((r) => setTimeout(r, timeKeyPress * 1000));
+
   document.dispatchEvent(eventUp);
 }
 
@@ -113,6 +119,8 @@ window.addEventListener("message", function (event) {
     timeLeftEyes = event.data.dataArrayWebgazer.leftKeyTime;
     timeRightEyes = event.data.dataArrayWebgazer.rightKeyTime;
     timeDownEyes = event.data.dataArrayWebgazer.downKeyTime;
+
+    console.log(timeDownEyes);
   }
 });
 
