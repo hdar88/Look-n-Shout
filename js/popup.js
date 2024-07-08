@@ -21,11 +21,19 @@ const upKey = document.getElementById("upKey");
 const downKey = document.getElementById("downKey");
 const leftKey = document.getElementById("leftKey");
 const rightKey = document.getElementById("rightKey");
+const upKeyTime = document.getElementById("upKeyTime");
+const downKeyTime = document.getElementById("downKeyTime");
+const leftKeyTime = document.getElementById("leftKeyTime");
+const rightKeyTime = document.getElementById("rightKeyTime");
 const webcamOnButton = document.getElementById("webcam-on-button");
 const webcamOffButton = document.getElementById("webcam-off-button");
 const gridOnButton = document.getElementById("grid-on-button");
 const gridOffButton = document.getElementById("grid-off-button");
-let dropdownLabel = document.getElementById('dropdown-label');
+const arrowUpTime = document.getElementById("arrowUpKeyTime");
+const arrowDownTime = document.getElementById("arrowDownKeyTime");
+const arrowLeftTime = document.getElementById("arrowLeftKeyTime");
+const arrowRightTime = document.getElementById("arrowRightKeyTime");
+let dropdownLabel = document.getElementById("dropdown-label");
 let isGridVisible;
 let voiceKeyBindsArr = [];
 let togglePauseResumeButton = true;
@@ -74,7 +82,6 @@ document.addEventListener("DOMContentLoaded", function () {
     togglePauseResumeButton = true;
     restartButton.classList.add("hidden");
     pauseButton.classList.remove("hidden");
-
   });
 });
 
@@ -132,7 +139,7 @@ helpButton.addEventListener("click", function () {
     clicked = true;
     helpPage.classList.remove("hidden");
     mainContainer.classList.add("hidden");
-    resetButton.classList.add("hidden")
+    resetButton.classList.add("hidden");
     pauseButton.classList.add("hidden");
     restartButton.classList.add("hidden");
     webcamOffButton.classList.add("hidden");
@@ -162,11 +169,6 @@ const storeDefaultInputFields = (container) => {
 storeDefaultInputFields(inputContainerEyes);
 storeDefaultInputFields(inputContainerVoice);
 
-//help page -> whole description of the functionality of our extension
-//TODO leonard
-
-// save button -> chrome.storage API -> get User Input
-//TODO oqba
 saveButton.addEventListener("click", function () {
   refreshKeys();
   if (toggle.checked && inputContainerEyes.classList.contains("hidden")) {
@@ -182,6 +184,7 @@ const saveKeysVoice = (container) => {
   let inputArray = container.getElementsByClassName("keyword-input");
   let selectArray = container.getElementsByClassName("dropdown-select-voice");
 
+  //TODO 3 if statements weg, i anstatt zahl benutzen
   for (var i = 0; i < 4; i++) {
     if (
       (!inputArray[0].value == "" && selectArray[0].selectedIndex == 0) ||
@@ -221,6 +224,10 @@ const saveKeysVoice = (container) => {
   const arrowDownInput = arrowDown.value;
   const arrowLeftInput = arrowLeft.value;
   const arrowRightInput = arrowRight.value;
+  const arrowUpTimeInput = arrowUpTime.value;
+  const arrowDownTimeInput = arrowDownTime.value;
+  const arrowLeftTimeInput = arrowLeftTime.value;
+  const arrowRightTimeInput = arrowRightTime.value;
 
   chrome.storage.sync.set(
     {
@@ -232,6 +239,10 @@ const saveKeysVoice = (container) => {
       arrowDown: arrowDownInput,
       arrowLeft: arrowLeftInput,
       arrowRight: arrowRightInput,
+      arrowUpTime: arrowUpTimeInput,
+      arrowDownTime: arrowDownTimeInput,
+      arrowLeftTime: arrowLeftTimeInput,
+      arrowRightTime: arrowRightTimeInput,
     },
     function () {
       console.log("Settings saved");
@@ -244,6 +255,10 @@ const saveKeysEyes = (container) => {
   const downKeyInput = downKey.selectedIndex == 0 ? "" : downKey.value;
   const leftKeyInput = leftKey.selectedIndex == 0 ? "" : leftKey.value;
   const rightKeyInput = rightKey.selectedIndex == 0 ? "" : rightKey.value;
+  const upKeyTimeInput = upKeyTime.value;
+  const downKeyTimeInput = downKeyTime.value;
+  const leftKeyTimeInput = leftKeyTime.value;
+  const rightKeyTimeInput = rightKeyTime.value;
 
   chrome.storage.sync.set(
     {
@@ -251,6 +266,10 @@ const saveKeysEyes = (container) => {
       downKey: downKeyInput,
       leftKey: leftKeyInput,
       rightKey: rightKeyInput,
+      upKeyTime: upKeyTimeInput,
+      downKeyTime: downKeyTimeInput,
+      leftKeyTime: leftKeyTimeInput,
+      rightKeyTime: rightKeyTimeInput,
     },
     function () {
       console.log("Settings saved");
@@ -269,6 +288,10 @@ const restoreVoiceOptions = () => {
       "selectArrowDown",
       "selectArrowLeft",
       "selectArrowRight",
+      "arrowUpTime",
+      "arrowDownTime",
+      "arrowLeftTime",
+      "arrowRightTime",
     ],
     function (result) {
       result.arrowUp == undefined
@@ -295,14 +318,34 @@ const restoreVoiceOptions = () => {
       result.selectArrowRight == undefined || result.selectArrowRight == ""
         ? (selectArrowRight.selectedIndex = 0)
         : (selectArrowRight.value = result.selectArrowRight);
+      result.arrowUpTime == undefined || result.arrowUpTime == ""
+        ? (arrowUpTime.value = 0)
+        : (arrowUpTime.value = result.arrowUpTime);
+      result.arrowDownTime == undefined || result.arrowDownTime == ""
+        ? (arrowDownTime.value = 0)
+        : (arrowDownTime.value = result.arrowDownTime);
+      result.arrowLeftTime == undefined || result.arrowLeftTime == ""
+        ? (arrowLeftTime.value = 0)
+        : (arrowLeftTime.value = result.arrowLeftTime);
+      result.arrowRightTime == undefined || result.arrowRightTime == ""
+        ? (arrowRightTime.value = 0)
+        : (arrowRightTime.value = result.arrowRightTime);
     }
   );
-  setTimeout(refreshKeys, 100);
 };
 
 const restoreEyeOptions = () => {
   chrome.storage.sync.get(
-    ["upKey", "downKey", "leftKey", "rightKey"],
+    [
+      "upKey",
+      "downKey",
+      "leftKey",
+      "rightKey",
+      "upKeyTime",
+      "downKeyTime",
+      "leftKeyTime",
+      "rightKeyTime",
+    ],
     function (result) {
       result.upKey == undefined || result.upKey == ""
         ? (upKey.selectedIndex = 0)
@@ -316,10 +359,21 @@ const restoreEyeOptions = () => {
       result.rightKey == undefined || result.rightKey == ""
         ? (rightKey.selectedIndex = 0)
         : (rightKey.value = result.rightKey);
+      result.rightKeyTime == undefined
+        ? (rightKeyTime.value = 0)
+        : (rightKeyTime.value = result.rightKeyTime);
+      result.leftKeyTime == undefined
+        ? (leftKeyTime.value = 0)
+        : (leftKeyTime.value = result.leftKeyTime);
+      result.downKeyTime == undefined
+        ? (downKeyTime.value = 0)
+        : (downKeyTime.value = result.downKeyTime);
+      result.upKeyTime == undefined
+        ? (upKeyTime.value = 0)
+        : (upKeyTime.value = result.upKeyTime);
       dataArray = result;
     }
   );
-  setTimeout(refreshKeys, 100);
 };
 
 function refreshKeys() {
@@ -340,7 +394,6 @@ console.log(voiceKeyBindsArr);
 // button to turn visibility of webcam on/ off
 //TODO
 document.addEventListener("DOMContentLoaded", function () {
-
   // init visibility of buttons
   webcamOnButton.classList.add("hidden");
   webcamOffButton.classList.remove("hidden");

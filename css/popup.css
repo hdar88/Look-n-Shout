@@ -21,7 +21,7 @@ body {
 
 .main-container-popup{
     transition: 0.3s ease-in-out;
-    width: 270px;
+    width: 310px;
     height: 450px;
     display: flex;
     align-items: center;
@@ -36,7 +36,7 @@ body {
 
 /* Container for the popup content */
 #container {
-    width: 220px;
+    width: 260px;
     padding: 20px;
     align-items: center;
     /*background-color: #292943; /* Dark purple background */
@@ -148,7 +148,8 @@ input:checked + .slider {
     font-size: 14px;
     background-color: #5b48a196;
     border-radius: 50px;
-    color: white;  
+    color: white;
+    margin-top: 8px;
 }
 
 .dropdown-select-voice{
@@ -167,11 +168,7 @@ input:checked + .slider {
     color: white;
 }
 
-.voice-containers{
-    margin-top: 20px;
-}
-
-.eyes-containers{
+.eyes-containers, .voice-containers{
     margin-top: 15px;
 }
 
@@ -199,10 +196,6 @@ input:not(:checked) + .slider .label-voice {
     opacity: 0.5;
 }
 
-#input-container-voice{
-    
-}
-
 /* Style for the "eyes" and "voice" labels */
 #input-container-eyes, #input-container-voice {
     margin-top: 20px;
@@ -216,12 +209,36 @@ input:not(:checked) + .slider .label-voice {
 }
 
 /* Input field styling */
-#input-container-voice input[type="text"] {
+#input-container-voice input[type="text"]{
     width: 100px; /* Adjust for input padding */
     height: 20px;
     font-size: 12px;
     text-align: center;
     margin-top: 8px; /* Add margin to space input field below label */
+    border: 1px solid #5f5f7f; /* Lighter purple border */
+    border-radius: 5px;
+    background-color: rgba(61, 61, 88, 0.5); /* Darker purple background */
+    color: #ffffff; /* White text */
+}
+
+#input-container-eyes input[type="number"] {
+    width: 30px; /* Adjust for input padding */
+    height: 20px;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 9px; /* Add margin to space input field below label */
+    border: 1px solid #5f5f7f; /* Lighter purple border */
+    border-radius: 5px;
+    background-color: rgba(61, 61, 88, 0.5); /* Darker purple background */
+    color: #ffffff; /* White text */
+}
+
+#input-container-voice input[type="number"] {
+    width: 30px; /* Adjust for input padding */
+    height: 20px;
+    font-size: 12px;
+    text-align: center;
+    margin-top: 9px; /* Add margin to space input field below label */
     border: 1px solid #5f5f7f; /* Lighter purple border */
     border-radius: 5px;
     background-color: rgba(61, 61, 88, 0.5); /* Darker purple background */
@@ -275,6 +292,7 @@ input:not(:checked) + .slider .label-voice {
 
 .keyword-keybind-divs{
     display: flex;
+    justify-content: center;
     gap: 5px;
     margin-left: auto;
 }
@@ -291,4 +309,8 @@ button:hover {
 /* Hidden class for the labels */
 .hidden {
     display: none;
+}
+
+.keyLengthInput {
+
 }
