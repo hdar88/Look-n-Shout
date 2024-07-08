@@ -2,9 +2,6 @@ let recognition;
 let diagnostic = document.createElement("div");
 document.body.appendChild(diagnostic);
 
-const dataToSend = "Hello from sender.js";
-localStorage.setItem("myData", dataToSend);
-
 let moveUp;
 let moveDown;
 let moveRight;
@@ -37,7 +34,7 @@ window.addEventListener("message", function (event) {
 });
 
 function startRecognition() {
-  console.log("START RECOGNITION");
+  console.log("STARTED RECOGNITION");
   if ("webkitSpeechRecognition" in window) {
     recognition = new webkitSpeechRecognition();
   } else if ("SpeechRecognition" in window) {
@@ -58,8 +55,7 @@ function startRecognition() {
       console.log("TEST METHOD");
       console.log(event);
 
-      if (finalTranscript.includes(keywordUp)) {
-        console.log("TEST A");
+      if (finalTranscript == keywordUp) {
         triggerkeypress(moveUp, timeUpVoice);
       } else if (finalTranscript.includes(keywordLeft)) {
         triggerkeypress(moveLeft, timeLeftVoice);
