@@ -1,6 +1,11 @@
 # [WebGazer.js](https://webgazer.cs.brown.edu)
 
-WebGazer.js is an eye tracking library that uses common webcams to infer the eye-gaze locations of web visitors on a page in real time. The eye tracking model it contains self-calibrates by watching web visitors interact with the web page and trains a mapping between the features of the eye and positions on the screen. WebGazer.js is written entirely in JavaScript and with only a few lines of code can be integrated in any website that wishes to better understand their visitors and transform their user experience. WebGazer.js runs entirely in the client browser, so no video data needs to be sent to a server. WebGazer.js can run only if the user consents in giving access to their webcam.
+WebGazer.js is an eye tracking library that uses common webcams to infer the eye-gaze locations of web visitors on a
+page in real time. The eye tracking model it contains self-calibrates by watching web visitors interact with the web
+page and trains a mapping between the features of the eye and positions on the screen. WebGazer.js is written entirely
+in JavaScript and with only a few lines of code can be integrated in any website that wishes to better understand their
+visitors and transform their user experience. WebGazer.js runs entirely in the client browser, so no video data needs to
+be sent to a server. WebGazer.js can run only if the user consents in giving access to their webcam.
 
 * [Official website](https://webgazer.cs.brown.edu)
 * [API Docs](https://github.com/brownhci/WebGazer/wiki/Top-Level-API)
@@ -55,8 +60,10 @@ import webgazer from 'webgazer'
 
 Within the /www directory there are two example HTML files:
 
-  * `calibration.html`: This example includes additional user feedback, such as a 9-point calibration sequence, accuracy measurements and an informative help module.
-  * `collision.html`: This example contains a game where the user can move an orange ball with their eyes, which in turn collides with blue balls.
+* `calibration.html`: This example includes additional user feedback, such as a 9-point calibration sequence, accuracy
+  measurements and an informative help module.
+* `collision.html`: This example contains a game where the user can move an orange ball with their eyes, which in turn
+  collides with blue balls.
 
 To run the example files as a server:
 
@@ -71,15 +78,17 @@ To run the example files as a server:
 
 The following browsers support WebGazer.js:
 
-  * Google Chrome
-  * Microsoft Edge
-  * Mozilla Firefox
-  * Opera
-  * Safari
+* Google Chrome
+* Microsoft Edge
+* Mozilla Firefox
+* Opera
+* Safari
 
 ## Publications
 
-  _**Note:** The current iteration of WebGazer no longer corresponds with the WebGazer described in the following publications and which can be found [here](https://github.com/brownhci/WebGazer/tree/2a4a70cb49b2d568a09362e1b52fd3bd025cd38d)._
+_**Note:** The current iteration of WebGazer no longer corresponds with the WebGazer described in the following
+publications and which can be
+found [here](https://github.com/brownhci/WebGazer/tree/2a4a70cb49b2d568a09362e1b52fd3bd025cd38d)._
 
 	@inproceedings{papoutsaki2016webgazer,
 	author     = {Alexandra Papoutsaki and Patsorn Sangkloy and James Laskey and Nediyana Daskalova and Jeff Huang and James Hays},
@@ -107,31 +116,32 @@ The following browsers support WebGazer.js:
     organization={ACM}
     }
 
-
-
 ## Who We Are
 
-  * Alexandra Papoutsaki
-  * Aaron Gokaslan
-  * Ida De Smet
-  * Xander Koo
-  * James Tompkin
-  * Jeff Huang
+* Alexandra Papoutsaki
+* Aaron Gokaslan
+* Ida De Smet
+* Xander Koo
+* James Tompkin
+* Jeff Huang
 
 ## Other Collaborators
 
-  * Nediyana Daskalova
-  * James Hays
-  * Yuze He
-  * James Laskey
-  * Patsorn Sangkloy
-  * Elizabeth Stevenson
-  * Preston Tunnell Wilson
-  * Jack Wong
+* Nediyana Daskalova
+* James Hays
+* Yuze He
+* James Laskey
+* Patsorn Sangkloy
+* Elizabeth Stevenson
+* Preston Tunnell Wilson
+* Jack Wong
 
 ### Acknowledgements
 
-Webgazer is developed based on the research that is done by Brown University, with recent work at Pomona College as well. The current maintainer is [Jeff Huang](https://jeffhuang.com/). The calibration example file was developed in the context of a course project with the aim to improve the feedback of WebGazer, proposed by Dr. Gerald Weber and his team Dr. Clemens Zeidler and Kai-Cheung Leung.
+Webgazer is developed based on the research that is done by Brown University, with recent work at Pomona College as
+well. The current maintainer is [Jeff Huang](https://jeffhuang.com/). The calibration example file was developed in the
+context of a course project with the aim to improve the feedback of WebGazer, proposed by Dr. Gerald Weber and his team
+Dr. Clemens Zeidler and Kai-Cheung Leung.
 
 This research is supported by NSF grants IIS-1464061, IIS-1552663, and the Brown University Salomon Award.
 
@@ -139,4 +149,5 @@ This research is supported by NSF grants IIS-1464061, IIS-1552663, and the Brown
 
 Copyright (C) 2016 [Brown WebGazer Team](https://webgazer.cs.brown.edu)
 
-Licensed under GPLv3. Companies have the option to license WebGazer.js under LGPLv3 while their valuation is under $1,000,000. For other licensing options, please contact webgazer@lists.cs.brown.edu
+Licensed under GPLv3. Companies have the option to license WebGazer.js under LGPLv3 while their valuation is under
+$1,000,000. For other licensing options, please contact webgazer@lists.cs.brown.edu

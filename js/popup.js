@@ -54,20 +54,20 @@ let clicked = false;
  * for voice by removing and adding the 'hidden' class respectively.
  */
 document.addEventListener("DOMContentLoaded", function () {
-  // Initialize input-container-eyes as visible
-  inputContainerEyes.classList.remove("hidden");
+    // Initialize input-container-eyes as visible
+    inputContainerEyes.classList.remove("hidden");
 
-  toggle.addEventListener("change", function () {
-    if (this.checked) {
-      document.querySelector(".slider").classList.add("checked");
-      inputContainerEyes.classList.add("hidden");
-      inputContainerVoice.classList.remove("hidden");
-    } else {
-      document.querySelector(".slider").classList.remove("checked");
-      inputContainerEyes.classList.remove("hidden");
-      inputContainerVoice.classList.add("hidden");
-    }
-  });
+    toggle.addEventListener("change", function () {
+        if (this.checked) {
+            document.querySelector(".slider").classList.add("checked");
+            inputContainerEyes.classList.add("hidden");
+            inputContainerVoice.classList.remove("hidden");
+        } else {
+            document.querySelector(".slider").classList.remove("checked");
+            inputContainerEyes.classList.remove("hidden");
+            inputContainerVoice.classList.add("hidden");
+        }
+    });
 });
 
 /**
@@ -80,21 +80,21 @@ document.addEventListener("DOMContentLoaded", function () {
  */
 // switch between pause and start icon
 document.addEventListener("DOMContentLoaded", function () {
-  // init visibility of buttons
-  restartButton.classList.add("hidden");
-  pauseButton.classList.remove("hidden");
-
-  // switch between pause and start icons when clicking
-  pauseButton.addEventListener("click", function () {
-    togglePauseResumeButton = false;
-    pauseButton.classList.add("hidden");
-    restartButton.classList.remove("hidden");
-  });
-  restartButton.addEventListener("click", function () {
-    togglePauseResumeButton = true;
+    // init visibility of buttons
     restartButton.classList.add("hidden");
     pauseButton.classList.remove("hidden");
-  });
+
+    // switch between pause and start icons when clicking
+    pauseButton.addEventListener("click", function () {
+        togglePauseResumeButton = false;
+        pauseButton.classList.add("hidden");
+        restartButton.classList.remove("hidden");
+    });
+    restartButton.addEventListener("click", function () {
+        togglePauseResumeButton = true;
+        restartButton.classList.add("hidden");
+        pauseButton.classList.remove("hidden");
+    });
 });
 
 /**
@@ -103,19 +103,19 @@ document.addEventListener("DOMContentLoaded", function () {
  * input fields are already empty and displays an alert if there's nothing to reset.
  */
 resetButton.addEventListener("click", function () {
-  let allEmpty = true;
+    let allEmpty = true;
 
-  if (toggle.checked && inputContainerEyes.classList.contains("hidden")) {
-    // Reset voice container input fields
-    allEmpty = checkAndResetVoice(inputContainerVoice);
-  } else if (inputContainerVoice.classList.contains("hidden")) {
-    // Reset eyes container input fields
-    allEmpty = checkAndResetEyes(inputContainerEyes);
-  }
+    if (toggle.checked && inputContainerEyes.classList.contains("hidden")) {
+        // Reset voice container input fields
+        allEmpty = checkAndResetVoice(inputContainerVoice);
+    } else if (inputContainerVoice.classList.contains("hidden")) {
+        // Reset eyes container input fields
+        allEmpty = checkAndResetEyes(inputContainerEyes);
+    }
 
-  if (allEmpty) {
-    alert("Oops! Nothing to reset here!");
-  }
+    if (allEmpty) {
+        alert("Oops! Nothing to reset here!");
+    }
 });
 
 /**
@@ -125,31 +125,31 @@ resetButton.addEventListener("click", function () {
  * @returns {boolean} Always returns false.
  */
 const checkAndResetVoice = (container) => {
-  console.log("TEST query1");
-  let allEmpty = true;
+    console.log("TEST query1");
+    let allEmpty = true;
 
-  allEmpty = false;
+    allEmpty = false;
 
-  let arrSelect = container.getElementsByClassName("dropdown-select-voice");
-  let arrInput = container.getElementsByClassName("keyword-input");
-  for (var i = 0; i < 4; i++) {
-    arrSelect[i].selectedIndex = 0;
-    arrInput[i].value = "";
-  }
-  return allEmpty;
+    let arrSelect = container.getElementsByClassName("dropdown-select-voice");
+    let arrInput = container.getElementsByClassName("keyword-input");
+    for (var i = 0; i < 4; i++) {
+        arrSelect[i].selectedIndex = 0;
+        arrInput[i].value = "";
+    }
+    return allEmpty;
 };
 
 const checkAndResetEyes = (container) => {
-  console.log("TEST query1");
-  let allEmpty = true;
+    console.log("TEST query1");
+    let allEmpty = true;
 
-  allEmpty = false;
+    allEmpty = false;
 
-  let arrSelect = container.getElementsByClassName("dropdown-select");
-  for (var i = 0; i < 4; i++) {
-    arrSelect[i].selectedIndex = 0;
-  }
-  return allEmpty;
+    let arrSelect = container.getElementsByClassName("dropdown-select");
+    for (var i = 0; i < 4; i++) {
+        arrSelect[i].selectedIndex = 0;
+    }
+    return allEmpty;
 };
 
 /**
@@ -158,31 +158,31 @@ const checkAndResetEyes = (container) => {
  * It also toggles the 'expanded' class on the main container to adjust the layout accordingly.
  */
 helpButton.addEventListener("click", function () {
-  mainContainerPopup.classList.toggle("expanded");
-  console.log("TEST");
-  if (!clicked) {
-    clicked = true;
-    helpPage.classList.remove("hidden");
-    mainContainer.classList.add("hidden");
-    resetButton.classList.add("hidden");
-    pauseButton.classList.add("hidden");
-    restartButton.classList.add("hidden");
-    webcamOffButton.classList.add("hidden");
-    gridOffButton.classList.add("hidden");
-  } else {
-    clicked = false;
-    helpPage.classList.add("hidden");
-    mainContainer.classList.remove("hidden");
-    resetButton.classList.remove("hidden");
-    webcamOffButton.classList.remove("hidden");
-    gridOffButton.classList.remove("hidden");
-
-    if (togglePauseResumeButton) {
-      pauseButton.classList.remove("hidden");
+    mainContainerPopup.classList.toggle("expanded");
+    console.log("TEST");
+    if (!clicked) {
+        clicked = true;
+        helpPage.classList.remove("hidden");
+        mainContainer.classList.add("hidden");
+        resetButton.classList.add("hidden");
+        pauseButton.classList.add("hidden");
+        restartButton.classList.add("hidden");
+        webcamOffButton.classList.add("hidden");
+        gridOffButton.classList.add("hidden");
     } else {
-      restartButton.classList.remove("hidden");
+        clicked = false;
+        helpPage.classList.add("hidden");
+        mainContainer.classList.remove("hidden");
+        resetButton.classList.remove("hidden");
+        webcamOffButton.classList.remove("hidden");
+        gridOffButton.classList.remove("hidden");
+
+        if (togglePauseResumeButton) {
+            pauseButton.classList.remove("hidden");
+        } else {
+            restartButton.classList.remove("hidden");
+        }
     }
-  }
 });
 
 /**
@@ -192,9 +192,9 @@ helpButton.addEventListener("click", function () {
  * @param {HTMLElement} container - The container element containing the input fields.
  */
 const storeDefaultInputFields = (container) => {
-  container.querySelectorAll("input").forEach((input) => {
-    input.dataset.placeholder = input.placeholder;
-  });
+    container.querySelectorAll("input").forEach((input) => {
+        input.dataset.placeholder = input.placeholder;
+    });
 };
 storeDefaultInputFields(inputContainerEyes);
 storeDefaultInputFields(inputContainerVoice);
@@ -206,12 +206,12 @@ storeDefaultInputFields(inputContainerVoice);
  * It calls `saveKeysVoice` if the voice settings are active or `saveKeysEyes` if the eyes settings are active.
  */
 saveButton.addEventListener("click", function () {
-  refreshKeys();
-  if (toggle.checked && inputContainerEyes.classList.contains("hidden")) {
-    saveKeysVoice(inputContainerVoice);
-  } else if (inputContainerVoice.classList.contains("hidden")) {
-    saveKeysEyes(inputContainerEyes);
-  }
+    refreshKeys();
+    if (toggle.checked && inputContainerEyes.classList.contains("hidden")) {
+        saveKeysVoice(inputContainerVoice);
+    } else if (inputContainerVoice.classList.contains("hidden")) {
+        saveKeysEyes(inputContainerEyes);
+    }
 });
 
 /**
@@ -221,75 +221,75 @@ saveButton.addEventListener("click", function () {
  * @param {HTMLElement} container - The container element that holds the voice command input fields and dropdowns.
  */
 const saveKeysVoice = (container) => {
-  let empty = false;
+    let empty = false;
 
-  let inputArray = container.getElementsByClassName("keyword-input");
-  let selectArray = container.getElementsByClassName("dropdown-select-voice");
+    let inputArray = container.getElementsByClassName("keyword-input");
+    let selectArray = container.getElementsByClassName("dropdown-select-voice");
 
-  //TODO 3 if statements weg, i anstatt zahl benutzen
-  for (var i = 0; i < 4; i++) {
-    if (
-      (!inputArray[0].value == "" && selectArray[0].selectedIndex == 0) ||
-      (inputArray[0].value == "" && !selectArray[0].selectedIndex == 0)
-    ) {
-      empty = true;
-    } else if (
-      (!inputArray[1].value == "" && selectArray[1].selectedIndex == 0) ||
-      (inputArray[1].value == "" && !selectArray[1].selectedIndex == 0)
-    ) {
-      empty = true;
-    } else if (
-      (!inputArray[2].value == "" && selectArray[2].selectedIndex == 0) ||
-      (inputArray[2].value == "" && !selectArray[2].selectedIndex == 0)
-    ) {
-      empty = true;
-    } else if (
-      (!inputArray[3].value == "" && selectArray[3].selectedIndex == 0) ||
-      (inputArray[3].value == "" && !selectArray[3].selectedIndex == 0)
-    ) {
-      empty = true;
+    //TODO 3 if statements weg, i anstatt zahl benutzen
+    for (var i = 0; i < 4; i++) {
+        if (
+            (!inputArray[0].value == "" && selectArray[0].selectedIndex == 0) ||
+            (inputArray[0].value == "" && !selectArray[0].selectedIndex == 0)
+        ) {
+            empty = true;
+        } else if (
+            (!inputArray[1].value == "" && selectArray[1].selectedIndex == 0) ||
+            (inputArray[1].value == "" && !selectArray[1].selectedIndex == 0)
+        ) {
+            empty = true;
+        } else if (
+            (!inputArray[2].value == "" && selectArray[2].selectedIndex == 0) ||
+            (inputArray[2].value == "" && !selectArray[2].selectedIndex == 0)
+        ) {
+            empty = true;
+        } else if (
+            (!inputArray[3].value == "" && selectArray[3].selectedIndex == 0) ||
+            (inputArray[3].value == "" && !selectArray[3].selectedIndex == 0)
+        ) {
+            empty = true;
+        }
     }
-  }
 
-  if (empty) {
-    alert("You must choose a keyword and a keybind");
-  }
-  const selectArrowUpValue =
-    selectArrowUp.selectedIndex == 0 ? "" : selectArrowUp.value;
-  const selectArrowDownValue =
-    selectArrowDown.selectedIndex == 0 ? "" : selectArrowDown.value;
-  const selectArrowLeftValue =
-    selectArrowLeft.selectedIndex == 0 ? "" : selectArrowLeft.value;
-  const selectArrowRightValue =
-    selectArrowRight.selectedIndex == 0 ? "" : selectArrowRight.value;
-  const arrowUpInput = arrowUp.value;
-  const arrowDownInput = arrowDown.value;
-  const arrowLeftInput = arrowLeft.value;
-  const arrowRightInput = arrowRight.value;
-  const arrowUpTimeInput = arrowUpTime.value;
-  const arrowDownTimeInput = arrowDownTime.value;
-  const arrowLeftTimeInput = arrowLeftTime.value;
-  const arrowRightTimeInput = arrowRightTime.value;
-
-  chrome.storage.sync.set(
-    {
-      selectArrowUp: selectArrowUpValue,
-      selectArrowDown: selectArrowDownValue,
-      selectArrowLeft: selectArrowLeftValue,
-      selectArrowRight: selectArrowRightValue,
-      arrowUp: arrowUpInput,
-      arrowDown: arrowDownInput,
-      arrowLeft: arrowLeftInput,
-      arrowRight: arrowRightInput,
-      arrowUpTime: arrowUpTimeInput,
-      arrowDownTime: arrowDownTimeInput,
-      arrowLeftTime: arrowLeftTimeInput,
-      arrowRightTime: arrowRightTimeInput,
-    },
-    function () {
-      console.log("Settings saved");
+    if (empty) {
+        alert("You must choose a keyword and a keybind");
     }
-  );
+    const selectArrowUpValue =
+        selectArrowUp.selectedIndex == 0 ? "" : selectArrowUp.value;
+    const selectArrowDownValue =
+        selectArrowDown.selectedIndex == 0 ? "" : selectArrowDown.value;
+    const selectArrowLeftValue =
+        selectArrowLeft.selectedIndex == 0 ? "" : selectArrowLeft.value;
+    const selectArrowRightValue =
+        selectArrowRight.selectedIndex == 0 ? "" : selectArrowRight.value;
+    const arrowUpInput = arrowUp.value;
+    const arrowDownInput = arrowDown.value;
+    const arrowLeftInput = arrowLeft.value;
+    const arrowRightInput = arrowRight.value;
+    const arrowUpTimeInput = arrowUpTime.value;
+    const arrowDownTimeInput = arrowDownTime.value;
+    const arrowLeftTimeInput = arrowLeftTime.value;
+    const arrowRightTimeInput = arrowRightTime.value;
+
+    chrome.storage.sync.set(
+        {
+            selectArrowUp: selectArrowUpValue,
+            selectArrowDown: selectArrowDownValue,
+            selectArrowLeft: selectArrowLeftValue,
+            selectArrowRight: selectArrowRightValue,
+            arrowUp: arrowUpInput,
+            arrowDown: arrowDownInput,
+            arrowLeft: arrowLeftInput,
+            arrowRight: arrowRightInput,
+            arrowUpTime: arrowUpTimeInput,
+            arrowDownTime: arrowDownTimeInput,
+            arrowLeftTime: arrowLeftTimeInput,
+            arrowRightTime: arrowRightTimeInput,
+        },
+        function () {
+            console.log("Settings saved");
+        }
+    );
 };
 
 /**
@@ -299,30 +299,30 @@ const saveKeysVoice = (container) => {
  * @param {HTMLElement} container - The container element that holds the eye control key input fields and dropdowns.
  */
 const saveKeysEyes = (container) => {
-  const upKeyInput = upKey.selectedIndex == 0 ? "" : upKey.value;
-  const downKeyInput = downKey.selectedIndex == 0 ? "" : downKey.value;
-  const leftKeyInput = leftKey.selectedIndex == 0 ? "" : leftKey.value;
-  const rightKeyInput = rightKey.selectedIndex == 0 ? "" : rightKey.value;
-  const upKeyTimeInput = upKeyTime.value;
-  const downKeyTimeInput = downKeyTime.value;
-  const leftKeyTimeInput = leftKeyTime.value;
-  const rightKeyTimeInput = rightKeyTime.value;
+    const upKeyInput = upKey.selectedIndex == 0 ? "" : upKey.value;
+    const downKeyInput = downKey.selectedIndex == 0 ? "" : downKey.value;
+    const leftKeyInput = leftKey.selectedIndex == 0 ? "" : leftKey.value;
+    const rightKeyInput = rightKey.selectedIndex == 0 ? "" : rightKey.value;
+    const upKeyTimeInput = upKeyTime.value;
+    const downKeyTimeInput = downKeyTime.value;
+    const leftKeyTimeInput = leftKeyTime.value;
+    const rightKeyTimeInput = rightKeyTime.value;
 
-  chrome.storage.sync.set(
-    {
-      upKey: upKeyInput,
-      downKey: downKeyInput,
-      leftKey: leftKeyInput,
-      rightKey: rightKeyInput,
-      upKeyTime: upKeyTimeInput,
-      downKeyTime: downKeyTimeInput,
-      leftKeyTime: leftKeyTimeInput,
-      rightKeyTime: rightKeyTimeInput,
-    },
-    function () {
-      console.log("Settings saved");
-    }
-  );
+    chrome.storage.sync.set(
+        {
+            upKey: upKeyInput,
+            downKey: downKeyInput,
+            leftKey: leftKeyInput,
+            rightKey: rightKeyInput,
+            upKeyTime: upKeyTimeInput,
+            downKeyTime: downKeyTimeInput,
+            leftKeyTime: leftKeyTimeInput,
+            rightKeyTime: rightKeyTimeInput,
+        },
+        function () {
+            console.log("Settings saved");
+        }
+    );
 };
 
 /**
@@ -331,60 +331,60 @@ const saveKeysEyes = (container) => {
  * the input or select element to its default state.
  */
 const restoreVoiceOptions = () => {
-  chrome.storage.sync.get(
-    [
-      "arrowUp",
-      "arrowDown",
-      "arrowLeft",
-      "arrowRight",
-      "selectArrowUp",
-      "selectArrowDown",
-      "selectArrowLeft",
-      "selectArrowRight",
-      "arrowUpTime",
-      "arrowDownTime",
-      "arrowLeftTime",
-      "arrowRightTime",
-    ],
-    function (result) {
-      result.arrowUp == undefined
-        ? (arrowUp.value = "")
-        : (arrowUp.value = result.arrowUp);
-      result.arrowDown == undefined
-        ? (arrowDown.value = "")
-        : (arrowDown.value = result.arrowDown);
-      result.arrowLeft == undefined
-        ? (arrowLeft.value = "")
-        : (arrowLeft.value = result.arrowLeft);
-      result.arrowRight == undefined
-        ? (arrowRight.value = "")
-        : (arrowRight.value = result.arrowRight);
-      result.selectArrowUp == undefined || result.selectArrowUp == ""
-        ? (selectArrowUp.selectedIndex = 0)
-        : (selectArrowUp.value = result.selectArrowUp);
-      result.selectArrowDown == undefined || result.selectArrowDown == ""
-        ? (selectArrowDown.selectedIndex = 0)
-        : (selectArrowDown.value = result.selectArrowDown);
-      result.selectArrowLeft == undefined || result.selectArrowLeft == ""
-        ? (selectArrowLeft.selectedIndex = 0)
-        : (selectArrowLeft.value = result.selectArrowLeft);
-      result.selectArrowRight == undefined || result.selectArrowRight == ""
-        ? (selectArrowRight.selectedIndex = 0)
-        : (selectArrowRight.value = result.selectArrowRight);
-      result.arrowUpTime == undefined || result.arrowUpTime == ""
-        ? (arrowUpTime.value = 0)
-        : (arrowUpTime.value = result.arrowUpTime);
-      result.arrowDownTime == undefined || result.arrowDownTime == ""
-        ? (arrowDownTime.value = 0)
-        : (arrowDownTime.value = result.arrowDownTime);
-      result.arrowLeftTime == undefined || result.arrowLeftTime == ""
-        ? (arrowLeftTime.value = 0)
-        : (arrowLeftTime.value = result.arrowLeftTime);
-      result.arrowRightTime == undefined || result.arrowRightTime == ""
-        ? (arrowRightTime.value = 0)
-        : (arrowRightTime.value = result.arrowRightTime);
-    }
-  );
+    chrome.storage.sync.get(
+        [
+            "arrowUp",
+            "arrowDown",
+            "arrowLeft",
+            "arrowRight",
+            "selectArrowUp",
+            "selectArrowDown",
+            "selectArrowLeft",
+            "selectArrowRight",
+            "arrowUpTime",
+            "arrowDownTime",
+            "arrowLeftTime",
+            "arrowRightTime",
+        ],
+        function (result) {
+            result.arrowUp == undefined
+                ? (arrowUp.value = "")
+                : (arrowUp.value = result.arrowUp);
+            result.arrowDown == undefined
+                ? (arrowDown.value = "")
+                : (arrowDown.value = result.arrowDown);
+            result.arrowLeft == undefined
+                ? (arrowLeft.value = "")
+                : (arrowLeft.value = result.arrowLeft);
+            result.arrowRight == undefined
+                ? (arrowRight.value = "")
+                : (arrowRight.value = result.arrowRight);
+            result.selectArrowUp == undefined || result.selectArrowUp == ""
+                ? (selectArrowUp.selectedIndex = 0)
+                : (selectArrowUp.value = result.selectArrowUp);
+            result.selectArrowDown == undefined || result.selectArrowDown == ""
+                ? (selectArrowDown.selectedIndex = 0)
+                : (selectArrowDown.value = result.selectArrowDown);
+            result.selectArrowLeft == undefined || result.selectArrowLeft == ""
+                ? (selectArrowLeft.selectedIndex = 0)
+                : (selectArrowLeft.value = result.selectArrowLeft);
+            result.selectArrowRight == undefined || result.selectArrowRight == ""
+                ? (selectArrowRight.selectedIndex = 0)
+                : (selectArrowRight.value = result.selectArrowRight);
+            result.arrowUpTime == undefined || result.arrowUpTime == ""
+                ? (arrowUpTime.value = 0)
+                : (arrowUpTime.value = result.arrowUpTime);
+            result.arrowDownTime == undefined || result.arrowDownTime == ""
+                ? (arrowDownTime.value = 0)
+                : (arrowDownTime.value = result.arrowDownTime);
+            result.arrowLeftTime == undefined || result.arrowLeftTime == ""
+                ? (arrowLeftTime.value = 0)
+                : (arrowLeftTime.value = result.arrowLeftTime);
+            result.arrowRightTime == undefined || result.arrowRightTime == ""
+                ? (arrowRightTime.value = 0)
+                : (arrowRightTime.value = result.arrowRightTime);
+        }
+    );
 };
 
 /**
@@ -394,45 +394,45 @@ const restoreVoiceOptions = () => {
  * configuration stored in Chrome's storage.
  */
 const restoreEyeOptions = () => {
-  chrome.storage.sync.get(
-    [
-      "upKey",
-      "downKey",
-      "leftKey",
-      "rightKey",
-      "upKeyTime",
-      "downKeyTime",
-      "leftKeyTime",
-      "rightKeyTime",
-    ],
-    function (result) {
-      result.upKey == undefined || result.upKey == ""
-        ? (upKey.selectedIndex = 0)
-        : (upKey.value = result.upKey);
-      result.downKey == undefined || result.downKey == ""
-        ? (downKey.selectedIndex = 0)
-        : (downKey.value = result.downKey);
-      result.leftKey == undefined || result.leftKey == ""
-        ? (leftKey.selectedIndex = 0)
-        : (leftKey.value = result.leftKey);
-      result.rightKey == undefined || result.rightKey == ""
-        ? (rightKey.selectedIndex = 0)
-        : (rightKey.value = result.rightKey);
-      result.rightKeyTime == undefined
-        ? (rightKeyTime.value = 0)
-        : (rightKeyTime.value = result.rightKeyTime);
-      result.leftKeyTime == undefined
-        ? (leftKeyTime.value = 0)
-        : (leftKeyTime.value = result.leftKeyTime);
-      result.downKeyTime == undefined
-        ? (downKeyTime.value = 0)
-        : (downKeyTime.value = result.downKeyTime);
-      result.upKeyTime == undefined
-        ? (upKeyTime.value = 0)
-        : (upKeyTime.value = result.upKeyTime);
-      dataArray = result;
-    }
-  );
+    chrome.storage.sync.get(
+        [
+            "upKey",
+            "downKey",
+            "leftKey",
+            "rightKey",
+            "upKeyTime",
+            "downKeyTime",
+            "leftKeyTime",
+            "rightKeyTime",
+        ],
+        function (result) {
+            result.upKey == undefined || result.upKey == ""
+                ? (upKey.selectedIndex = 0)
+                : (upKey.value = result.upKey);
+            result.downKey == undefined || result.downKey == ""
+                ? (downKey.selectedIndex = 0)
+                : (downKey.value = result.downKey);
+            result.leftKey == undefined || result.leftKey == ""
+                ? (leftKey.selectedIndex = 0)
+                : (leftKey.value = result.leftKey);
+            result.rightKey == undefined || result.rightKey == ""
+                ? (rightKey.selectedIndex = 0)
+                : (rightKey.value = result.rightKey);
+            result.rightKeyTime == undefined
+                ? (rightKeyTime.value = 0)
+                : (rightKeyTime.value = result.rightKeyTime);
+            result.leftKeyTime == undefined
+                ? (leftKeyTime.value = 0)
+                : (leftKeyTime.value = result.leftKeyTime);
+            result.downKeyTime == undefined
+                ? (downKeyTime.value = 0)
+                : (downKeyTime.value = result.downKeyTime);
+            result.upKeyTime == undefined
+                ? (upKeyTime.value = 0)
+                : (upKeyTime.value = result.upKeyTime);
+            dataArray = result;
+        }
+    );
 };
 
 /**
@@ -441,7 +441,7 @@ const restoreEyeOptions = () => {
  * abstracting the process of updating the settings in the content scripts.
  */
 function refreshKeys() {
-  sendSettingsContentScripts();
+    sendSettingsContentScripts();
 }
 
 /**
@@ -466,29 +466,29 @@ console.log(voiceKeyBindsArr);
  * the `updateWebcamVisibility` function to apply the change.
  */
 document.addEventListener("DOMContentLoaded", function () {
-  // init visibility of buttons
-  webcamOnButton.classList.add("hidden");
-  webcamOffButton.classList.remove("hidden");
-
-  // shows webcam on option button
-  webcamOffButton.addEventListener("click", function () {
-    webcamOffButton.classList.add("hidden");
-    webcamOnButton.classList.remove("hidden");
-
-    // updates webgazer's webcam video canvas element visibility flag
-    isWebcamVisible = false;
-    updateWebcamVisibility();
-  });
-
-  // show webcam off option button
-  webcamOnButton.addEventListener("click", function () {
+    // init visibility of buttons
     webcamOnButton.classList.add("hidden");
     webcamOffButton.classList.remove("hidden");
 
-    // updates webgazer's webcam video canvas element visibility flag
-    isWebcamVisible = true;
-    updateWebcamVisibility();
-  });
+    // shows webcam on option button
+    webcamOffButton.addEventListener("click", function () {
+        webcamOffButton.classList.add("hidden");
+        webcamOnButton.classList.remove("hidden");
+
+        // updates webgazer's webcam video canvas element visibility flag
+        isWebcamVisible = false;
+        updateWebcamVisibility();
+    });
+
+    // show webcam off option button
+    webcamOnButton.addEventListener("click", function () {
+        webcamOnButton.classList.add("hidden");
+        webcamOffButton.classList.remove("hidden");
+
+        // updates webgazer's webcam video canvas element visibility flag
+        isWebcamVisible = true;
+        updateWebcamVisibility();
+    });
 });
 
 /**
@@ -500,59 +500,59 @@ document.addEventListener("DOMContentLoaded", function () {
  */
 document.addEventListener("DOMContentLoaded", function () {
 
-  // init visibility of grid buttons
-  gridOnButton.classList.add("hidden");
-  gridOffButton.classList.remove("hidden");
-
-  // do not show grid overlay
-  gridOffButton.addEventListener("click", function () {
-    gridOffButton.classList.add("hidden");
-    gridOnButton.classList.remove("hidden");
-
-    //update grid visibility
-    isGridVisible = false;
-    updateGridVisibility();
-  });
-
-  // show grid overlay
-  gridOnButton.addEventListener("click", function () {
+    // init visibility of grid buttons
     gridOnButton.classList.add("hidden");
     gridOffButton.classList.remove("hidden");
 
-    //update grid visibility
-    isGridVisible = true;
-    updateGridVisibility();
-  });
+    // do not show grid overlay
+    gridOffButton.addEventListener("click", function () {
+        gridOffButton.classList.add("hidden");
+        gridOnButton.classList.remove("hidden");
+
+        //update grid visibility
+        isGridVisible = false;
+        updateGridVisibility();
+    });
+
+    // show grid overlay
+    gridOnButton.addEventListener("click", function () {
+        gridOnButton.classList.add("hidden");
+        gridOffButton.classList.remove("hidden");
+
+        //update grid visibility
+        isGridVisible = true;
+        updateGridVisibility();
+    });
 });
 
 /**
  * Sends the current voice key bindings array to the active tab's content script.
  */
 function sendSettingsContentScripts() {
-  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    chrome.tabs.sendMessage(tabs[0].id, { voiceKeyBindsArr: voiceKeyBindsArr });
-  });
+    chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, {voiceKeyBindsArr: voiceKeyBindsArr});
+    });
 }
 
 /**
  * Listens for messages of type "keybinds" and logs the received data.
  */
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.type === "keybinds") {
-    console.log("Received data:", message.dataArray);
-  }
+    if (message.type === "keybinds") {
+        console.log("Received data:", message.dataArray);
+    }
 });
 
 /** Function to send message to content script about current state of grid visibility */
 function updateGridVisibility() {
-  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    chrome.tabs.sendMessage(tabs[0].id, { isGridVisible: isGridVisible });
-  });
+    chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, {isGridVisible: isGridVisible});
+    });
 }
 
 /** Function to send message to content script about current state of webcam visibility */
 function updateWebcamVisibility() {
-  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    chrome.tabs.sendMessage(tabs[0].id, { isWebcamVisible: isWebcamVisible });
-  });
+    chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
+        chrome.tabs.sendMessage(tabs[0].id, {isWebcamVisible: isWebcamVisible});
+    });
 }

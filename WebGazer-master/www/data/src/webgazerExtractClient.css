@@ -5,6 +5,7 @@
     background-color: yellow;
     z-index: 4;
 }
+
 #wgGP {
     width: 0px;
     height: 0px;
@@ -12,6 +13,7 @@
     background-color: green;
     z-index: 5;
 }
+
 #tobiiGP {
     width: 0px;
     height: 0px;
@@ -19,12 +21,14 @@
     background-color: blue;
     z-index: 6;
 }
+
 #scTimeOffsetDiv {
     position: absolute;
     top: 500px;
     left: 0px;
     z-index: 7;
 }
+
 #diagDiv {
     position: absolute;
     top: 550px;

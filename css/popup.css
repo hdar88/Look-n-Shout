@@ -19,7 +19,7 @@ body {
     border-radius: 50px;
 }
 
-.main-container-popup{
+.main-container-popup {
     transition: 0.3s ease-in-out;
     width: 310px;
     height: 450px;
@@ -27,7 +27,7 @@ body {
     align-items: center;
 }
 
-.text-help-page{
+.text-help-page {
     line-height: 1.4;
     color: white;
     font-size: 10px;
@@ -47,12 +47,12 @@ body {
     text-align: center;
 }
 
-.main-container-popup.expanded{
+.main-container-popup.expanded {
     width: 400px;
     height: 700px;
 }
 
-.header-help-page{
+.header-help-page {
     color: white;
     font-size: 20px;
     margin-top: 20px;
@@ -68,9 +68,13 @@ body {
     margin-right: 10px;
 }
 
-@keyframes slide{
-    0% {scale: 0}
-    100% {scale: 1;}
+@keyframes slide {
+    0% {
+        scale: 0
+    }
+    100% {
+        scale: 1;
+    }
 }
 
 /* Header styling */
@@ -126,6 +130,7 @@ h2 {
         text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
     }
 }
+
 input:checked + .slider {
     background-color: #8e44ad;
 }
@@ -138,11 +143,11 @@ input:checked + .slider {
     box-sizing: border-box;
 }
 
-.dropdown-divs{
+.dropdown-divs {
     display: flex;
 }
 
-.dropdown-select{
+.dropdown-select {
     height: 25px;
     width: 180px;
     font-size: 14px;
@@ -152,27 +157,27 @@ input:checked + .slider {
     margin-top: 8px;
 }
 
-.dropdown-select-voice{
+.dropdown-select-voice {
     height: 25px;
     width: 110px;
     font-size: 12px;
     background-color: #5b48a196;
     border-radius: 50px;
-    margin-top: 8px; 
-    color: white; 
+    margin-top: 8px;
+    color: white;
 }
 
-.dropdown-options{
+.dropdown-options {
     text-align: center;
     background-color: #5b48a194;
     color: white;
 }
 
-.eyes-containers, .voice-containers{
+.eyes-containers, .voice-containers {
     margin-top: 15px;
 }
 
-.dropdown-options:hover{
+.dropdown-options:hover {
     background-color: yellow;
 }
 
@@ -209,7 +214,7 @@ input:not(:checked) + .slider .label-voice {
 }
 
 /* Input field styling */
-#input-container-voice input[type="text"]{
+#input-container-voice input[type="text"] {
     width: 100px; /* Adjust for input padding */
     height: 20px;
     font-size: 12px;
@@ -283,14 +288,14 @@ input:not(:checked) + .slider .label-voice {
 }
 
 .icon-buttons img {
-    width: 55px;  /* Set the width you want for your icons */
+    width: 55px; /* Set the width you want for your icons */
     height: 55px; /* Set the height you want for your icons */
     max-width: 100%; /* Ensure images are responsive */
     max-height: 100%; /* Ensure images are responsive */
     opacity: 1.1;
 }
 
-.keyword-keybind-divs{
+.keyword-keybind-divs {
     display: flex;
     justify-content: center;
     gap: 5px;
@@ -300,6 +305,7 @@ input:not(:checked) + .slider .label-voice {
 #icons-sidebar {
     width: 70px;
 }
+
 /* Button hover effect */
 button:hover {
     filter: brightness(1.5); /* Hover effect to make the button slightly brighter */
