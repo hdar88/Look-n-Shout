@@ -15,6 +15,9 @@ let timeDownVoice;
 let timeLeftVoice;
 let timeRightVoice;
 
+/** Listener for messages from content.js for keybinds
+ * updates the keybinds based on the received data array
+ * */
 window.addEventListener("message", function (event) {
     if (event.data.type && event.data.type === "keybinds") {
         // Process the dataArray
@@ -33,6 +36,14 @@ window.addEventListener("message", function (event) {
     }
 });
 
+/**
+ * Initializes and starts the speech recognition process using the Web Speech API.
+ * It supports both webkitSpeechRecognition and SpeechRecognition depending on the browser.
+ * The recognition process is set to be continuous and to provide interim results.
+ * It listens for speech in English (US) and restarts recognition upon processing a command.
+ * Commands are processed to trigger keypress simulations based on recognized keywords.
+ * If "stop" is detected in the speech, the recognition process is halted.
+ */
 function startRecognition() {
     console.log("STARTED RECOGNITION");
     if ("webkitSpeechRecognition" in window) {
@@ -75,6 +86,12 @@ function startRecognition() {
     };
 }
 
+/**
+ * Triggers a keypress event based on the provided key and time interval.
+ * @param key - key to be pressed
+ * @param timeKeyPress - time for which key should be pressed
+ * @returns {Promise<void>} - promise to be resolved after key press event is simulated
+ */
 async function triggerkeypress(key, timeKeyPress) {
     const keyCodeMap = {
         " ": 32,
@@ -108,20 +125,19 @@ async function triggerkeypress(key, timeKeyPress) {
     await new Promise((r) => setTimeout(r, timeKeyPress * 1000));
     document.dispatchEvent(eventUp);
 
-    //output.dispatchEvent(event);
-
     console.log("inside trigger method");
 }
 
+/**
+ * Sleep function to pause the execution for a specified number of milliseconds.
+ * @param milliseconds - time to sleep in milliseconds
+ * @returns {Promise<unknown>} - promise to be resolved after the specified time
+ */
 function sleep(milliseconds) {
     return new Promise((resolve) => setTimeout(resolve, milliseconds));
 }
 
-/*recognition.onspeechend = function() {
-    console.log('Speech recognition service disconnected');
-    recognition.start();  // restart when service failed
-};*/
-
+/** Listener for messages from content.js for webcam on/off logic */
 window.addEventListener("load", () => {
     startRecognition();
 });
