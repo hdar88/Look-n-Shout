@@ -43,7 +43,16 @@ let isWebcamVisible;
 
 let clicked = false;
 
-// switch between eyes and voice pop up content
+/**
+ * Adds an event listener for the DOMContentLoaded event to initialize the UI state
+ * and set up a change event listener on a toggle element. When the DOM content is fully loaded,
+ * this function makes the input container for eyes visible by removing the 'hidden' class.
+ * It then listens for changes on the toggle element. If the toggle is checked, it adds the 'checked'
+ * class to the slider, hides the input container for eyes, and shows the input container for voice
+ * by removing and adding the 'hidden' class respectively. If the toggle is not checked, it removes
+ * the 'checked' class from the slider, shows the input container for eyes, and hides the input container
+ * for voice by removing and adding the 'hidden' class respectively.
+ */
 document.addEventListener("DOMContentLoaded", function () {
   // Initialize input-container-eyes as visible
   inputContainerEyes.classList.remove("hidden");
@@ -61,7 +70,14 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-//Pause - Start button to pause/ restart eye gaze or voice tracking
+/**
+ * Attaches event listeners to the document and buttons to manage the visibility and state of pause and restart buttons.
+ * It initializes the visibility of the pause and restart buttons, showing the pause button
+ * and hiding the restart button by default. It then listens for click events on both buttons to toggle their visibility
+ * and the application's pause/resume state. Clicking the pause button sets the application to a paused state, hides the pause button,
+ * and shows the restart button. Conversely, clicking the restart button sets the application to a resumed state,
+ * hides the restart button and shows the pause button.
+ */
 // switch between pause and start icon
 document.addEventListener("DOMContentLoaded", function () {
   // init visibility of buttons
@@ -73,10 +89,6 @@ document.addEventListener("DOMContentLoaded", function () {
     togglePauseResumeButton = false;
     pauseButton.classList.add("hidden");
     restartButton.classList.remove("hidden");
-    /*if (toggle.checked) {
-             webspeech recognition stop
-        }
-        else webgazer stop*/
   });
   restartButton.addEventListener("click", function () {
     togglePauseResumeButton = true;
@@ -85,7 +97,11 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// Reset button: clear the visible content inside the input fields and (maybe also saved key assignments)
+/**
+ * Attaches an event listener to the reset button to clear the content inside the input fields
+ * of either the voice or eyes container based on the current toggle state. It checks if the
+ * input fields are already empty and displays an alert if there's nothing to reset.
+ */
 resetButton.addEventListener("click", function () {
   let allEmpty = true;
 
@@ -102,7 +118,12 @@ resetButton.addEventListener("click", function () {
   }
 });
 
-// Function to reset input fields to default states
+/**
+ * Resets the selected index of dropdowns and clears the values of input fields within the voice container.
+ * Always returns false indicating that not all fields are empty after the reset operation.
+ * @param {HTMLElement} container - The container element that holds voice-related input fields and dropdowns.
+ * @returns {boolean} Always returns false.
+ */
 const checkAndResetVoice = (container) => {
   console.log("TEST query1");
   let allEmpty = true;
@@ -131,7 +152,11 @@ const checkAndResetEyes = (container) => {
   return allEmpty;
 };
 
-// help page UI
+/**
+ * Toggles the visibility of the help page and main UI elements. When the help button is clicked,
+ * it either shows or hides the help page and various UI buttons based on the current state.
+ * It also toggles the 'expanded' class on the main container to adjust the layout accordingly.
+ */
 helpButton.addEventListener("click", function () {
   mainContainerPopup.classList.toggle("expanded");
   console.log("TEST");
@@ -160,7 +185,12 @@ helpButton.addEventListener("click", function () {
   }
 });
 
-// Store default state of input fields
+/**
+ * Stores the default placeholder values of all input fields within a specified container.
+ * This function iterates over each input field in the container and saves its placeholder
+ * value in a custom data attribute for later use.
+ * @param {HTMLElement} container - The container element containing the input fields.
+ */
 const storeDefaultInputFields = (container) => {
   container.querySelectorAll("input").forEach((input) => {
     input.dataset.placeholder = input.placeholder;
@@ -169,6 +199,12 @@ const storeDefaultInputFields = (container) => {
 storeDefaultInputFields(inputContainerEyes);
 storeDefaultInputFields(inputContainerVoice);
 
+/**
+ * Attaches an event listener to the save button.
+ * On click, it refreshes the keys and then checks the toggle state to determine whether to save the voice or eyes
+ * settings based on the visibility of the input containers.
+ * It calls `saveKeysVoice` if the voice settings are active or `saveKeysEyes` if the eyes settings are active.
+ */
 saveButton.addEventListener("click", function () {
   refreshKeys();
   if (toggle.checked && inputContainerEyes.classList.contains("hidden")) {
@@ -178,6 +214,12 @@ saveButton.addEventListener("click", function () {
   }
 });
 
+/**
+ * Saves the voice key settings to storage. It validates the combination of keyword inputs and dropdown selections
+ * for voice commands, ensuring each has a corresponding pair. If any mismatch is found, it alerts the user to choose
+ * both a keyword and a keybind. It then saves the selected keys and their durations for voice commands to storage.
+ * @param {HTMLElement} container - The container element that holds the voice command input fields and dropdowns.
+ */
 const saveKeysVoice = (container) => {
   let empty = false;
 
@@ -250,6 +292,12 @@ const saveKeysVoice = (container) => {
   );
 };
 
+/**
+ * Saves the eye control key settings to storage. It checks the selected index for each key dropdown
+ * and saves the corresponding value or an empty string if no key is selected. It also saves the duration
+ * for each key press. The settings are stored using the Chrome storage API.
+ * @param {HTMLElement} container - The container element that holds the eye control key input fields and dropdowns.
+ */
 const saveKeysEyes = (container) => {
   const upKeyInput = upKey.selectedIndex == 0 ? "" : upKey.value;
   const downKeyInput = downKey.selectedIndex == 0 ? "" : downKey.value;
@@ -277,6 +325,11 @@ const saveKeysEyes = (container) => {
   );
 };
 
+/**
+ * Restores the voice command options from Chrome's storage. It retrieves the saved values for each voice command's
+ * keybind and duration, updating the UI elements accordingly. If no value is found for a specific command, it sets
+ * the input or select element to its default state.
+ */
 const restoreVoiceOptions = () => {
   chrome.storage.sync.get(
     [
@@ -334,6 +387,12 @@ const restoreVoiceOptions = () => {
   );
 };
 
+/**
+ * Restores the eye control options from Chrome's storage. It retrieves the saved values for each eye control's
+ * keybind and duration, updating the UI elements accordingly. If no value is found for a specific control, it sets
+ * the select element to its default state and input values to 0. This ensures that the UI reflects the current
+ * configuration stored in Chrome's storage.
+ */
 const restoreEyeOptions = () => {
   chrome.storage.sync.get(
     [
@@ -376,10 +435,18 @@ const restoreEyeOptions = () => {
   );
 };
 
+/**
+ * Refreshes the key settings by sending them to the content script.
+ * This function is a wrapper around `sendSettingsContentScripts`,
+ * abstracting the process of updating the settings in the content scripts.
+ */
 function refreshKeys() {
   sendSettingsContentScripts();
 }
 
+/**
+ * On DOMContentLoaded, restores voice and eye control options from storage.
+ */
 document.addEventListener("DOMContentLoaded", restoreVoiceOptions);
 document.addEventListener("DOMContentLoaded", restoreEyeOptions);
 
@@ -391,8 +458,13 @@ console.log(voiceKeyBindsArr);
 // input validation
 //TODO
 
-// button to turn visibility of webcam on/ off
-//TODO
+/**
+ * Manages the visibility state of the webcam through UI buttons. On DOMContentLoaded, it initializes the visibility
+ * of the webcam toggle buttons, showing the "webcam off" button and hiding the "webcam on" button by default.
+ * Click events on these buttons toggle the visibility state of the webcam and update the UI to reflect this change.
+ * The actual visibility of the webcam video canvas element is controlled by updating a visibility flag and calling
+ * the `updateWebcamVisibility` function to apply the change.
+ */
 document.addEventListener("DOMContentLoaded", function () {
   // init visibility of buttons
   webcamOnButton.classList.add("hidden");
@@ -419,6 +491,13 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+/**
+ * Manages the visibility state of the grid overlay through UI buttons. On DOMContentLoaded, it initializes the visibility
+ * of the grid toggle buttons, showing the "grid off" button and hiding the "grid on" button by default.
+ * Click events on these buttons toggle the visibility state of the grid overlay and update the UI to reflect this change.
+ * The actual visibility of the grid overlay is controlled by updating a visibility flag and calling
+ * the `updateGridVisibility` function to apply the change.
+ */
 document.addEventListener("DOMContentLoaded", function () {
 
   // init visibility of grid buttons
@@ -446,26 +525,32 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+/**
+ * Sends the current voice key bindings array to the active tab's content script.
+ */
 function sendSettingsContentScripts() {
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     chrome.tabs.sendMessage(tabs[0].id, { voiceKeyBindsArr: voiceKeyBindsArr });
   });
 }
 
+/**
+ * Listens for messages of type "keybinds" and logs the received data.
+ */
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   if (message.type === "keybinds") {
     console.log("Received data:", message.dataArray);
   }
 });
 
-// Function to send message to content script about current state of grid visibility
+/** Function to send message to content script about current state of grid visibility */
 function updateGridVisibility() {
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     chrome.tabs.sendMessage(tabs[0].id, { isGridVisible: isGridVisible });
   });
 }
 
-// Function to send message to content script about current state of webcam visibility
+/** Function to send message to content script about current state of webcam visibility */
 function updateWebcamVisibility() {
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     chrome.tabs.sendMessage(tabs[0].id, { isWebcamVisible: isWebcamVisible });
