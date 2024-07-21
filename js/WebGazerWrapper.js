@@ -7,61 +7,43 @@ let timeDownEyes;
 let timeLeftEyes;
 let timeRightEyes;
 
+const topBoundary = document.getElementById("topBoundary");
+const bottomBoundary = document.getElementById("bottomBoundary");
+const leftBoundary = document.getElementById("leftBoundary");
+const rightBoundary = document.getElementById("rightBoundary");
+
+const boundaries = [
+    {element: topBoundary, action: () => simulateKeyPress(moveUpEyes, timeUpEyes)},
+    {element: bottomBoundary, action: () => simulateKeyPress(moveDownEyes, timeDownEyes)},
+    {element: leftBoundary, action: () => simulateKeyPress(moveLeftEyes, timeLeftEyes)},
+    {element: rightBoundary, action: () => simulateKeyPress(moveRightEyes, timeRightEyes)}
+];
+
+/**
+ * Initializes the WebGazer gaze tracking with a custom listener and sets the tracker to "TFFacemesh".
+ * The gaze listener evaluates the user's gaze against predefined boundaries and triggers corresponding actions.
+ * After initialization, it clears any existing WebGazer data.
+ */
 webgazer
     .setGazeListener(function (data) {
-        if (data == null) {
-            return;
-        }
-        let xPrediction = data.x;
-        let yPrediction = data.y;
+        if (!data) return;
 
-        let topBoundary = document.getElementById("topBoundary");
-        let bottomBoundary = document.getElementById("bottomBoundary");
-        let leftBoundary = document.getElementById("leftBoundary");
-        let rightBoundary = document.getElementById("rightBoundary");
+        const {x: xPrediction, y: yPrediction} = data;
 
-        // define position and size of boundaries
-        let topRect = topBoundary.getBoundingClientRect();
-        let bottomRect = bottomBoundary.getBoundingClientRect();
-        let leftRect = leftBoundary.getBoundingClientRect();
-        let rightRect = rightBoundary.getBoundingClientRect();
-
-        // check in which boundary gaze is positioned
-        if (
-            yPrediction >= topRect.top &&
-            yPrediction <= topRect.bottom &&
-            xPrediction >= topRect.left &&
-            xPrediction <= topRect.right
-        ) {
-            simulateKeyPress(moveUpEyes, timeUpEyes);
-        } else if (
-            yPrediction >= bottomRect.top &&
-            yPrediction <= bottomRect.bottom &&
-            xPrediction >= bottomRect.left &&
-            xPrediction <= bottomRect.right
-        ) {
-            simulateKeyPress(moveDownEyes, timeDownEyes);
-        } else if (
-            yPrediction >= leftRect.top &&
-            yPrediction <= leftRect.bottom &&
-            xPrediction >= leftRect.left &&
-            xPrediction <= leftRect.right
-        ) {
-            simulateKeyPress(moveLeftEyes, timeLeftEyes);
-        } else if (
-            yPrediction >= rightRect.top &&
-            yPrediction <= rightRect.bottom &&
-            xPrediction >= rightRect.left &&
-            xPrediction <= rightRect.right
-        ) {
-            simulateKeyPress(moveRightEyes, timeRightEyes);
-        }
+        boundaries.forEach(({element, action}) => {
+            const {top, bottom, left, right} = element.getBoundingClientRect();
+            if (xPrediction > left && xPrediction < right && yPrediction > top && yPrediction < bottom) {
+                action();
+            }
+        });
     })
     .setTracker("TFFacemesh")
     .begin();
 webgazer.clearData();
 
-// Listener for messages from content.js for webcam on/off logic
+/** Listener for messages from content.js for webcam on/off logic
+ * to show/hide the video canvas element of webgazer.js
+ */
 window.addEventListener("message", function (event) {
     if (event.source !== window) return; // checks if message from same window
     if (event.data.type && event.data.type === "TOGGLE_WEBCAM") {
@@ -73,6 +55,11 @@ window.addEventListener("message", function (event) {
     }
 });
 
+/** Function to simulate key press events
+ * @param key - key to be pressed
+ * @param timeKeyPress - time for which key should be pressed
+ * @returns {Promise<void>} - promise to be resolved after key press event is simulated
+ */
 async function simulateKeyPress(key, timeKeyPress) {
     console.log("TIME" + timeKeyPress);
     const keyCodeMap = {
@@ -109,6 +96,7 @@ async function simulateKeyPress(key, timeKeyPress) {
     document.dispatchEvent(eventUp);
 }
 
+/** Listener for messages from popup.js to restore eye tracking options */
 window.addEventListener("message", function (event) {
     if (event.data.type && event.data.type === "keybinds_eyes") {
         // Process the dataArray
@@ -124,7 +112,3 @@ window.addEventListener("message", function (event) {
         console.log(timeDownEyes);
     }
 });
-
-function simulateKeyCombiPress(keys) {
-    //TODO
-}
