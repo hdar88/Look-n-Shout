@@ -67,13 +67,13 @@ function startRecognition() {
             console.log(event);
 
             if (finalTranscript == keywordUp) {
-                triggerkeypress(moveUp, timeUpVoice);
+                simulateKeyPress(moveUp, timeUpVoice);
             } else if (finalTranscript.includes(keywordLeft)) {
-                triggerkeypress(moveLeft, timeLeftVoice);
+                simulateKeyPress(moveLeft, timeLeftVoice);
             } else if (finalTranscript.includes(keywordRight)) {
-                triggerkeypress(moveRight, timeRightVoice);
+                simulateKeyPress(moveRight, timeRightVoice);
             } else if (finalTranscript.includes(keywordDown)) {
-                triggerkeypress(moveDown, timeDownVoice);
+                simulateKeyPress(moveDown, timeDownVoice);
             }
 
             if (finalTranscript) {
@@ -87,12 +87,12 @@ function startRecognition() {
 }
 
 /**
- * Triggers a keypress event based on the provided key and time interval.
+ * Simulates a keypress event based on the provided key and time interval.
  * @param key - key to be pressed
  * @param timeKeyPress - time for which key should be pressed
  * @returns {Promise<void>} - promise to be resolved after key press event is simulated
  */
-async function triggerkeypress(key, timeKeyPress) {
+async function simulateKeyPress(key, timeKeyPress) {
     const keyCodeMap = {
         " ": 32,
         A: 65,
@@ -121,11 +121,10 @@ async function triggerkeypress(key, timeKeyPress) {
     const eventUp = new KeyboardEvent("keyup", eventInit);
 
     document.dispatchEvent(eventDown);
-    console.log(eventDown);
-    await new Promise((r) => setTimeout(r, timeKeyPress * 1000));
+    if (timeKeyPress > 0) {
+        await new Promise((r) => setTimeout(r, timeKeyPress * 1000));
+    }
     document.dispatchEvent(eventUp);
-
-    console.log("inside trigger method");
 }
 
 /**
