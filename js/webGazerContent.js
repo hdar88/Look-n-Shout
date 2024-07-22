@@ -24,6 +24,18 @@ const loadWebGazer = () => {
     script.onload = () => {
         const gazeScript = document.createElement("script");
         gazeScript.src = chrome.runtime.getURL("js/WebGazerWrapper.js");
+        gazeScript.onload = async () => {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                console.log("Webcam access granted.");
+            } catch (error) {
+                if (error.name === 'NotAllowedError') {
+                    alert("Webcam permission denied. Please allow access to the webcam if you want to use eye tracking.");
+                } else {
+                    console.error("An error occurred: ", error);
+                }
+            }
+        };
         document.body.appendChild(gazeScript);
     };
     document.body.appendChild(script);
@@ -97,7 +109,6 @@ setTimeout(restoreEyeOptions, 100);
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     restoreEyeOptions();
 });
-
 
 /**
  *Function to set boundary visibility
