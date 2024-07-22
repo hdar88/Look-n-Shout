@@ -61,7 +61,6 @@ window.addEventListener("message", function (event) {
  * @returns {Promise<void>} - promise to be resolved after key press event is simulated
  */
 async function simulateKeyPress(key, timeKeyPress) {
-    console.log("TIME" + timeKeyPress);
     const keyCodeMap = {
         w: 87,
         a: 65,
@@ -90,9 +89,9 @@ async function simulateKeyPress(key, timeKeyPress) {
     const eventUp = new KeyboardEvent("keyup", eventInit);
 
     document.dispatchEvent(eventDown);
-
-    await new Promise((r) => setTimeout(r, timeKeyPress * 1000));
-
+    if (timeKeyPress > 0) {
+        await new Promise((r) => setTimeout(r, timeKeyPress * 1000));
+    }
     document.dispatchEvent(eventUp);
 }
 
