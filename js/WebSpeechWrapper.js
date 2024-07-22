@@ -122,7 +122,7 @@ async function simulateKeyPress(key, timeKeyPress) {
 
     document.dispatchEvent(eventDown);
     if (timeKeyPress > 0) {
-        await new Promise((r) => setTimeout(r, timeKeyPress * 1000));
+        await new Promise((r) => setTimeout(r, timeKeyPress * 10));
     }
     document.dispatchEvent(eventUp);
 }
