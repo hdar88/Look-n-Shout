@@ -1,10 +1,11 @@
-// Inject WebSpeechWrapper.js into the webpage
+/** Inject WebSpeechWrapper.js into the webpage */
 const script = document.createElement("script");
 script.src = chrome.runtime.getURL("js/WebSpeechWrapper.js");
 (document.head || document.documentElement).appendChild(script);
 
 let dataArray = [];
 
+/** Function to restore voice options from storage and post them to the WebSpeech wrapper */
 const restoreVoiceOptions = () => {
     chrome.storage.sync.get(
         [
@@ -36,6 +37,7 @@ const restoreVoiceOptions = () => {
 };
 setTimeout(restoreVoiceOptions, 100);
 
+/** Listener for messages from popup.js to restore voice options */
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     restoreVoiceOptions();
 });
