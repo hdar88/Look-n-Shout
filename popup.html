@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Popup</title>
+    <link rel="stylesheet" href="css/popup.css"/>
+</head>
+
+<body>
+<div class="header" id="icons-sidebar">
+    <button class="icon-buttons" id="settings-button">
+        <img src="icons/help-button.png" alt="settings"/>
+    </button>
+    <button class="icon-buttons hidden" id="pause-button">
+        <img src="icons/pause-button.png" alt="pause"/>
+    </button>
+    <button class="icon-buttons hidden" id="restart-button">
+        <img src="icons/restart-button.png" alt="restart"/>
+    </button>
+    <button class="icon-buttons" id="reset-button">
+        <img src="icons/reset-button.png" alt="reset"/>
+    </button>
+    <button class="icon-buttons hidden" id="webcam-on-button">
+        <img src="icons/webcam-on.png" alt="webcam-on"/>
+    </button>
+    <button class="icon-buttons hidden" id="webcam-off-button">
+        <img src="icons/webcam-off.png" alt="webcam-off"/>
+    </button>
+    <button class="icon-buttons hidden" id="grid-on-button">
+        <img src="icons/grid-on.png" alt="grid-on"/>
+    </button>
+    <button class="icon-buttons hidden" id="grid-off-button">
+        <img src="icons/grid-off.png" alt="grid-off"/>
+    </button>
+</div>
+<div id="main-container" class="main-container-popup">
+    <div id="container">
+        <label class="switch">
+            <input type="checkbox" id="toggle"/>
+            <span class="slider round">
+            <span class="slider-labels">
+              <span class="label-eyes">eyes</span>
+              <span class="label-voice">voice</span>
+            </span>
+          </span>
+        </label>
+        <div id="input-container-eyes" class="hidden">
+            <div class="eyes-containers">
+                <label for="upKey">Top Screen:</label>
+                <div class="keyword-keybind-divs">
+                    <select name="upKey" id="upKey" class="dropdown-select">
+                        <option class="dropdown-options" disabled selected>---Select a key---</option>
+                        <option class="dropdown-options">W</option>
+                        <option class="dropdown-options">SpaceBar</option>
+                        <option class="dropdown-options">ArrowUp</option>
+                    </select>
+                    <input type="number" id="upKeyTime" class="key-length-input" min="0" max="10" value="0"
+                           onkeydown="return false;">
+                </div>
+            </div>
+            <div class="eyes-containers">
+                <label for="downKey">Bottom Screen:</label>
+                <div class="keyword-keybind-divs">
+                    <select name="downKey" id="downKey" class="dropdown-select">
+                        <option class="dropdown-options" disabled selected>---Select a key---</option>
+                        <option class="dropdown-options">S</option>
+                        <option class="dropdown-options">ArrowDown</option>
+                    </select>
+                    <input type="number" id="downKeyTime" class="key-length-input" min="0" max="10" value="0"
+                           onkeydown="return false;">
+                </div>
+            </div>
+            <div class="eyes-containers">
+                <label for="leftKey">Left Screen:</label>
+                <div class="keyword-keybind-divs">
+                    <select name="leftKey" id="leftKey" class="dropdown-select">
+                        <option class="dropdown-options" disabled selected>---Select a key---</option>
+                        <option class="dropdown-options">A</option>
+                        <option class="dropdown-options">ArrowLeft</option>
+                    </select>
+                    <input type="number" id="leftKeyTime" class="key-length-input" min="0" max="10" value="0"
+                           onkeydown="return false;">
+                </div>
+            </div>
+            <div class="eyes-containers">
+                <label for="rightKey">Right Screen:</label>
+                <div class="keyword-keybind-divs">
+                    <select name="rightKey" id="rightKey" class="dropdown-select">
+                        <option class="dropdown-options" disabled selected>---Select a key---</option>
+                        <option class="dropdown-options">D</option>
+                        <option class="dropdown-options">ArrowRight</option>
+                    </select>
+                    <input type="number" id="rightKeyTime" class="key-length-input" min="0" max="10" value="0"
+                           onkeydown="return false;">
+                </div>
+            </div>
+        </div>
+        <div id="input-container-voice" class="hidden">
+            <div class="voice-containers">
+                <label for="up-voice">Arrow Up:</label>
+                <div class="keyword-keybind-divs">
+                    <input type="text" id="up-voice" placeholder="Enter a keyword" class="keyword-input"/>
+                    <select name="upKey" id="upKey-voice" class="dropdown-select-voice">
+                        <option class="dropdown-options" disabled selected>---Select a key---</option>
+                        <option class="dropdown-options">W</option>
+                        <option class="dropdown-options">SpaceBar</option>
+                        <option class="dropdown-options">ArrowUp</option>
+                    </select>
+                    <input type="number" id="arrowUpKeyTime" class="key-length-input" min="0" max="10" value="0"
+                           onkeydown="return false;">
+                </div>
+            </div>
+            <div class="voice-containers">
+                <label for="down-voice">Arrow Down:</label>
+                <div class="keyword-keybind-divs">
+                    <input type="text" id="down-voice" placeholder="Enter a keyword" class="keyword-input"/>
+                    <select name="downKey" id="downKey-voice" class="dropdown-select-voice">
+                        <option class="dropdown-options" disabled selected>---Select a key---</option>
+                        <option class="dropdown-options">S</option>
+                        <option class="dropdown-options">ArrowDown</option>
+                    </select>
+                    <input type="number" id="arrowDownKeyTime" class="key-length-input" min="0" max="10" value="0"
+                           onkeydown="return false;">
+                </div>
+            </div>
+            <div class="voice-containers">
+                <label for="left-voice">Arrow Left:</label>
+                <div class="keyword-keybind-divs">
+                    <input type="text" id="left-voice" placeholder="Enter a keyword" class="keyword-input"/>
+                    <select name="leftKey" id="leftKey-voice" class="dropdown-select-voice">
+                        <option class="dropdown-options" disabled selected>---Select a key---</option>
+                        <option class="dropdown-options">A</option>
+                        <option class="dropdown-options">ArrowLeft</option>
+                    </select>
+                    <input type="number" id="arrowLeftKeyTime" class="key-length-input" min="0" max="10" value="0"
+                           onkeydown="return false;">
+                </div>
+            </div>
+            <div class="voice-containers">
+                <label for="right-voice">Arrow Right:</label>
+                <div class="keyword-keybind-divs">
+                    <input type="text" id="right-voice" placeholder="Enter a keyword" class="keyword-input"/>
+                    <select name="rightKey" id="rightKey-voice" class="dropdown-select-voice">
+                        <option class="dropdown-options" disabled selected>---Select a key---</option>
+                        <option class="dropdown-options">D</option>
+                        <option class="dropdown-options">ArrowRight</option>
+                    </select>
+                    <input type="number" id="arrowRightKeyTime" class="key-length-input" min="0" max="10" value="0"
+                           onkeydown="return false;">
+                </div>
+            </div>
+        </div>
+        <button id="save-button">Save</button>
+    </div>
+    <div id="help-page-container" class="hidden">
+        <h1 class="header-help-page">Play with eyes</h1>
+        <p class="text-help-page">
+            Please calibrate first by clicking and hovering your mouse and looking at the mouse’s movement.
+            The built-in grid overlay will help you!
+        </p>
+        <h1 class="header-help-page">Play with voice</h1>
+        <p class="text-help-page">
+            Some words might not be recognized well. Please speak clearly and choose unique keywords.
+            If this does not help, a restart might!
+        </p>
+        <h1 class="header-help-page">Reset Button</h1>
+        <p class="text-help-page">
+            Reset all your fields at once to begin from scratch!
+        </p>
+        <h1 class="header-help-page">Webcam on/off button</h1>
+        <p class="text-help-page">
+            Turn the webcam on or off as you like! But don't be shy, looking great today!
+        </p>
+        <h1 class="header-help-page">Grid on/off button </h1>
+        <p class="text-help-page">
+            The grid overlay is annoying? We thought so! Turn it off and on as you wish!
+            For calibration of gaze movement, it helps to keep it on first!
+        </p>
+    </div>
+</div>
+<script src="js/popup.js" type="text/javascript"></script>
+</body>
+</html>
