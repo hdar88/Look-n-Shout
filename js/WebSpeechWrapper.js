@@ -127,15 +127,6 @@ async function simulateKeyPress(key, timeKeyPress) {
     document.dispatchEvent(eventUp);
 }
 
-/**
- * Sleep function to pause the execution for a specified number of milliseconds.
- * @param milliseconds - time to sleep in milliseconds
- * @returns {Promise<unknown>} - promise to be resolved after the specified time
- */
-function sleep(milliseconds) {
-    return new Promise((resolve) => setTimeout(resolve, milliseconds));
-}
-
 /** Listener for messages from content.js for webcam on/off logic */
 window.addEventListener("load", () => {
     startRecognition();
