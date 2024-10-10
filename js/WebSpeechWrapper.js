@@ -45,7 +45,6 @@ window.addEventListener("message", function (event) {
  * If "stop" is detected in the speech, the recognition process is halted.
  */
 function startRecognition() {
-    console.log("STARTED RECOGNITION");
     if ("webkitSpeechRecognition" in window) {
         recognition = new webkitSpeechRecognition();
     } else if ("SpeechRecognition" in window) {
@@ -61,12 +60,8 @@ function startRecognition() {
         if (finalTranscript.includes("stop")) {
             recognition.stop();
             event.results[0][0].transcript = "";
-            console.log("STOPPED");
         } else {
-            console.log("TEST METHOD");
-            console.log(event);
-
-            if (finalTranscript == keywordUp) {
+            if (finalTranscript === keywordUp) {
                 simulateKeyPress(moveUp, timeUpVoice);
             } else if (finalTranscript.includes(keywordLeft)) {
                 simulateKeyPress(moveLeft, timeLeftVoice);
@@ -77,11 +72,9 @@ function startRecognition() {
             }
 
             if (finalTranscript) {
-                console.log("Final Transcript TESTT: ", finalTranscript);
                 diagnostic.textContent = "Final Transcript TEST: " + finalTranscript;
             }
             startRecognition();
-            console.log("TEST");
         }
     };
 }
