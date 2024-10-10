@@ -1,21 +1,19 @@
 body {
-    min-width: 600px !important;
+    min-width:600px!important;
 }
 
 button {
     border-radius: 4px;
 }
-
 /* Video Feed Styling */
 #overlay {
-    /* Video Feed Styling:
-     * Include the !important keyword to override default styles applied by JS.
-     * webgazer.js sets defaults for: display, position, top, left, width, height
-     */
+/* Video Feed Styling:
+ * Include the !important keyword to override default styles applied by JS.
+ * webgazer.js sets defaults for: display, position, top, left, width, height
+ */
 }
-
 #webgazerVideoContainer {
-    display: block !important;
+    display: block !important; 
     position: fixed !important;
     top: 0px !important;
     left: 0px !important;
@@ -30,18 +28,17 @@ button {
     width: calc(100% - 320px);
     z-index: 0;
     box-shadow: 0px 3px 5px #ddd;
-    border: 0px;
+    border:0px;
     background-color: #fff;
 }
 
-#Accuracy a {
+#Accuracy a{
     background-color: #222;
     color: #eee;
     left: -15px;
     padding-left: 80px;
     padding-right: 40px;
 }
-
 #Accuracy {
     background-color: #222;
     padding-left: inherit;
@@ -50,7 +47,6 @@ button {
 li {
     padding-left: 50px;
 }
-
 .navbar-right li {
     padding-right: 20px;
 }
@@ -62,18 +58,16 @@ li {
     background: none;
     color: #777;
 }
-
 .helpBtn:hover {
-    color: black !important;
+    color: black!important;
     text-decoration: none;
 }
-
 .modal-header {
-    border-bottom: none !important;
+    border-bottom: none!important;
 }
 
 /* Calibration button styling */
-.Calibration {
+.Calibration{
     width: 20px;
     height: 20px;
     -webkit-border-radius: 25px;
@@ -83,52 +77,44 @@ li {
     opacity: 0.2;
     border-color: black;
     border-style: solid;
-    position: fixed;
+    position:fixed;
 }
 
 /* Calibration point position */
-#Pt1 {
+#Pt1{
     top: 70px;
-    left: 340px;
+    left:340px;
 }
-
-#Pt2 {
+#Pt2{
     top: 70px;
-    left: 50vw;
+    left:50vw;
     margin-left: 340;
 }
-
-#Pt3 {
+#Pt3{
     top: 70px;
-    right: 2vw;
+    right:2vw;
 }
-
-#Pt4 {
-    top: 50vh;
-    left: 2vw;
+#Pt4{
+    top:50vh;
+    left:2vw;
 }
-
-#Pt5 {
+#Pt5{
     top: 50vh;
     left: 50vw;
 }
-
-#Pt6 {
+#Pt6{
     top: 50vh;
-    right: 2vw;
+    right:2vw;
 }
-
-#Pt7 {
-    bottom: 2vw;
+#Pt7{
+    bottom:2vw;
     left: 2vw;
 }
-
-#Pt8 {
-    bottom: 2vw;
-    left: 50vw;
+#Pt8{
+    bottom:2vw;
+    left:50vw;
 }
-
-#Pt9 {
-    bottom: 2vw;
-    right: 2vw;
+#Pt9{
+    bottom:2vw;
+    right:2vw;
 }
